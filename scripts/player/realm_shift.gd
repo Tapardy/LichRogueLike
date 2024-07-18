@@ -12,7 +12,14 @@ func set_tile_maps(light: TileMap, dark: TileMap):
 
 func handle_realm_shift() -> void:
 	is_in_shadowrealm = !is_in_shadowrealm
-		
+	update_tilemaps()
+
+func change_realm(value) -> void:
+	print(value)
+	is_in_shadowrealm = value
+	update_tilemaps()
+
+func update_tilemaps() -> void:
 	if is_in_shadowrealm:
 		tile_map_light.visible = false
 		tile_map_dark.visible = true
@@ -23,4 +30,3 @@ func handle_realm_shift() -> void:
 		tile_map_dark.visible = false
 		tile_map_light.tile_set.set_physics_layer_collision_layer(0,1)
 		tile_map_dark.tile_set.set_physics_layer_collision_layer(0,2)
-		

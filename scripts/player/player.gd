@@ -46,3 +46,6 @@ func _physics_process(delta):
 func _input(event):
 	if event.is_action_pressed("realm_shift"):
 		$RealmShift.handle_realm_shift()
+
+func change_realm(value)-> void:
+	$RealmShift.change_realm(value)
