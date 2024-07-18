@@ -7,6 +7,8 @@ func _ready():
 	$MeleeAttack.visible = false
 	
 func _input(event) -> void:
+	if event.is_action_pressed("ui_accept"):
+		damage_self()
 	if event.is_action_pressed("melee_attack"):
 		#print("melee attack")
 		perform_melee_attack()
@@ -32,3 +34,10 @@ func deal_damage() -> void:
 	attack.attack_damage = melee_damage
 	print(melee_damage)
 	entity.get_node("HealthComponent").damage(attack)
+	$"../LifeForce".add_life_force()
+
+func damage_self():
+	var attack := Attack.new()
+	# Subject to change, due to the transmutation spell self damage
+	attack.attack_damage = melee_damage
+	$"../HealthComponent".damage(attack)

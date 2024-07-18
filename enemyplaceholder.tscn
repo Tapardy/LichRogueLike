@@ -14,7 +14,7 @@ size = Vector2(21, 27)
 position = Vector2(-16, -16)
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_mj0ab")]
-max_health = 40
+max_health = 1000
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(-112, 0)

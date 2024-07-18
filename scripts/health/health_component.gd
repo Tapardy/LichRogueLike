@@ -11,19 +11,28 @@ signal player_death
 func _ready() -> void:
 	health = max_health
 
-
 func damage(attack: Attack) -> void:
 	if supress_damage == false:
 		health -= attack.attack_damage
-
+			
 		#print("health: ", health)
 		emit_signal("health_changed")
 		if health <= 0:
 			get_parent().queue_free()
 
-func heal() -> void:
-	health = max_health
+func heal(amount: int) -> void:
+	health += amount
+	if health > max_health:
+		health = max_health
+		
 	emit_signal("health_changed")
 
 func update_hp() -> void:
 	emit_signal("health_changed")
+
+func is_max_hp() -> bool:
+	if health >= max_health:
+		return true
+	else:
+		return false
+	

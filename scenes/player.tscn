@@ -1,10 +1,12 @@
-[gd_scene load_steps=13 format=3 uid="uid://bnih347l0un2n"]
+[gd_scene load_steps=16 format=3 uid="uid://bnih347l0un2n"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_wtr5s"]
 [ext_resource type="Texture2D" uid="uid://dwmwuf0tuijwf" path="res://assets/32rogues/monsters.png" id="2_t4ivk"]
 [ext_resource type="Script" path="res://scripts/player/player_attack.gd" id="3_sav2k"]
 [ext_resource type="Texture2D" uid="uid://qmdabwr0mq71" path="res://assets/SFX303_nyknck/Sprite-0001-Sheet-Sheet.png" id="4_4liia"]
+[ext_resource type="Script" path="res://scripts/player/life_force.gd" id="5_ckido"]
 [ext_resource type="PackedScene" uid="uid://b6ws03lwfd0te" path="res://scenes/components/health_component.tscn" id="5_j5mnj"]
+[ext_resource type="Script" path="res://scripts/player/realm_shift.gd" id="7_iftrq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5l7kr"]
 size = Vector2(32, 32)
@@ -230,6 +232,22 @@ tracks/8/keys = {
 
 [sub_resource type="Animation" id="Animation_qcx5u"]
 resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("AtlasTexture_hruq3")]
+}
+
+[sub_resource type="Animation" id="Animation_vgql5"]
+resource_name = "jump"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -247,10 +265,11 @@ tracks/0/keys = {
 _data = {
 "RESET": SubResource("Animation_c5e25"),
 "attack": SubResource("Animation_oblaf"),
-"idle": SubResource("Animation_qcx5u")
+"idle": SubResource("Animation_qcx5u"),
+"jump": SubResource("Animation_vgql5")
 }
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_wtr5s")
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -291,7 +310,17 @@ position = Vector2(-3, 1.5)
 shape = SubResource("RectangleShape2D_gsixq")
 disabled = true
 
+[node name="AttackDuration" type="Timer" parent="PlayerAttack"]
+wait_time = 0.2
+one_shot = true
+
+[node name="LifeForce" type="Node2D" parent="."]
+script = ExtResource("5_ckido")
+
 [node name="HealthComponent" parent="." instance=ExtResource("5_j5mnj")]
 max_health = 100
+
+[node name="RealmShift" type="Node2D" parent="."]
+script = ExtResource("7_iftrq")
 
 [connection signal="area_entered" from="PlayerAttack/MeleeAttack/MeleeHitbox" to="PlayerAttack" method="_on_melee_hitbox_area_entered"]
