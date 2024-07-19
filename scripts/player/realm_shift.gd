@@ -1,10 +1,11 @@
 extends Node2D
 
-var is_in_shadowrealm = false
+var is_in_shadowrealm: bool = false
 var tile_map_light: TileMap
 var tile_map_dark: TileMap
 var player: CharacterBody2D
 var tile_map: TileMap
+var is_in_light: bool = false
 
 func _ready() -> void:
 	player = get_parent()
@@ -16,16 +17,18 @@ func set_tile_maps(light: TileMap, dark: TileMap) -> void:
 	print(light, dark)
 
 func handle_realm_shift() -> void:
-	if can_shift_realm():
+	if can_shift_realm() and not is_in_light:
 		is_in_shadowrealm = !is_in_shadowrealm
 		update_tilemaps()
 
 func change_realm(value: bool) -> void:
-	if can_shift_realm():
-		print(value)
-		is_in_shadowrealm = value
-		update_tilemaps()
+	print(value)
+	is_in_shadowrealm = value
+	is_in_light = true
+	update_tilemaps()
 	
+func exit_light() -> void:
+	is_in_light = false
 
 func update_tilemaps() -> void:
 	if is_in_shadowrealm:

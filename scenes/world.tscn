@@ -1,9 +1,10 @@
-[gd_scene load_steps=12 format=3 uid="uid://bl1ivlm1thybo"]
+[gd_scene load_steps=13 format=3 uid="uid://bl1ivlm1thybo"]
 
 [ext_resource type="Texture2D" uid="uid://bjfkhph05ycgg" path="res://assets/Adventure 2D Tileset/Tile/x32-florest-tileset.png" id="1_rvy6q"]
 [ext_resource type="PackedScene" uid="uid://bnih347l0un2n" path="res://scenes/player.tscn" id="2_qy6pw"]
 [ext_resource type="PackedScene" uid="uid://cq2hmwewp8lbt" path="res://enemyplaceholder.tscn" id="2_r0do6"]
 [ext_resource type="PackedScene" uid="uid://0dej24w46dta" path="res://scenes/components/light.tscn" id="4_x0uxo"]
+[ext_resource type="Script" path="res://scripts/GUI.gd" id="5_8vscp"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_b84fn"]
 texture = ExtResource("1_rvy6q")
@@ -308,9 +309,6 @@ layer_1/tile_data = PackedInt32Array(-65534, 131077, 1, -131070, 131077, 1, -196
 [node name="EnemyPlaceholder" parent="." instance=ExtResource("2_r0do6")]
 position = Vector2(-32, -16)
 
-[node name="Player" parent="." instance=ExtResource("2_qy6pw")]
-position = Vector2(-16, -16)
-
 [node name="Light" parent="." instance=ExtResource("4_x0uxo")]
 position = Vector2(192, -32)
 
@@ -323,6 +321,12 @@ position = Vector2(-11, 0)
 scale = Vector2(0.65625, 1)
 shadow_enabled = true
 texture = SubResource("GradientTexture2D_5e4oq")
+
+[node name="Player" parent="." instance=ExtResource("2_qy6pw")]
+position = Vector2(0, -15)
+
+[node name="GUI" type="CanvasLayer" parent="."]
+script = ExtResource("5_8vscp")
 
 [editable path="EnemyPlaceholder"]
 [editable path="Light"]

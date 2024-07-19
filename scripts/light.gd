@@ -6,3 +6,12 @@ func _on_area_2d_body_entered(body):
 		print("you are in the light")
 		
 		body.get_node("RealmShift").change_realm(false)
+
+
+func _on_area_2d_body_exited(body):
+	print(body)
+	if body.is_in_group("player"):
+		print("you are in the light")
+		
+		body.get_node("RealmShift").exit_light()
+

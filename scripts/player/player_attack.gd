@@ -7,15 +7,15 @@ func _ready():
 	$MeleeAttack.visible = false
 	
 func _input(event) -> void:
-	if event.is_action_pressed("ui_accept"):
-		damage_self()
+	#if event.is_action_pressed("ui_accept"):
+		#damage_self()
 	if event.is_action_pressed("melee_attack"):
 		#print("melee attack")
 		perform_melee_attack()
 
 func perform_melee_attack() -> void:
 	$"../AnimationPlayer".play("attack")
-
+	
 	if sprite_2d.flip_h:
 		$MeleeAttack.flip_h = true
 		$MeleeAttack.position.x = sprite_2d.position.x + 32

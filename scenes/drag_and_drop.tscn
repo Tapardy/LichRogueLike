@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://c4sp5vx3vl25j"]
+
+[ext_resource type="Script" path="res://scripts/drag_and_drop.gd" id="1_6tj2g"]
+
+[node name="DragAndDrop" type="TextureRect"]
+custom_minimum_size = Vector2(32, 32)
+offset_right = 40.0
+offset_bottom = 40.0
+expand_mode = 1
+script = ExtResource("1_6tj2g")
+
+[node name="Panel" type="Panel" parent="."]
+show_behind_parent = true
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2

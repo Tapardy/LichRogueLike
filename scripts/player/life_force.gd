@@ -11,13 +11,13 @@ func _ready():
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	if current_life_force > max_life_force:
 		current_life_force = max_life_force
 	#print(current_life_force)
 
 func _input(event):
-	if Input.is_action_just_pressed("heal"):
+	if event.is_action_pressed("heal"):
 		if current_life_force >= heal_treshold:
 			heal()
 
