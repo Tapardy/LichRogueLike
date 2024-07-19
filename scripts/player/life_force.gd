@@ -7,24 +7,24 @@ var heal_treshold: int = 33
 var heal_amount: int = 25
 var life_from_hit: int = 11
 # Called when the node enters the scene tree for the first time.
-func _ready():
+func _ready()-> void:
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
+func _process(_delta: float) -> void:
 	if current_life_force > max_life_force:
 		current_life_force = max_life_force
 	#print(current_life_force)
 
-func _input(event):
+func _input(event: InputEvent)-> void:
 	if event.is_action_pressed("heal"):
 		if current_life_force >= heal_treshold:
 			heal()
 
-func add_life_force():
+func add_life_force()-> void:
 	current_life_force += life_from_hit
 
-func heal():
+func heal()-> void:
 	if $"../HealthComponent".is_max_hp() == false:
 		print("life force before heal ", current_life_force)
 		current_life_force -= heal_treshold

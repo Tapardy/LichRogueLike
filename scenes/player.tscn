@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bnih347l0un2n"]
+[gd_scene load_steps=21 format=3 uid="uid://bnih347l0un2n"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_wtr5s"]
 [ext_resource type="Texture2D" uid="uid://dwmwuf0tuijwf" path="res://assets/32rogues/monsters.png" id="2_t4ivk"]
@@ -8,6 +8,10 @@
 [ext_resource type="PackedScene" uid="uid://b6ws03lwfd0te" path="res://scenes/components/health_component.tscn" id="5_j5mnj"]
 [ext_resource type="Script" path="res://scripts/player/realm_shift.gd" id="7_iftrq"]
 [ext_resource type="FontFile" uid="uid://gn3ut7dc70bk" path="res://assets/m3x6.ttf" id="8_y631v"]
+[ext_resource type="Script" path="res://scripts/GUI.gd" id="9_isori"]
+[ext_resource type="Script" path="res://Inventory/Scripts/inventory_slot.gd" id="10_18vfk"]
+[ext_resource type="Script" path="res://Inventory/Scripts/inventory_item.gd" id="11_6nr5v"]
+[ext_resource type="Resource" uid="uid://djjmnj5v5mhk4" path="res://Inventory/Items(Resources)/firebolt.tres" id="12_rgix5"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5l7kr"]
 size = Vector2(32, 32)
@@ -337,6 +341,76 @@ vertical_alignment = 1
 [node name="Timer" type="Timer" parent="RealmShift"]
 wait_time = 0.5
 one_shot = true
+
+[node name="GUI" type="CanvasLayer" parent="."]
+script = ExtResource("9_isori")
+
+[node name="Panel" type="Panel" parent="GUI"]
+offset_left = 128.0
+offset_top = 32.0
+offset_right = 1024.0
+offset_bottom = 608.0
+metadata/_edit_lock_ = true
+
+[node name="VBoxContainer" type="VBoxContainer" parent="GUI"]
+offset_left = 128.0
+offset_top = 32.0
+offset_right = 396.0
+offset_bottom = 96.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="GUI/VBoxContainer"]
+layout_mode = 2
+
+[node name="MainSpellSlot" type="PanelContainer" parent="GUI/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+script = ExtResource("10_18vfk")
+
+[node name="MainSpell" type="TextureRect" parent="GUI/VBoxContainer/HBoxContainer/MainSpellSlot"]
+layout_mode = 2
+script = ExtResource("11_6nr5v")
+data = ExtResource("12_rgix5")
+
+[node name="SubSlot1" type="PanelContainer" parent="GUI/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+script = ExtResource("10_18vfk")
+type = 1
+
+[node name="SubSpell1" type="TextureRect" parent="GUI/VBoxContainer/HBoxContainer/SubSlot1"]
+layout_mode = 2
+script = ExtResource("11_6nr5v")
+data = ExtResource("12_rgix5")
+
+[node name="SubSlot2" type="PanelContainer" parent="GUI/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+script = ExtResource("10_18vfk")
+type = 1
+
+[node name="SubSpell2" type="TextureRect" parent="GUI/VBoxContainer/HBoxContainer/SubSlot2"]
+layout_mode = 2
+script = ExtResource("11_6nr5v")
+data = ExtResource("12_rgix5")
+
+[node name="SubSlot3" type="PanelContainer" parent="GUI/VBoxContainer/HBoxContainer"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+script = ExtResource("10_18vfk")
+type = 1
+
+[node name="SubSpell3" type="TextureRect" parent="GUI/VBoxContainer/HBoxContainer/SubSlot3"]
+layout_mode = 2
+script = ExtResource("11_6nr5v")
+data = ExtResource("12_rgix5")
+
+[node name="Inv" type="GridContainer" parent="GUI"]
+unique_name_in_owner = true
+offset_left = 544.0
+offset_top = 128.0
+offset_right = 968.0
+offset_bottom = 512.0
+columns = 4
 
 [connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
 [connection signal="area_entered" from="PlayerAttack/MeleeAttack/MeleeHitbox" to="PlayerAttack" method="_on_melee_hitbox_area_entered"]

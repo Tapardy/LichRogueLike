@@ -12,9 +12,9 @@ var can_jump: bool = true
 
 func _ready() -> void:
 	coyote_timer.wait_time = COYOTE_TIME
-	$RealmShift.set_tile_maps(%TileMapLight, %TileMapDark)
+	$RealmShift.set_tile_maps($"../TileMapLight", $"../TileMapDark")
 	
-func _physics_process(delta):
+func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y += gravity * delta
 	
@@ -24,7 +24,7 @@ func _physics_process(delta):
 			velocity.y = JUMP_VELOCITY
 			can_jump = false 
 			
-	var direction = Input.get_axis("move_left", "move_right")
+	var direction: float = Input.get_axis("move_left", "move_right")
 	if direction > 0:
 		sprite_2d.flip_h = true
 	elif direction < 0:
@@ -39,7 +39,7 @@ func _physics_process(delta):
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 	
 	# Move the character
-	var was_on_floor = is_on_floor()
+	var was_on_floor: bool = is_on_floor()
 	move_and_slide()
 	
 	if was_on_floor and not is_on_floor():
@@ -47,11 +47,11 @@ func _physics_process(delta):
 	elif not is_on_floor():
 		can_jump = true
 
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("realm_shift"):
 		$RealmShift.handle_realm_shift()
 
-func change_realm(value) -> void:
+func change_realm(value: int) -> void:
 	$RealmShift.change_realm(value)
 
 func _on_coyote_timer_timeout() -> void:

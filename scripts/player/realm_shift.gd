@@ -48,7 +48,7 @@ func can_shift_realm() -> bool:
 	elif not is_in_shadowrealm:
 		tile_map = tile_map_dark
 		
-	var target_tile = tile_map.local_to_map(player.global_position)
+	var target_tile: Vector2 = tile_map.local_to_map(player.global_position)
 	var tile_data: TileData = tile_map.get_cell_tile_data(0, target_tile)
 	print(tile_data)
 	if !tile_data:
@@ -61,5 +61,5 @@ func can_shift_realm() -> bool:
 		return true
 
 
-func _on_timer_timeout():
+func _on_timer_timeout() -> void:
 	$Label.text = ""
