@@ -9,9 +9,9 @@
 [ext_resource type="Script" path="res://scripts/player/realm_shift.gd" id="7_iftrq"]
 [ext_resource type="FontFile" uid="uid://gn3ut7dc70bk" path="res://assets/m3x6.ttf" id="8_y631v"]
 [ext_resource type="Script" path="res://scripts/GUI.gd" id="9_isori"]
+[ext_resource type="Script" path="res://scripts/player/spell_casting.gd" id="9_rsxl2"]
 [ext_resource type="Script" path="res://Inventory/Scripts/inventory_slot.gd" id="10_18vfk"]
-[ext_resource type="Script" path="res://Inventory/Scripts/inventory_item.gd" id="11_6nr5v"]
-[ext_resource type="Resource" uid="uid://djjmnj5v5mhk4" path="res://Inventory/Items(Resources)/firebolt.tres" id="12_rgix5"]
+[ext_resource type="Texture2D" uid="uid://gxnc0yqmqor4" path="res://assets/invslot.png" id="10_w577b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5l7kr"]
 size = Vector2(32, 32)
@@ -342,7 +342,11 @@ vertical_alignment = 1
 wait_time = 0.5
 one_shot = true
 
+[node name="SpellCasting" type="Node2D" parent="."]
+script = ExtResource("9_rsxl2")
+
 [node name="GUI" type="CanvasLayer" parent="."]
+visible = false
 script = ExtResource("9_isori")
 
 [node name="Panel" type="Panel" parent="GUI"]
@@ -352,58 +356,6 @@ offset_right = 1024.0
 offset_bottom = 608.0
 metadata/_edit_lock_ = true
 
-[node name="VBoxContainer" type="VBoxContainer" parent="GUI"]
-offset_left = 128.0
-offset_top = 32.0
-offset_right = 396.0
-offset_bottom = 96.0
-
-[node name="HBoxContainer" type="HBoxContainer" parent="GUI/VBoxContainer"]
-layout_mode = 2
-
-[node name="MainSpellSlot" type="PanelContainer" parent="GUI/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-script = ExtResource("10_18vfk")
-
-[node name="MainSpell" type="TextureRect" parent="GUI/VBoxContainer/HBoxContainer/MainSpellSlot"]
-layout_mode = 2
-script = ExtResource("11_6nr5v")
-data = ExtResource("12_rgix5")
-
-[node name="SubSlot1" type="PanelContainer" parent="GUI/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-script = ExtResource("10_18vfk")
-type = 1
-
-[node name="SubSpell1" type="TextureRect" parent="GUI/VBoxContainer/HBoxContainer/SubSlot1"]
-layout_mode = 2
-script = ExtResource("11_6nr5v")
-data = ExtResource("12_rgix5")
-
-[node name="SubSlot2" type="PanelContainer" parent="GUI/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-script = ExtResource("10_18vfk")
-type = 1
-
-[node name="SubSpell2" type="TextureRect" parent="GUI/VBoxContainer/HBoxContainer/SubSlot2"]
-layout_mode = 2
-script = ExtResource("11_6nr5v")
-data = ExtResource("12_rgix5")
-
-[node name="SubSlot3" type="PanelContainer" parent="GUI/VBoxContainer/HBoxContainer"]
-custom_minimum_size = Vector2(64, 64)
-layout_mode = 2
-script = ExtResource("10_18vfk")
-type = 1
-
-[node name="SubSpell3" type="TextureRect" parent="GUI/VBoxContainer/HBoxContainer/SubSlot3"]
-layout_mode = 2
-script = ExtResource("11_6nr5v")
-data = ExtResource("12_rgix5")
-
 [node name="Inv" type="GridContainer" parent="GUI"]
 unique_name_in_owner = true
 offset_left = 544.0
@@ -411,6 +363,126 @@ offset_top = 128.0
 offset_right = 968.0
 offset_bottom = 512.0
 columns = 4
+
+[node name="Spells" type="Control" parent="GUI"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="MainSpellSlot" type="VBoxContainer" parent="GUI/Spells"]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 32.0
+offset_right = 226.0
+offset_bottom = 128.0
+
+[node name="InvSlotMain" type="Sprite2D" parent="GUI/Spells/MainSpellSlot"]
+position = Vector2(48, 48)
+scale = Vector2(1.46875, 1.42424)
+texture = ExtResource("10_w577b")
+
+[node name="MainSpellSlot" type="PanelContainer" parent="GUI/Spells/MainSpellSlot"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+script = ExtResource("10_18vfk")
+
+[node name="SubSpellSlots" type="HBoxContainer" parent="GUI/Spells"]
+layout_mode = 0
+offset_left = 228.0
+offset_top = 50.0
+offset_right = 496.0
+offset_bottom = 114.0
+
+[node name="InvSlotSub1" type="Sprite2D" parent="GUI/Spells/SubSpellSlots"]
+position = Vector2(32, 32)
+scale = Vector2(0.96875, 0.939394)
+texture = ExtResource("10_w577b")
+
+[node name="SubSlot1" type="PanelContainer" parent="GUI/Spells/SubSpellSlots"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+script = ExtResource("10_18vfk")
+type = 1
+
+[node name="InvSlotSub2" type="Sprite2D" parent="GUI/Spells/SubSpellSlots"]
+position = Vector2(100, 32)
+scale = Vector2(0.96875, 0.939394)
+texture = ExtResource("10_w577b")
+
+[node name="SubSlot2" type="PanelContainer" parent="GUI/Spells/SubSpellSlots"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+script = ExtResource("10_18vfk")
+type = 1
+
+[node name="InvSlotSub3" type="Sprite2D" parent="GUI/Spells/SubSpellSlots"]
+position = Vector2(168, 32)
+scale = Vector2(0.968751, 0.939394)
+texture = ExtResource("10_w577b")
+
+[node name="SubSlot3" type="PanelContainer" parent="GUI/Spells/SubSpellSlots"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+script = ExtResource("10_18vfk")
+type = 1
+
+[node name="MainSpellSlot2" type="VBoxContainer" parent="GUI/Spells"]
+layout_mode = 0
+offset_left = 128.0
+offset_top = 135.0
+offset_right = 226.0
+offset_bottom = 231.0
+
+[node name="InvSlotMain" type="Sprite2D" parent="GUI/Spells/MainSpellSlot2"]
+position = Vector2(48, 48)
+scale = Vector2(1.46875, 1.42424)
+texture = ExtResource("10_w577b")
+
+[node name="MainSpellSlot" type="PanelContainer" parent="GUI/Spells/MainSpellSlot2"]
+custom_minimum_size = Vector2(96, 96)
+layout_mode = 2
+script = ExtResource("10_18vfk")
+
+[node name="SubSpellSlots2" type="HBoxContainer" parent="GUI/Spells"]
+layout_mode = 0
+offset_left = 228.0
+offset_top = 153.0
+offset_right = 496.0
+offset_bottom = 217.0
+
+[node name="InvSlotSub1" type="Sprite2D" parent="GUI/Spells/SubSpellSlots2"]
+position = Vector2(32, 32)
+scale = Vector2(0.96875, 0.939394)
+texture = ExtResource("10_w577b")
+
+[node name="SubSlot1" type="PanelContainer" parent="GUI/Spells/SubSpellSlots2"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+script = ExtResource("10_18vfk")
+type = 1
+
+[node name="InvSlotSub2" type="Sprite2D" parent="GUI/Spells/SubSpellSlots2"]
+position = Vector2(100, 32)
+scale = Vector2(0.96875, 0.939394)
+texture = ExtResource("10_w577b")
+
+[node name="SubSlot2" type="PanelContainer" parent="GUI/Spells/SubSpellSlots2"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+script = ExtResource("10_18vfk")
+type = 1
+
+[node name="InvSlotSub3" type="Sprite2D" parent="GUI/Spells/SubSpellSlots2"]
+position = Vector2(168, 32)
+scale = Vector2(0.968751, 0.939393)
+texture = ExtResource("10_w577b")
+
+[node name="SubSlot3" type="PanelContainer" parent="GUI/Spells/SubSpellSlots2"]
+custom_minimum_size = Vector2(64, 64)
+layout_mode = 2
+script = ExtResource("10_18vfk")
+type = 1
 
 [connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
 [connection signal="area_entered" from="PlayerAttack/MeleeAttack/MeleeHitbox" to="PlayerAttack" method="_on_melee_hitbox_area_entered"]

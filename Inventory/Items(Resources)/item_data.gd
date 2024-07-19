@@ -3,9 +3,7 @@ class_name ItemData
 
 enum Type {
 	MAIN,
-	SUB1,
-	SUB2,
-	SUB3
+	SUB1
 }
 
 @export var type: Type

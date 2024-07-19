@@ -32,6 +32,10 @@ window/stretch/mode="viewport"
 
 enabled=PackedStringArray("res://addons/SignalVisualizer/plugin.cfg")
 
+[file_customization]
+
+folder_colors={}
+
 [input]
 
 move_left={

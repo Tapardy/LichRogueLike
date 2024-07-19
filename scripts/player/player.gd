@@ -56,3 +56,4 @@ func change_realm(value: int) -> void:
 
 func _on_coyote_timer_timeout() -> void:
 	can_jump = false
+	

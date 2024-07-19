@@ -310,11 +310,10 @@ position = Vector2(-32, -16)
 position = Vector2(192, -32)
 
 [node name="CollisionShape2D" parent="Light/Area2D" index="0"]
-position = Vector2(-11, 0)
+position = Vector2(0, 1)
 shape = SubResource("RectangleShape2D_0aa0e")
 
 [node name="PointLight2D" parent="Light" index="1"]
-position = Vector2(-11, 0)
 scale = Vector2(0.65625, 1)
 shadow_enabled = true
 texture = SubResource("GradientTexture2D_5e4oq")
