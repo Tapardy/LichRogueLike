@@ -1,0 +1,66 @@
+[gd_scene load_steps=12 format=3 uid="uid://c376303tidx87"]
+
+[ext_resource type="Script" path="res://scenes/abilities/stone spikes/stone spikes.gd" id="1_ewgf5"]
+[ext_resource type="Texture2D" uid="uid://b8famwt8wjkp8" path="res://assets/Foozle_2DE0001_Pixel_Magic_Effects/Earth_Spike/001.png" id="2_orvgh"]
+[ext_resource type="Texture2D" uid="uid://bym3to3rd62mn" path="res://assets/Foozle_2DE0001_Pixel_Magic_Effects/Earth_Spike/002.png" id="3_ol2mo"]
+[ext_resource type="Texture2D" uid="uid://6enragchqg4e" path="res://assets/Foozle_2DE0001_Pixel_Magic_Effects/Earth_Spike/003.png" id="4_x4slm"]
+[ext_resource type="Texture2D" uid="uid://eqylvxnjp5vf" path="res://assets/Foozle_2DE0001_Pixel_Magic_Effects/Earth_Spike/004.png" id="5_5xvmi"]
+[ext_resource type="Texture2D" uid="uid://dm7lwusu8lvk4" path="res://assets/Foozle_2DE0001_Pixel_Magic_Effects/Earth_Spike/006.png" id="7_poulo"]
+[ext_resource type="Texture2D" uid="uid://dyw7e6vo42fh1" path="res://assets/Foozle_2DE0001_Pixel_Magic_Effects/Earth_Spike/007.png" id="8_vgpgg"]
+[ext_resource type="Texture2D" uid="uid://bue4wri6keng2" path="res://assets/Foozle_2DE0001_Pixel_Magic_Effects/Earth_Spike/008.png" id="9_5bfn3"]
+[ext_resource type="Texture2D" uid="uid://lrtk88x14foa" path="res://assets/Foozle_2DE0001_Pixel_Magic_Effects/Earth_Spike/009.png" id="10_pkcax"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ekcd1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_orvgh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_ol2mo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_x4slm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_5xvmi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_poulo")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_vgpgg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_5bfn3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_pkcax")
+}],
+"loop": false,
+"name": &"default",
+"speed": 7.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pv4bj"]
+size = Vector2(58, 31)
+
+[node name="GroundStone" type="Node2D"]
+script = ExtResource("1_ewgf5")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ekcd1")
+frame = 7
+frame_progress = 1.0
+
+[node name="ImpactTimer" type="Timer" parent="AnimatedSprite2D"]
+one_shot = true
+
+[node name="Area2D" type="Area2D" parent="AnimatedSprite2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/Area2D"]
+position = Vector2(0, 16.5)
+shape = SubResource("RectangleShape2D_pv4bj")
+
+[connection signal="timeout" from="AnimatedSprite2D/ImpactTimer" to="." method="_on_impact_timer_timeout"]
+[connection signal="area_entered" from="AnimatedSprite2D/Area2D" to="." method="_on_area_2d_area_entered"]

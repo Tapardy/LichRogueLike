@@ -3,7 +3,8 @@ extends CanvasLayer
 var InvSize: int = 9
 var itemsLoad: Array = [
 	"res://Inventory/Items(Resources)/firebolt.tres",
-	"res://Inventory/Items(Resources)/rock.tres"
+	"res://Inventory/Items(Resources)/rock.tres",
+	"res://Inventory/Items(Resources)/ground_stone.tres"
 ]
 var itemsLoadSub: Array = [
 	"res://Inventory/Items(Resources)/damage_increase.tres",

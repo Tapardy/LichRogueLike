@@ -102,7 +102,10 @@ func print_hotbar(main_spell_slot: Node, sub_spell_slot: Node, hotbar_name: Stri
 	if !has_valid_panel_container(main_spell_slot):
 		print("Error: One or both PanelContainers have no children. Aborting function.")
 		return
-	
+		
+	if casting:
+		return
+		
 	print(main_spell_slot.get_child_count())
 	
 	# Process and print sub spells
@@ -154,16 +157,16 @@ func process_and_print_hotbar(slot: Node, slot_type: String, hotbar_name: String
 		else:
 			print("%s %s Slot has no children" % [hotbar_name, slot_type])
 
-func handle_spell_duplication():
+func handle_spell_duplication()-> void:
 	cast_amount *= 2
 
-func increase_damage_dealt():
+func increase_damage_dealt()-> void:
 	if not spell_modifications.has("DAMAGE_INCREASE"):
 		spell_modifications["DAMAGE_INCREASE"] = 2.0  # Initial modification value
 	else:
 		spell_modifications["DAMAGE_INCREASE"] *= 2.0  # Double the modification value
 
-func increase_spell_size():
+func increase_spell_size()-> void:
 	if not spell_modifications.has("ROOT_SCALE"):
 		spell_modifications["ROOT_SCALE"] = Vector2(2, 2)  # Initial scale modification value
 	else:
