@@ -16,18 +16,6 @@
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("1_1rycj")
-}, {
-"duration": 1.0,
-"texture": ExtResource("2_urpb1")
-}, {
-"duration": 1.0,
-"texture": ExtResource("3_0xhvj")
-}, {
-"duration": 1.0,
-"texture": ExtResource("4_a1dg8")
-}, {
-"duration": 1.0,
 "texture": ExtResource("5_kcoo8")
 }, {
 "duration": 1.0,
@@ -46,6 +34,26 @@ animations = [{
 "texture": ExtResource("10_66plj")
 }],
 "loop": false,
+"name": &"Impact",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_1rycj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_urpb1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_0xhvj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_a1dg8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_kcoo8")
+}],
+"loop": true,
 "name": &"default",
 "speed": 10.0
 }]
@@ -56,16 +64,25 @@ radius = 15.0
 [node name="FireBolt" type="Node2D"]
 script = ExtResource("1_nbjcj")
 
+[node name="DeletionTimer" type="Timer" parent="."]
+wait_time = 2.0
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_j8rdf")
+animation = &"Impact"
 autoplay = "default"
-frame = 9
+frame = 5
 frame_progress = 1.0
+
+[node name="ImpactTimer" type="Timer" parent="AnimatedSprite2D"]
+wait_time = 0.3
 
 [node name="Area2D" type="Area2D" parent="AnimatedSprite2D"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/Area2D"]
 shape = SubResource("CircleShape2D_0uct5")
 
+[connection signal="timeout" from="DeletionTimer" to="." method="_on_deletion_timer_timeout"]
+[connection signal="timeout" from="AnimatedSprite2D/ImpactTimer" to="." method="_on_impact_timer_timeout"]
 [connection signal="area_entered" from="AnimatedSprite2D/Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="body_entered" from="AnimatedSprite2D/Area2D" to="." method="_on_area_2d_body_entered"]

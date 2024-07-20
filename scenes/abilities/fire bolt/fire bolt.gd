@@ -17,6 +17,7 @@ func _ready() -> void:
 	player = find_player()
 
 	if player:
+		$DeletionTimer.start()
 		# Set direction based on the player's direction
 		direction = player.get_direction()  # Ensure get_direction() is a valid function on the player node
 		print("player direction: ", direction)
@@ -24,8 +25,10 @@ func _ready() -> void:
 		# Flip the sprite based on direction
 		if direction == -1:
 			$AnimatedSprite2D.flip_h = true
+			$AnimatedSprite2D/Area2D.position.x -= 15
 		elif direction == 1:
 			$AnimatedSprite2D.flip_h = false
+			$AnimatedSprite2D/Area2D.position.x += 15
 
 		# Set the initial position of the projectile to be at the player's location
 		global_position = player.global_position
@@ -41,19 +44,21 @@ func find_player() -> Node2D:
 			return node
 	return null
 
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	entity = area.owner
+	print(entity)
+	if entity.is_in_group("enemies"):
+		$AnimatedSprite2D.play("Impact")
+		speed = 0
+		$AnimatedSprite2D/ImpactTimer.start()
+		deal_damage()
+
 func deal_damage() -> void:
 	var attack := Attack.new()
 	attack.attack_damage = damage
 	print("damage dealt: ", damage)
 	entity.get_node("HealthComponent").damage(attack)
-	queue_free()
 
-func _on_area_2d_area_entered(area: Area2D) -> void:
-	entity = area.owner
-	print(entity)
-	if entity.is_in_group("enemies"):
-		deal_damage()
-#
 #func _on_area_2d_body_entered(body: Node2D) -> void:
 	#if not body.is_in_group("player"):
 		#queue_free()
@@ -74,3 +79,11 @@ func set_size(new_size: Vector2) -> void:
 	size = new_size
 	self.scale = size
 	print("Size set to: ", size)
+
+
+func _on_deletion_timer_timeout() -> void:
+	queue_free()
+
+
+func _on_impact_timer_timeout() -> void:
+	queue_free()

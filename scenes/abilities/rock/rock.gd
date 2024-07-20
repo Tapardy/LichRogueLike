@@ -15,46 +15,49 @@ var size: Vector2 = base_size
 func _ready() -> void:
 	# Find the player node in the scene tree
 	player = find_player()
-
+	
 	if player:
+		$DeletionTimer.start()
 		# Set direction based on the player's direction
 		direction = player.get_direction()  # Ensure get_direction() is a valid function on the player node
 		print("player direction: ", direction)
-
+		
 		# Flip the sprite based on direction
 		if direction == -1:
 			$AnimatedSprite2D.flip_h = true
+			$AnimatedSprite2D/Area2D.position.x -= 15
 		elif direction == 1:
 			$AnimatedSprite2D.flip_h = false
-
+			$AnimatedSprite2D/Area2D.position.x += 15
+		
 		# Set the initial position of the projectile to be at the player's location
 		global_position = player.global_position
 	else:
 		print("Player not found")
 
-
-# Called at a fixed frame rate. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	global_position.x += direction * speed * delta
 
 func find_player() -> Node2D:
-	# Traverse the scene tree to find the player node
 	for node in get_tree().get_nodes_in_group("player"):
 		if node.is_in_group("player"):
 			return node
 	return null
 
-func deal_damage() -> void:
-	var attack := Attack.new()
-	attack.attack_damage = 15
-	entity.get_node("HealthComponent").damage(attack)
-	queue_free()
-
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	entity = area.owner
 	print(entity)
 	if entity.is_in_group("enemies"):
+		$AnimatedSprite2D.play("Impact")
+		speed = 0
+		$AnimatedSprite2D/ImpactTimer.start()
 		deal_damage()
+
+func deal_damage() -> void:
+	var attack := Attack.new()
+	attack.attack_damage = damage
+	print("damage dealt: ", damage)
+	entity.get_node("HealthComponent").damage(attack)
 
 #func _on_area_2d_body_entered(body: Node2D) -> void:
 	#if not body.is_in_group("player"):
@@ -64,15 +67,23 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 		#print("hit an enemy")
 
 func set_damage(multiplier: float) -> void:
+	print(multiplier)
 	damage = base_damage * multiplier
 	print("Damage set to: ", damage)
 
-# Getter method for damage (optional, if needed)
 func get_damage() -> int:
 	return damage
 
-# Setter method for size
 func set_size(new_size: Vector2) -> void:
+	print(new_size)
 	size = new_size
 	self.scale = size
 	print("Size set to: ", size)
+
+
+func _on_deletion_timer_timeout() -> void:
+	queue_free()
+
+
+func _on_impact_timer_timeout() -> void:
+	queue_free()
