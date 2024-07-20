@@ -18,7 +18,7 @@ func _get_drag_data(at_position: Vector2) -> Variant:
 	return self
 
 func make_drag_preview(at_position: Vector2) -> Variant:
-	var t = TextureRect.new()
+	var t: TextureRect = TextureRect.new()
 	t.texture = texture
 	t.expand_mode = TextureRect.EXPAND_IGNORE_SIZE
 	t.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
@@ -27,7 +27,7 @@ func make_drag_preview(at_position: Vector2) -> Variant:
 	t.position = Vector2(-at_position)
 	t.z_index = 1000  # Set a high z_index value to ensure it is on top
 	
-	var c = Control.new()
+	var c: Control = Control.new()
 	c.add_child(t)
 	
 	return c

@@ -57,3 +57,8 @@ func change_realm(value: int) -> void:
 func _on_coyote_timer_timeout() -> void:
 	can_jump = false
 	
+func get_direction() -> int:
+	if sprite_2d.flip_h == false:
+		return -1
+	else:
+		return 1

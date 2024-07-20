@@ -13,3 +13,4 @@ type = 0
 name = "Fire Bolt"
 description = "Transmute a strong ball of fire that will damage the enemy and set them aflame"
 texture = SubResource("AtlasTexture_ot5et")
+sub_spell_type = 3

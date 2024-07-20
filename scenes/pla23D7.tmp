@@ -363,14 +363,6 @@ offset_right = 968.0
 offset_bottom = 512.0
 columns = 4
 
-[node name="InvSub" type="GridContainer" parent="GUI"]
-unique_name_in_owner = true
-offset_left = 134.0
-offset_top = 236.0
-offset_right = 558.0
-offset_bottom = 620.0
-columns = 4
-
 [node name="Spells" type="Control" parent="GUI"]
 layout_mode = 3
 anchors_preset = 0
