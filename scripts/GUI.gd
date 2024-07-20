@@ -1,14 +1,22 @@
 extends CanvasLayer
 
-var InvSize: int = 8
+var InvSize: int = 9
 var itemsLoad: Array = [
 	"res://Inventory/Items(Resources)/firebolt.tres",
 	"res://Inventory/Items(Resources)/rock.tres"
 ]
 var itemsLoadSub: Array = [
 	"res://Inventory/Items(Resources)/damage_increase.tres",
+	"res://Inventory/Items(Resources)/damage_increase.tres",
+	"res://Inventory/Items(Resources)/damage_increase.tres",
+	
 	"res://Inventory/Items(Resources)/spell_duplication.tres",
-	"res://Inventory/Items(Resources)/spell_duplication.tres"
+	"res://Inventory/Items(Resources)/spell_duplication.tres",
+	"res://Inventory/Items(Resources)/spell_duplication.tres",
+	
+	"res://Inventory/Items(Resources)/size_increase.tres",
+	"res://Inventory/Items(Resources)/size_increase.tres",
+	"res://Inventory/Items(Resources)/size_increase.tres"
 ]
 
 func _ready() -> void:

@@ -3,6 +3,7 @@ extends Node2D
 var cast_amount: int = 1
 var timer: Timer
 var casting: bool = false  # Add this flag to track casting state
+var spell_modifications: Dictionary = {}  # Dictionary to store spell modifications
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -31,7 +32,11 @@ func load_ability(name: String) -> void:
 	# Cast spells with delay so player can actually visually see the spells being cast
 	for i in range(times_to_load):
 		# Instantiate and add the scene node
-		var sceneNode: Node = scene.instantiate()
+		var sceneNode = scene.instantiate()
+		
+		# Apply modifications to the instantiated node
+		apply_modifications(sceneNode)
+		
 		player_sibling_container.add_child(sceneNode)
 		
 		# Wait for the specified duration
@@ -41,7 +46,27 @@ func load_ability(name: String) -> void:
 	# Reset cast_amount to 1
 	cast_amount = 1
 	
+	# Clear spell modifications after casting
+	spell_modifications.clear()
+	
 	casting = false  # Reset casting flag after casting is complete
+
+# Function to apply modifications to the spell
+func apply_modifications(sceneNode: Node) -> void:
+	for key in spell_modifications.keys():
+		match key:
+			"DAMAGE_INCREASE":
+				if sceneNode.has_method("set_damage"):
+					# Apply the modification value directly
+					var multiplier = spell_modifications[key]
+					sceneNode.set_damage(multiplier)
+			"SIZE_INCREASE":
+				if sceneNode.has_method("set_size"):
+					sceneNode.set_size(sceneNode.get("size") * spell_modifications[key])
+			"ROOT_SCALE":
+				if sceneNode.has_method("set_scale"):
+					sceneNode.set_scale(sceneNode.get_scale() * spell_modifications[key])
+			# Add more cases for other modifications
 
 # Function to handle SUB1 type data and print SubSpellType
 func handle_sub1_type(data: ItemData) -> void:
@@ -49,8 +74,10 @@ func handle_sub1_type(data: ItemData) -> void:
 	match data.sub_spell_type:
 		ItemData.SubSpellType.DAMAGE_INCREASE:
 			sub_spell_type_name = "DAMAGE_INCREASE"
+			increase_damage_dealt()
 		ItemData.SubSpellType.SIZE_INCREASE:
 			sub_spell_type_name = "SIZE_INCREASE"
+			increase_spell_size()
 		ItemData.SubSpellType.SPELL_DUPLICATION:
 			sub_spell_type_name = "SPELL_DUPLICATION"
 			handle_spell_duplication()
@@ -129,3 +156,15 @@ func process_and_print_hotbar(slot: Node, slot_type: String, hotbar_name: String
 
 func handle_spell_duplication():
 	cast_amount *= 2
+
+func increase_damage_dealt():
+	if not spell_modifications.has("DAMAGE_INCREASE"):
+		spell_modifications["DAMAGE_INCREASE"] = 2.0  # Initial modification value
+	else:
+		spell_modifications["DAMAGE_INCREASE"] *= 2.0  # Double the modification value
+
+func increase_spell_size():
+	if not spell_modifications.has("ROOT_SCALE"):
+		spell_modifications["ROOT_SCALE"] = Vector2(2, 2)  # Initial scale modification value
+	else:
+		spell_modifications["ROOT_SCALE"] *= 2.0  # Double the scale modification value

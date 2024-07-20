@@ -5,6 +5,12 @@ var speed: float = 200.0  # Speed of the projectile
 var entity: Node2D
 var player: Node2D  # Reference to the player node
 
+
+var base_damage: int = 10 
+var damage: int = base_damage 
+var base_size: Vector2 = Vector2(1, 1)
+var size: Vector2 = base_size
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# Find the player node in the scene tree
@@ -50,12 +56,23 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	if entity.is_in_group("enemies"):
 		deal_damage()
 
-func _on_area_2d_body_entered(body: Node2D) -> void:
-	if not body.is_in_group("player"):
-		queue_free()
-	print(body)
-	if body.get_parent().get_parent().is_in_group("enemies"):
-		print("hit an enemy")
+#func _on_area_2d_body_entered(body: Node2D) -> void:
+	#if not body.is_in_group("player"):
+		#queue_free()
+	#print(body)
+	#if body.get_parent().get_parent().is_in_group("enemies"):
+		#print("hit an enemy")
 
-func message():
-	print("heyyo")
+func set_damage(multiplier: float) -> void:
+	damage = base_damage * multiplier
+	print("Damage set to: ", damage)
+
+# Getter method for damage (optional, if needed)
+func get_damage() -> int:
+	return damage
+
+# Setter method for size
+func set_size(new_size: Vector2) -> void:
+	size = new_size
+	self.scale = size
+	print("Size set to: ", size)

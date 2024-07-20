@@ -5,6 +5,12 @@ var speed: float = 200.0  # Speed of the projectile
 var entity: Node2D
 var player: Node2D  # Reference to the player node
 
+
+var base_damage: int = 10 
+var damage: int = base_damage 
+var base_size: Vector2 = Vector2(1, 1)
+var size: Vector2 = base_size
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	# Find the player node in the scene tree
@@ -26,13 +32,10 @@ func _ready() -> void:
 	else:
 		print("Player not found")
 
-
-# Called at a fixed frame rate. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
 	global_position.x += direction * speed * delta
 
 func find_player() -> Node2D:
-	# Traverse the scene tree to find the player node
 	for node in get_tree().get_nodes_in_group("player"):
 		if node.is_in_group("player"):
 			return node
@@ -40,7 +43,8 @@ func find_player() -> Node2D:
 
 func deal_damage() -> void:
 	var attack := Attack.new()
-	attack.attack_damage = 15
+	attack.attack_damage = damage
+	print("damage dealt: ", damage)
 	entity.get_node("HealthComponent").damage(attack)
 	queue_free()
 
@@ -49,13 +53,24 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	print(entity)
 	if entity.is_in_group("enemies"):
 		deal_damage()
+#
+#func _on_area_2d_body_entered(body: Node2D) -> void:
+	#if not body.is_in_group("player"):
+		#queue_free()
+	#print(body)
+	#if body.get_parent().get_parent().is_in_group("enemies"):
+		#print("hit an enemy")
 
-func _on_area_2d_body_entered(body: Node2D) -> void:
-	if not body.is_in_group("player"):
-		queue_free()
-	print(body)
-	if body.get_parent().get_parent().is_in_group("enemies"):
-		print("hit an enemy")
+func set_damage(multiplier: float) -> void:
+	print(multiplier)
+	damage = base_damage * multiplier
+	print("Damage set to: ", damage)
 
-func message():
-	print("heyyo")
+func get_damage() -> int:
+	return damage
+
+func set_size(new_size: Vector2) -> void:
+	print(new_size)
+	size = new_size
+	self.scale = size
+	print("Size set to: ", size)
