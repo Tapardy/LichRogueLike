@@ -20,11 +20,14 @@ var itemsLoadSub: Array = [
 	"res://Inventory/Items(Resources)/size_increase.tres"
 ]
 
+var main_slot_texture: Texture = preload("res://assets/invslot.png")
+var sub_slot_texture: Texture = preload("res://assets/invslot.png")
+
 func _ready() -> void:
 	# Initialize primary inventory
 	for i in range(InvSize):
 		var slot := InventorySlot.new()
-		slot.init(ItemData.Type.MAIN, Vector2(64, 64))
+		slot.init(ItemData.Type.MAIN, Vector2(64, 64), main_slot_texture)
 		$Inv.add_child(slot)
 
 	for i in range(itemsLoad.size()):
@@ -35,7 +38,7 @@ func _ready() -> void:
 	# Initialize secondary inventory
 	for i in range(InvSize):
 		var slot := InventorySlot.new()
-		slot.init(ItemData.Type.SUB1, Vector2(64, 64))
+		slot.init(ItemData.Type.SUB1, Vector2(64, 64), sub_slot_texture)
 		$InvSub.add_child(slot)
 
 	for i in range(itemsLoadSub.size()):

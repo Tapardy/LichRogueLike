@@ -28,6 +28,10 @@ gdscript/canvas_textures/default_texture_filter=0
 
 window/stretch/mode="viewport"
 
+[dotnet]
+
+project/assembly_name="LichBorne"
+
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/SignalVisualizer/plugin.cfg")
