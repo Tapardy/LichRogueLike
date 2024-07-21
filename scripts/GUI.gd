@@ -1,6 +1,8 @@
 extends CanvasLayer
 
-var InvSize: int = 9
+class_name InventoryManager
+
+var InvSize: int = 24
 var itemsLoad: Array = [
 	"res://Inventory/Items(Resources)/firebolt.tres",
 	"res://Inventory/Items(Resources)/rock.tres",
@@ -50,3 +52,33 @@ func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("open_inventory"):
 		print("triggered inventory")
 		self.visible = !self.visible
+
+
+# Public function to add an item to the main inventory
+func add_item_to_main(item_path: String) -> void:
+	itemsLoad.append(item_path)
+	update_inventory()
+
+# Public function to add an item to the secondary inventory
+func add_item_to_sub(item_path: String) -> void:
+	itemsLoadSub.append(item_path)
+	update_inventory()
+
+# Update inventory display
+func update_inventory() -> void:
+	# Update primary inventory slots with new items
+	for i in range(itemsLoad.size()):
+		if i < $Inv.get_child_count():
+			var slot := $Inv.get_child(i) as InventorySlot
+			var item := InventoryItem.new()
+			item.init(load(itemsLoad[i]))
+			slot.add_child(item)
+
+	# Update secondary inventory slots with new items
+	for i in range(itemsLoadSub.size()):
+		if i < $InvSub.get_child_count():
+			var slot := $InvSub.get_child(i) as InventorySlot
+			var item := InventoryItem.new()
+			item.init(load(itemsLoadSub[i]))
+			slot.add_child(item)
+

@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://gn3ut7dc70bk"
-path="res://.godot/imported/m3x6.ttf-29e134dd6f879b5b054b7adb3472081a.fontdata"
+uid="uid://i513hmdqaayh"
+path="res://.godot/imported/prstartk.ttf-f9b1a53085fb556fc133cc82379bcf94.fontdata"
 
 [deps]
 
-source_file="res://assets/m3x6.ttf"
-dest_files=["res://.godot/imported/m3x6.ttf-29e134dd6f879b5b054b7adb3472081a.fontdata"]
+source_file="res://assets/prstartk.ttf"
+dest_files=["res://.godot/imported/prstartk.ttf-f9b1a53085fb556fc133cc82379bcf94.fontdata"]
 
 [params]
 
@@ -27,13 +27,7 @@ Fallbacks=null
 fallbacks=[]
 Compress=null
 compress=true
-preload=[{
-"chars": [],
-"glyphs": [],
-"name": "New Configuration",
-"size": Vector2i(127, 0),
-"variation_embolden": 0.0
-}]
+preload=[]
 language_support={}
 script_support={}
 opentype_features={}

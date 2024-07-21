@@ -49,6 +49,7 @@ size = Vector2(58, 31)
 script = ExtResource("1_ewgf5")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+light_mask = 2
 sprite_frames = SubResource("SpriteFrames_ekcd1")
 frame = 7
 frame_progress = 1.0

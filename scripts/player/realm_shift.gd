@@ -7,6 +7,8 @@ var player: CharacterBody2D
 var tile_map: TileMap
 var is_in_light: bool = false
 
+
+
 func _ready() -> void:
 	player = get_parent()
 	print(player)
@@ -18,6 +20,7 @@ func set_tile_maps(light: TileMap, dark: TileMap) -> void:
 
 func handle_realm_shift() -> void:
 	if can_shift_realm() and not is_in_light:
+		$"../GUI".add_item_to_main("res://Inventory/Items(Resources)/ground_stone.tres")
 		is_in_shadowrealm = !is_in_shadowrealm
 		update_tilemaps()
 

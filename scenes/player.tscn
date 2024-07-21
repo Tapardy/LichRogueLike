@@ -481,19 +481,33 @@ offset_bottom = 444.0
 
 [node name="Inv" type="GridContainer" parent="GUI"]
 unique_name_in_owner = true
-offset_left = 132.0
-offset_top = 46.0
-offset_right = 556.0
-offset_bottom = 430.0
-columns = 4
+offset_left = 145.0
+offset_top = 79.0
+offset_right = 569.0
+offset_bottom = 463.0
+columns = 6
 
 [node name="InvSub" type="GridContainer" parent="GUI"]
 unique_name_in_owner = true
-offset_left = 589.0
-offset_top = 46.0
-offset_right = 1013.0
-offset_bottom = 430.0
-columns = 4
+offset_left = 602.0
+offset_top = 79.0
+offset_right = 1026.0
+offset_bottom = 463.0
+columns = 6
+
+[node name="Label" type="Label" parent="GUI"]
+offset_left = 724.0
+offset_top = 45.0
+offset_right = 884.0
+offset_bottom = 61.0
+text = "Sub Spells"
+
+[node name="Label2" type="Label" parent="GUI"]
+offset_left = 255.0
+offset_top = 45.0
+offset_right = 431.0
+offset_bottom = 61.0
+text = "Main Spells"
 
 [connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
 [connection signal="area_entered" from="PlayerAttack/MeleeAttack/MeleeHitbox" to="PlayerAttack" method="_on_melee_hitbox_area_entered"]

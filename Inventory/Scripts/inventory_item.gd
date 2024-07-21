@@ -26,7 +26,6 @@ func make_drag_preview(at_position: Vector2) -> Variant:
 	t.modulate.a = 0.5
 	t.position = Vector2(-at_position)
 	t.z_index = 1000  # Set a high z_index value to ensure it is on top
-	
 	var c: Control = Control.new()
 	c.add_child(t)
 	

@@ -23,9 +23,8 @@ func _can_drop_data(_at_position: Vector2, data: Variant) -> bool:
 	return false
 
 func _drop_data(_at_position: Vector2, data: Variant) -> void:
-	if get_child_count() > 1:  # Check for more than just the background
-		var item := get_child(1)
-		if item == data:
-			return
-		item.reparent(data.get_parent())
+	# Check if the slot already has an item
+	for child in get_children():
+		if child is InventoryItem and child != data:
+			child.reparent(data.get_parent())
 	data.reparent(self)
