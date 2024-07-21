@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bnih347l0un2n"]
+[gd_scene load_steps=24 format=3 uid="uid://bnih347l0un2n"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_wtr5s"]
 [ext_resource type="Texture2D" uid="uid://dwmwuf0tuijwf" path="res://assets/32rogues/monsters.png" id="2_t4ivk"]
@@ -12,6 +12,8 @@
 [ext_resource type="Script" path="res://scripts/player/spell_casting.gd" id="9_rsxl2"]
 [ext_resource type="Script" path="res://Inventory/Scripts/inventory_slot.gd" id="10_18vfk"]
 [ext_resource type="Texture2D" uid="uid://gxnc0yqmqor4" path="res://assets/invslot.png" id="10_w577b"]
+[ext_resource type="Script" path="res://scenes/Area2D.gd" id="13_x0esd"]
+[ext_resource type="Texture2D" uid="uid://82fcvyvdrb1" path="res://assets/Foozle_2DE0001_Pixel_Magic_Effects/Molten_Spear/003.png" id="14_0bygs"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5l7kr"]
 size = Vector2(32, 32)
@@ -274,6 +276,9 @@ _data = {
 "jump": SubResource("Animation_vgql5")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_i1hsk"]
+size = Vector2(20, 45)
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_wtr5s")
 
@@ -372,6 +377,7 @@ texture = ExtResource("10_w577b")
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 script = ExtResource("10_18vfk")
+type = null
 
 [node name="SubSpellSlots" type="HBoxContainer" parent="PlayerSpells/Spells"]
 layout_mode = 0
@@ -429,6 +435,7 @@ texture = ExtResource("10_w577b")
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 script = ExtResource("10_18vfk")
+type = null
 
 [node name="SubSpellSlots2" type="HBoxContainer" parent="PlayerSpells/Spells"]
 layout_mode = 0
@@ -471,8 +478,9 @@ script = ExtResource("10_18vfk")
 type = 1
 
 [node name="GUI" type="CanvasLayer" parent="."]
-unique_name_in_owner = true
 script = ExtResource("9_isori")
+itemsLoad = null
+itemsLoadSub = null
 
 [node name="Panel" type="Panel" parent="GUI"]
 offset_left = 128.0
@@ -510,6 +518,19 @@ offset_right = 431.0
 offset_bottom = 61.0
 text = "Main Spells"
 
+[node name="Area2D" type="Area2D" parent="GUI"]
+script = ExtResource("13_x0esd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="GUI/Area2D"]
+position = Vector2(528, 336.5)
+shape = SubResource("RectangleShape2D_i1hsk")
+
+[node name="Sprite2D" type="Sprite2D" parent="GUI/Area2D"]
+position = Vector2(527, 347)
+texture = ExtResource("14_0bygs")
+
 [connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
 [connection signal="area_entered" from="PlayerAttack/MeleeAttack/MeleeHitbox" to="PlayerAttack" method="_on_melee_hitbox_area_entered"]
 [connection signal="timeout" from="RealmShift/Timer" to="RealmShift" method="_on_timer_timeout"]
+[connection signal="body_entered" from="GUI/Area2D" to="GUI/Area2D" method="_on_body_entered"]
+[connection signal="body_exited" from="GUI/Area2D" to="GUI/Area2D" method="_on_body_exited"]

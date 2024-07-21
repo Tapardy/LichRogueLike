@@ -1,10 +1,12 @@
-[gd_scene load_steps=14 format=3 uid="uid://bl1ivlm1thybo"]
+[gd_scene load_steps=16 format=3 uid="uid://bl1ivlm1thybo"]
 
 [ext_resource type="Texture2D" uid="uid://bjfkhph05ycgg" path="res://assets/Adventure 2D Tileset/Tile/x32-florest-tileset.png" id="1_rvy6q"]
 [ext_resource type="PackedScene" uid="uid://bnih347l0un2n" path="res://scenes/player.tscn" id="2_qy6pw"]
 [ext_resource type="PackedScene" uid="uid://cq2hmwewp8lbt" path="res://enemyplaceholder.tscn" id="2_r0do6"]
 [ext_resource type="PackedScene" uid="uid://0dej24w46dta" path="res://scenes/components/light.tscn" id="4_x0uxo"]
 [ext_resource type="Script" path="res://scripts/temp_kill_zone.gd" id="5_kqt4o"]
+[ext_resource type="PackedScene" uid="uid://xrxanx21whw3" path="res://scenes/pickupable_items/main_spells/collectible_main_spell.tscn" id="6_qctje"]
+[ext_resource type="Resource" uid="uid://djjmnj5v5mhk4" path="res://Inventory/Items(Resources)/firebolt.tres" id="7_kw6c0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_b84fn"]
 texture = ExtResource("1_rvy6q")
@@ -324,7 +326,7 @@ light_mask = 0
 position = Vector2(0, -15)
 
 [node name="EnemyPlaceholder" parent="." instance=ExtResource("2_r0do6")]
-position = Vector2(-32, -16)
+position = Vector2(-168, -15)
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(0, -15)
@@ -333,6 +335,10 @@ script = ExtResource("5_kqt4o")
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0, 251)
 shape = SubResource("WorldBoundaryShape2D_xor44")
+
+[node name="FireBoltCollectible" parent="." instance=ExtResource("6_qctje")]
+position = Vector2(-115, -66)
+item = ExtResource("7_kw6c0")
 
 [connection signal="area_entered" from="Area2D" to="Area2D" method="_on_area_entered"]
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]

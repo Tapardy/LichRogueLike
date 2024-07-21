@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://xrxanx21whw3"]
+
+[ext_resource type="Script" path="res://scripts/collectible_spells/collectible_main_spell.gd" id="1_jdfpn"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_cspjo"]
+radius = 22.6667
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c83hd"]
+size = Vector2(24, 24)
+
+[node name="CollectibleMainSpell" type="RigidBody2D"]
+collision_layer = 32768
+mass = 1000.0
+script = ExtResource("1_jdfpn")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.75, 0.75)
+
+[node name="InteractableArea" type="Area2D" parent="."]
+scale = Vector2(0.75, 0.75)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableArea"]
+shape = SubResource("CircleShape2D_cspjo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_c83hd")
+
+[connection signal="body_entered" from="InteractableArea" to="." method="_on_interactable_area_body_entered"]

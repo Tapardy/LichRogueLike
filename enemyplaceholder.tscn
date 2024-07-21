@@ -1,22 +1,23 @@
-[gd_scene load_steps=6 format=3 uid="uid://cq2hmwewp8lbt"]
+[gd_scene load_steps=8 format=3 uid="uid://cq2hmwewp8lbt"]
 
 [ext_resource type="Texture2D" uid="uid://dwmwuf0tuijwf" path="res://assets/32rogues/monsters.png" id="1_g1yxk"]
 [ext_resource type="Script" path="res://scripts/enemyplaceholder.gd" id="1_nvvq2"]
+[ext_resource type="Resource" uid="uid://djjmnj5v5mhk4" path="res://Inventory/Items(Resources)/firebolt.tres" id="2_j678m"]
 [ext_resource type="PackedScene" uid="uid://b6ws03lwfd0te" path="res://scenes/components/health_component.tscn" id="2_mj0ab"]
+[ext_resource type="Resource" uid="uid://0nngx5o11t7k" path="res://Inventory/Items(Resources)/ground_stone.tres" id="3_klv45"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_llsmy"]
 atlas = ExtResource("1_g1yxk")
 region = Rect2(0, 128, 32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qsgcq"]
-size = Vector2(21, 27)
+size = Vector2(21, 27.5)
 
 [node name="enemyplaceholder" type="Node2D" groups=["enemies"]]
-position = Vector2(-16, -16)
 script = ExtResource("1_nvvq2")
+items = Array[Resource("res://Inventory/Items(Resources)/item_data.gd")]([ExtResource("2_j678m"), ExtResource("3_klv45")])
 
 [node name="HealthComponent" parent="." instance=ExtResource("2_mj0ab")]
-max_health = 1000
 
 [node name="Label" type="Label" parent="."]
 z_index = 1000
@@ -26,11 +27,10 @@ offset_right = -94.0
 offset_bottom = -13.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-112, 0)
 texture = SubResource("AtlasTexture_llsmy")
 
 [node name="Area2D" type="Area2D" parent="Sprite2D"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D"]
-position = Vector2(-1.5, 0.5)
+position = Vector2(-1, 0.25)
 shape = SubResource("RectangleShape2D_qsgcq")

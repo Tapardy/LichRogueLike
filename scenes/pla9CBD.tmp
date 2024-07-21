@@ -471,8 +471,9 @@ script = ExtResource("10_18vfk")
 type = 1
 
 [node name="GUI" type="CanvasLayer" parent="."]
-unique_name_in_owner = true
 script = ExtResource("9_isori")
+itemsLoad = null
+itemsLoadSub = null
 
 [node name="Panel" type="Panel" parent="GUI"]
 offset_left = 128.0
