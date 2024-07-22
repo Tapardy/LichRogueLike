@@ -3,7 +3,7 @@ class_name InventorySlot
 
 @export var type: ItemData.Type
 var background_texture: Texture = preload("res://assets/invslot.png")
-var special_texture: Texture = preload("res://assets/Foozle_2DE0001_Pixel_Magic_Effects/Explosion/003.png")
+var special_texture: Texture = preload("res://assets/bin.png")
 var is_special: bool = false  # Flag to identify if the slot is special
 
 func init(t: ItemData.Type, cms: Vector2, bg_texture: Texture = null, special: bool = false) -> void:
@@ -37,18 +37,18 @@ func _drop_data(_at_position: Vector2, data: Variant) -> void:
 	for child in get_children():
 		if child is InventoryItem and child != data:
 			child.reparent(data.get_parent())
-	data.reparent(self)
 	
+	# Remove the item from its previous location
 	if is_special:
-		# Notify InventoryManager to remove this item from arrays
 		var manager := get_parent().get_parent() as InventoryManager
 		if manager:
 			manager.remove_item(data)
-			
+		
 		# Clear any existing items from this slot
 		for child in get_children():
 			if child is InventoryItem:
 				child.queue_free()
-				
+	
 	# Add the new item
 	data.reparent(self)
+

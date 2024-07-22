@@ -1,12 +1,12 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://c4j3ccjydelwv"]
 
 [ext_resource type="Script" path="res://Inventory/Items(Resources)/item_data.gd" id="1_vb8c1"]
-[ext_resource type="Texture2D" uid="uid://dknopwlaa4ke" path="res://assets/Foozle_2DE0001_Pixel_Magic_Effects/Fire_Ball/001.png" id="2_vxlm1"]
+[ext_resource type="Texture2D" uid="uid://c75e7nwtrmuql" path="res://assets/bakground shiit.png" id="2_4d8xv"]
 
 [resource]
 script = ExtResource("1_vb8c1")
 type = 1
 name = "Damage Increase"
 description = ""
-texture = ExtResource("2_vxlm1")
+texture = ExtResource("2_4d8xv")
 sub_spell_type = 0

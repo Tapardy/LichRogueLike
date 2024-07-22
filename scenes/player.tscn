@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://bnih347l0un2n"]
+[gd_scene load_steps=22 format=3 uid="uid://bnih347l0un2n"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_wtr5s"]
 [ext_resource type="Texture2D" uid="uid://dwmwuf0tuijwf" path="res://assets/32rogues/monsters.png" id="2_t4ivk"]
@@ -11,7 +11,8 @@
 [ext_resource type="Script" path="res://scripts/GUI.gd" id="9_isori"]
 [ext_resource type="Script" path="res://scripts/player/spell_casting.gd" id="9_rsxl2"]
 [ext_resource type="Script" path="res://Inventory/Scripts/inventory_slot.gd" id="10_18vfk"]
-[ext_resource type="Texture2D" uid="uid://gxnc0yqmqor4" path="res://assets/invslot.png" id="10_w577b"]
+[ext_resource type="Texture2D" uid="uid://b123r5engv0e" path="res://assets/borderMain.png" id="10_mdkvd"]
+[ext_resource type="Texture2D" uid="uid://c75e7nwtrmuql" path="res://assets/bakground shiit.png" id="12_owca2"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5l7kr"]
 size = Vector2(32, 32)
@@ -365,8 +366,8 @@ offset_bottom = 104.0
 
 [node name="InvSlotMain" type="Sprite2D" parent="PlayerSpells/Spells/MainSpellSlot"]
 position = Vector2(48.8333, 48)
-scale = Vector2(1.48438, 1.42424)
-texture = ExtResource("10_w577b")
+scale = Vector2(3.03125, 3)
+texture = ExtResource("10_mdkvd")
 
 [node name="MainSpellSlot" type="PanelContainer" parent="PlayerSpells/Spells/MainSpellSlot"]
 custom_minimum_size = Vector2(96, 96)
@@ -382,8 +383,8 @@ offset_bottom = 90.0
 
 [node name="InvSlotSub1" type="Sprite2D" parent="PlayerSpells/Spells/SubSpellSlots"]
 position = Vector2(32, 32)
-scale = Vector2(0.96875, 0.939394)
-texture = ExtResource("10_w577b")
+scale = Vector2(2, 2.04167)
+texture = ExtResource("12_owca2")
 
 [node name="SubSlot1" type="PanelContainer" parent="PlayerSpells/Spells/SubSpellSlots"]
 custom_minimum_size = Vector2(64, 64)
@@ -393,8 +394,8 @@ type = 1
 
 [node name="InvSlotSub2" type="Sprite2D" parent="PlayerSpells/Spells/SubSpellSlots"]
 position = Vector2(100, 32)
-scale = Vector2(0.96875, 0.939394)
-texture = ExtResource("10_w577b")
+scale = Vector2(2, 2.04167)
+texture = ExtResource("12_owca2")
 
 [node name="SubSlot2" type="PanelContainer" parent="PlayerSpells/Spells/SubSpellSlots"]
 custom_minimum_size = Vector2(64, 64)
@@ -404,8 +405,8 @@ type = 1
 
 [node name="InvSlotSub3" type="Sprite2D" parent="PlayerSpells/Spells/SubSpellSlots"]
 position = Vector2(168, 32)
-scale = Vector2(0.968751, 0.939394)
-texture = ExtResource("10_w577b")
+scale = Vector2(2, 2.04167)
+texture = ExtResource("12_owca2")
 
 [node name="SubSlot3" type="PanelContainer" parent="PlayerSpells/Spells/SubSpellSlots"]
 custom_minimum_size = Vector2(64, 64)
@@ -422,8 +423,8 @@ offset_bottom = 207.0
 
 [node name="InvSlotMain" type="Sprite2D" parent="PlayerSpells/Spells/MainSpellSlot2"]
 position = Vector2(48.6667, 48)
-scale = Vector2(1.48958, 1.42424)
-texture = ExtResource("10_w577b")
+scale = Vector2(3.04166, 2.97917)
+texture = ExtResource("10_mdkvd")
 
 [node name="MainSpellSlot" type="PanelContainer" parent="PlayerSpells/Spells/MainSpellSlot2"]
 custom_minimum_size = Vector2(96, 96)
@@ -439,8 +440,8 @@ offset_bottom = 193.0
 
 [node name="InvSlotSub1" type="Sprite2D" parent="PlayerSpells/Spells/SubSpellSlots2"]
 position = Vector2(32, 32)
-scale = Vector2(0.96875, 0.939394)
-texture = ExtResource("10_w577b")
+scale = Vector2(2, 2.02083)
+texture = ExtResource("12_owca2")
 
 [node name="SubSlot1" type="PanelContainer" parent="PlayerSpells/Spells/SubSpellSlots2"]
 custom_minimum_size = Vector2(64, 64)
@@ -450,8 +451,8 @@ type = 1
 
 [node name="InvSlotSub2" type="Sprite2D" parent="PlayerSpells/Spells/SubSpellSlots2"]
 position = Vector2(100, 32)
-scale = Vector2(0.96875, 0.939394)
-texture = ExtResource("10_w577b")
+scale = Vector2(2, 2.02083)
+texture = ExtResource("12_owca2")
 
 [node name="SubSlot2" type="PanelContainer" parent="PlayerSpells/Spells/SubSpellSlots2"]
 custom_minimum_size = Vector2(64, 64)
@@ -461,8 +462,8 @@ type = 1
 
 [node name="InvSlotSub3" type="Sprite2D" parent="PlayerSpells/Spells/SubSpellSlots2"]
 position = Vector2(168, 32)
-scale = Vector2(0.968751, 0.939393)
-texture = ExtResource("10_w577b")
+scale = Vector2(2, 2.02083)
+texture = ExtResource("12_owca2")
 
 [node name="SubSlot3" type="PanelContainer" parent="PlayerSpells/Spells/SubSpellSlots2"]
 custom_minimum_size = Vector2(64, 64)

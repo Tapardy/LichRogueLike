@@ -66,20 +66,26 @@ func add_item_to_sub(item_path: String) -> void:
 		itemsLoadSub.append(item_path)
 		update_inventory()
 
-# Check if an item can be added to the main inventory
 func can_add_item_to_main(item_path: String) -> bool:
 	return itemsLoad.size() < InvSize - 1
 
-# Check if an item can be added to the secondary inventory
 func can_add_item_to_sub(item_path: String) -> bool:
 	return itemsLoadSub.size() < InvSize - 1
 
-# Public function to remove an item from the inventory
 func remove_item(item: InventoryItem) -> void:
 	var item_path := item.data.resource_path
-	itemsLoad.erase(item_path)
-	itemsLoadSub.erase(item_path)
+
+	# Remove item from the appropriate list
+	if item_path in itemsLoad:
+		itemsLoad.erase(item_path)
+	elif item_path in itemsLoadSub:
+		itemsLoadSub.erase(item_path)
+	else:
+		print("Error: Item not found in inventory lists.")
+
+	# Update the inventory to reflect the changes
 	update_inventory()
+
 
 # Update inventory display
 func update_inventory() -> void:
