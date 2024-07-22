@@ -35,22 +35,21 @@ func _can_drop_data(_at_position: Vector2, data: Variant) -> bool:
 	return false
 
 func _drop_data(_at_position: Vector2, data: Variant) -> void:
-	# Check if the slot is a hotbar slot
+	var manager := get_parent().get_parent() as InventoryManager
+
 	if is_hotbar:
+		manager = owner.get_node("GUI")
 		# Reparent the item to the hotbar slot
 		data.reparent(self)
-		
+
 		# Notify the manager to remove the item from the main or secondary inventory
-		var manager := owner.get_node("GUI") as InventoryManager
-		if manager:
-			if data.data.type == ItemData.Type.MAIN:
-				manager.remove_item_from_main(data)
-			elif data.data.type == ItemData.Type.SUB1:
-				manager.remove_item_from_sub(data)
+		if data.data.type == ItemData.Type.MAIN:
+			manager.remove_item_from_main(data)
+		elif data.data.type == ItemData.Type.SUB1:
+			manager.remove_item_from_sub(data)
 	else:
 		# Handle regular inventory slots
 		if is_special:
-			var manager := get_parent().get_parent() as InventoryManager
 			if manager:
 				manager.remove_item(data)
 		
@@ -61,3 +60,10 @@ func _drop_data(_at_position: Vector2, data: Variant) -> void:
 		
 		# Add the new item
 		data.reparent(self)
+
+		# Add the item to the inventory data
+		if type == ItemData.Type.MAIN:
+			manager.add_item_to_main(data.data.resource_path)
+		elif type == ItemData.Type.SUB1:
+			manager.add_item_to_sub(data.data.resource_path)
+
