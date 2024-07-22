@@ -56,13 +56,23 @@ func _process(_delta: float) -> void:
 
 # Public function to add an item to the main inventory
 func add_item_to_main(item_path: String) -> void:
-	itemsLoad.append(item_path)
-	update_inventory()
+	if itemsLoad.size() < InvSize - 1:
+		itemsLoad.append(item_path)
+		update_inventory()
 
 # Public function to add an item to the secondary inventory
 func add_item_to_sub(item_path: String) -> void:
-	itemsLoadSub.append(item_path)
-	update_inventory()
+	if itemsLoadSub.size() < InvSize - 1:
+		itemsLoadSub.append(item_path)
+		update_inventory()
+
+# Check if an item can be added to the main inventory
+func can_add_item_to_main(item_path: String) -> bool:
+	return itemsLoad.size() < InvSize - 1
+
+# Check if an item can be added to the secondary inventory
+func can_add_item_to_sub(item_path: String) -> bool:
+	return itemsLoadSub.size() < InvSize - 1
 
 # Public function to remove an item from the inventory
 func remove_item(item: InventoryItem) -> void:
