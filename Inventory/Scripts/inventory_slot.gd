@@ -2,10 +2,12 @@ extends PanelContainer
 class_name InventorySlot
 
 @export var type: ItemData.Type
-@export var is_hotbar: bool = false  # Flag to identify if the slot is a hotbar slot
+@export var is_hotbar: bool = false
 var background_texture: Texture = preload("res://assets/invslot.png")
 var special_texture: Texture = preload("res://assets/bin.png")
-var is_special: bool = false  # Flag to identify if the slot is special
+var is_special: bool = false
+
+var dragged_from_hotbar: bool = false  # New property to track the source
 
 func init(t: ItemData.Type, cms: Vector2, bg_texture: Texture = null, special: bool = false) -> void:
 	type = t
@@ -13,7 +15,6 @@ func init(t: ItemData.Type, cms: Vector2, bg_texture: Texture = null, special: b
 	background_texture = bg_texture
 	is_special = special
 	
-	# Add a TextureRect for the background
 	var bg: TextureRect = TextureRect.new()
 	bg.expand = true
 	bg.stretch_mode = TextureRect.STRETCH_KEEP_ASPECT_CENTERED
@@ -39,31 +40,25 @@ func _drop_data(_at_position: Vector2, data: Variant) -> void:
 
 	if is_hotbar:
 		manager = owner.get_node("GUI")
-		# Reparent the item to the hotbar slot
 		data.reparent(self)
-
-		# Notify the manager to remove the item from the main or secondary inventory
+		
 		if data.data.type == ItemData.Type.MAIN:
 			manager.remove_item_from_main(data)
 		elif data.data.type == ItemData.Type.SUB1:
 			manager.remove_item_from_sub(data)
 	else:
-		# Handle regular inventory slots
 		if is_special:
 			if manager:
 				manager.remove_item(data)
-		
-		# Clear any existing items from this slot
+				
 		for child in get_children():
 			if child is InventoryItem:
 				child.queue_free()
-		
-		# Add the new item
+				
 		data.reparent(self)
-
-		# Add the item to the inventory data
-		if type == ItemData.Type.MAIN:
-			manager.add_item_to_main(data.data.resource_path)
-		elif type == ItemData.Type.SUB1:
-			manager.add_item_to_sub(data.data.resource_path)
-
+		
+		if data.dragged_from_hotbar:
+			if type == ItemData.Type.MAIN:
+				manager.add_item_to_main(data.data.resource_path)
+			elif type == ItemData.Type.SUB1:
+				manager.add_item_to_sub(data.data.resource_path)
