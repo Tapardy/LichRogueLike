@@ -373,6 +373,7 @@ texture = ExtResource("10_mdkvd")
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 script = ExtResource("10_18vfk")
+is_hotbar = true
 
 [node name="SubSpellSlots" type="HBoxContainer" parent="PlayerSpells/Spells"]
 layout_mode = 0
@@ -391,6 +392,7 @@ custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 script = ExtResource("10_18vfk")
 type = 1
+is_hotbar = true
 
 [node name="InvSlotSub2" type="Sprite2D" parent="PlayerSpells/Spells/SubSpellSlots"]
 position = Vector2(100, 32)
@@ -402,6 +404,7 @@ custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 script = ExtResource("10_18vfk")
 type = 1
+is_hotbar = true
 
 [node name="InvSlotSub3" type="Sprite2D" parent="PlayerSpells/Spells/SubSpellSlots"]
 position = Vector2(168, 32)
@@ -413,6 +416,7 @@ custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 script = ExtResource("10_18vfk")
 type = 1
+is_hotbar = true
 
 [node name="MainSpellSlot2" type="VBoxContainer" parent="PlayerSpells/Spells"]
 layout_mode = 0
@@ -430,6 +434,7 @@ texture = ExtResource("10_mdkvd")
 custom_minimum_size = Vector2(96, 96)
 layout_mode = 2
 script = ExtResource("10_18vfk")
+is_hotbar = true
 
 [node name="SubSpellSlots2" type="HBoxContainer" parent="PlayerSpells/Spells"]
 layout_mode = 0
@@ -448,6 +453,7 @@ custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 script = ExtResource("10_18vfk")
 type = 1
+is_hotbar = true
 
 [node name="InvSlotSub2" type="Sprite2D" parent="PlayerSpells/Spells/SubSpellSlots2"]
 position = Vector2(100, 32)
@@ -459,6 +465,7 @@ custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 script = ExtResource("10_18vfk")
 type = 1
+is_hotbar = true
 
 [node name="InvSlotSub3" type="Sprite2D" parent="PlayerSpells/Spells/SubSpellSlots2"]
 position = Vector2(168, 32)
@@ -470,6 +477,7 @@ custom_minimum_size = Vector2(64, 64)
 layout_mode = 2
 script = ExtResource("10_18vfk")
 type = 1
+is_hotbar = true
 
 [node name="GUI" type="CanvasLayer" parent="."]
 unique_name_in_owner = true

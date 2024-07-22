@@ -1,3 +1,4 @@
+
 extends CanvasLayer
 class_name InventoryManager
 
@@ -11,11 +12,9 @@ var InvSize: int = 24
 	"res://Inventory/Items(Resources)/damage_increase.tres",
 	"res://Inventory/Items(Resources)/damage_increase.tres",
 	"res://Inventory/Items(Resources)/damage_increase.tres",
-	
 	"res://Inventory/Items(Resources)/spell_duplication.tres",
 	"res://Inventory/Items(Resources)/spell_duplication.tres",
 	"res://Inventory/Items(Resources)/spell_duplication.tres",
-	
 	"res://Inventory/Items(Resources)/size_increase.tres",
 	"res://Inventory/Items(Resources)/size_increase.tres",
 	"res://Inventory/Items(Resources)/size_increase.tres"
@@ -72,20 +71,26 @@ func can_add_item_to_main(item_path: String) -> bool:
 func can_add_item_to_sub(item_path: String) -> bool:
 	return itemsLoadSub.size() < InvSize - 1
 
-func remove_item(item: InventoryItem) -> void:
+func remove_item_from_main(item: InventoryItem) -> void:
 	var item_path := item.data.resource_path
-
-	# Remove item from the appropriate list
 	if item_path in itemsLoad:
 		itemsLoad.erase(item_path)
-	elif item_path in itemsLoadSub:
+		update_inventory()
+
+func remove_item_from_sub(item: InventoryItem) -> void:
+	var item_path := item.data.resource_path
+	if item_path in itemsLoadSub:
 		itemsLoadSub.erase(item_path)
+		update_inventory()
+
+# Remove item from either inventory
+func remove_item(item: InventoryItem) -> void:
+	if item.data.type == ItemData.Type.MAIN:
+		remove_item_from_main(item)
+	elif item.data.type == ItemData.Type.SUB1:
+		remove_item_from_sub(item)
 	else:
-		print("Error: Item not found in inventory lists.")
-
-	# Update the inventory to reflect the changes
-	update_inventory()
-
+		print("Error: Item type not recognized.")
 
 # Update inventory display
 func update_inventory() -> void:

@@ -2,6 +2,7 @@ extends PanelContainer
 class_name InventorySlot
 
 @export var type: ItemData.Type
+@export var is_hotbar: bool = false  # Flag to identify if the slot is a hotbar slot
 var background_texture: Texture = preload("res://assets/invslot.png")
 var special_texture: Texture = preload("res://assets/bin.png")
 var is_special: bool = false  # Flag to identify if the slot is special
@@ -30,37 +31,33 @@ func set_special_icon() -> void:
 
 func _can_drop_data(_at_position: Vector2, data: Variant) -> bool:
 	if data is InventoryItem:
-		return type == data.data.type or is_special
+		return type == data.data.type
 	return false
 
 func _drop_data(_at_position: Vector2, data: Variant) -> void:
-	# Check if the data is an InventoryItem
-	if data is InventoryItem:
-		var item = data as InventoryItem
-
-		# If this is a special slot, delete the item and clean up
+	# Check if the slot is a hotbar slot
+	if is_hotbar:
+		# Reparent the item to the hotbar slot
+		data.reparent(self)
+		
+		# Notify the manager to remove the item from the main or secondary inventory
+		var manager := owner.get_node("GUI") as InventoryManager
+		if manager:
+			if data.data.type == ItemData.Type.MAIN:
+				manager.remove_item_from_main(data)
+			elif data.data.type == ItemData.Type.SUB1:
+				manager.remove_item_from_sub(data)
+	else:
+		# Handle regular inventory slots
 		if is_special:
-			# Check if InventoryManager is available
 			var manager := get_parent().get_parent() as InventoryManager
-			
 			if manager:
-				manager.remove_item(item)
-			else:
-				print_debug("Warning: InventoryManager not found. Item will not be removed from the global inventory.")
-
-			# Clear any existing items from this slot
-			for child in get_children():
-				if child is InventoryItem:
-					# Ensure the item is still a child before removing
-					if child.get_parent() == self:
-						remove_child(child)
-					child.queue_free()
-
-			# Ensure the item being dropped is not already a child before removing
-			if item.get_parent() == self:
-				remove_child(item)
-			item.queue_free()
-		else:
-			# If not a special slot, reparent the item to this slot
-			if item.get_parent() != self:
-				item.reparent(self)
+				manager.remove_item(data)
+		
+		# Clear any existing items from this slot
+		for child in get_children():
+			if child is InventoryItem:
+				child.queue_free()
+		
+		# Add the new item
+		data.reparent(self)
