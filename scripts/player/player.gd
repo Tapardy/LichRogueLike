@@ -11,7 +11,8 @@ var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
 var can_jump: bool = true
 
 func _ready() -> void:
-	coyote_timer.wait_time = COYOTE_TIME
+	coyote_timer.wait_time = COYOTE_TIME 
+	$Camera2D/CanvasLayer/Sprite2D.visible = false
 	$RealmShift.set_tile_maps($"../TileMapLight", $"../TileMapDark")
 	
 func _physics_process(delta: float) -> void:

@@ -6,30 +6,32 @@ var tile_map_dark: TileMap
 var player: CharacterBody2D
 var tile_map: TileMap
 var is_in_light: bool = false
-
-
+var can_shift: bool = true  # New variable to track cooldown
 
 func _ready() -> void:
 	player = get_parent()
 	print(player)
-	
+
 func set_tile_maps(light: TileMap, dark: TileMap) -> void:
 	tile_map_light = light
 	tile_map_dark = dark
 	print(light, dark)
 
 func handle_realm_shift() -> void:
-	if can_shift_realm() and not is_in_light:
+	if can_shift and can_shift_realm() and not is_in_light:
+		$"../Camera2D/AnimationPlayer".play("dissolve")
 		$"../GUI".add_item_to_main("res://Inventory/Items(Resources)/ground_stone.tres")
 		is_in_shadowrealm = !is_in_shadowrealm
 		update_tilemaps()
+		can_shift = false  # Start cooldown
+		$Timer.start(0.5)  # Start the timer for 0.5 seconds
 
 func change_realm(value: bool) -> void:
 	print(value)
 	is_in_shadowrealm = value
 	is_in_light = true
 	update_tilemaps()
-	
+
 func exit_light() -> void:
 	is_in_light = false
 
@@ -63,6 +65,6 @@ func can_shift_realm() -> bool:
 	else:
 		return true
 
-
 func _on_timer_timeout() -> void:
 	$Label.text = ""
+	can_shift = true  # Reset cooldown flag

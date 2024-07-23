@@ -1,0 +1,45 @@
+[gd_resource type="VisualShader" load_steps=6 format=3 uid="uid://ywidhewah2n4"]
+
+[sub_resource type="VisualShaderNodeTexture2DParameter" id="VisualShaderNodeTexture2DParameter_uqxo0"]
+parameter_name = "Albedo"
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_b5gvn"]
+source = 5
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_sqws3"]
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_s6nv4"]
+noise = SubResource("FastNoiseLite_sqws3")
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_xmg1c"]
+texture = SubResource("NoiseTexture2D_s6nv4")
+
+[resource]
+code = "shader_type spatial;
+render_mode blend_mix, depth_draw_opaque, cull_back, diffuse_lambert, specular_schlick_ggx;
+
+uniform sampler2D Albedo;
+
+
+
+void fragment() {
+	vec4 n_out3p0;
+// Texture2D:3
+	n_out3p0 = texture(Albedo, UV);
+
+
+// Output:0
+	ALBEDO = vec3(n_out3p0.xyz);
+
+
+}
+"
+graph_offset = Vector2(-870.627, 25.1596)
+nodes/fragment/0/position = Vector2(440, 160)
+nodes/fragment/2/node = SubResource("VisualShaderNodeTexture2DParameter_uqxo0")
+nodes/fragment/2/position = Vector2(-400, 60)
+nodes/fragment/3/node = SubResource("VisualShaderNodeTexture_b5gvn")
+nodes/fragment/3/position = Vector2(9.04786, 252.155)
+nodes/fragment/4/node = SubResource("VisualShaderNodeTexture_xmg1c")
+nodes/fragment/4/position = Vector2(-340, 460)
+nodes/fragment/connections = PackedInt32Array(2, 0, 3, 2, 3, 0, 0, 0)
