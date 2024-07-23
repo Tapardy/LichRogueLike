@@ -504,6 +504,9 @@ theme_override_fonts/font = ExtResource("8_y631v")
 horizontal_alignment = 1
 vertical_alignment = 1
 
+[node name="ShadowStrengthTimer" type="Timer" parent="RealmShift"]
+wait_time = 2.0
+
 [node name="SpellCasting" type="Node2D" parent="."]
 script = ExtResource("9_rsxl2")
 main_spell_self_damage = 20
@@ -695,3 +698,4 @@ show_percentage = false
 [connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
 [connection signal="area_entered" from="PlayerAttack/MeleeAttack/MeleeHitbox" to="PlayerAttack" method="_on_melee_hitbox_area_entered"]
 [connection signal="timeout" from="RealmShift/Timer" to="RealmShift" method="_on_timer_timeout"]
+[connection signal="timeout" from="RealmShift/ShadowStrengthTimer" to="RealmShift" method="_on_shadow_strength_timer_timeout"]

@@ -33,6 +33,7 @@ func load_ability(name: String) -> void:
 	$"../HealthComponent".damage_self(final_self_damage)
 	
 	casting = true  # Set casting flag to true
+
 	print("cast_amount variable: ", cast_amount)
 	var scene: PackedScene = load("res://scenes/abilities/" + name + "/" + name + ".tscn")
 	
@@ -45,7 +46,11 @@ func load_ability(name: String) -> void:
 	# Cast spells with delay so player can actually visually see the spells being cast
 	for i in range(times_to_load):
 		var sceneNode: Node = scene.instantiate()
-		
+		if $"../RealmShift".is_in_shadowrealm:
+			sceneNode.set_damage($"../RealmShift".shadow_strength)
+		else:
+			sceneNode.set_damage($"../RealmShift".light_strength)
+			
 		apply_modifications(sceneNode)
 		
 		player_sibling_container.add_child(sceneNode)

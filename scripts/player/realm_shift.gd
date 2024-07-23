@@ -5,12 +5,21 @@ var tile_map_light: TileMap
 var tile_map_dark: TileMap
 var player: CharacterBody2D
 var tile_map: TileMap
-var is_in_light: bool = false
 var can_shift: bool = true  # New variable to track cooldown
+
+# New variables for strength multipliers
+var shadow_strength: float = 1.0
+var light_strength: float = 1.0
+var strength_increase_rate: float = 0.1  # Rate at which strength increases
+var strength_decrease_rate: float = 0.05  # Rate at which strength decreases
+var strength_transition_time: float = 2.0  # Time to transition strength back to default
 
 func _ready() -> void:
 	player = get_parent()
 	print(player)
+	
+	# Ensure the ShadowStrengthTimer is properly set up
+	$ShadowStrengthTimer.wait_time = 0.1  # Adjust this value as needed for your update frequency
 
 func set_tile_maps(light: TileMap, dark: TileMap) -> void:
 	tile_map_light = light
@@ -18,22 +27,28 @@ func set_tile_maps(light: TileMap, dark: TileMap) -> void:
 	print(light, dark)
 
 func handle_realm_shift() -> void:
-	if can_shift and can_shift_realm() and not is_in_light:
+	if can_shift and can_shift_realm():
 		$"../Camera2D/AnimationPlayer".play("dissolve")
 		$"../GUI".add_item_to_main("res://Inventory/Items(Resources)/ground_stone.tres")
 		is_in_shadowrealm = !is_in_shadowrealm
 		update_tilemaps()
 		can_shift = false  # Start cooldown
-		$Timer.start(0.75)  # Start the timer for 0.5 seconds
+		$Timer.start(0.75)  # Start the cooldown timer
+
+		if is_in_shadowrealm:
+			start_shadow_realm_strength_increase()
+		else:
+			start_light_realm_strength_decrease()
 
 func change_realm(value: bool) -> void:
 	print(value)
 	is_in_shadowrealm = value
-	is_in_light = true
 	update_tilemaps()
 
-func exit_light() -> void:
-	is_in_light = false
+	if is_in_shadowrealm:
+		start_shadow_realm_strength_increase()
+	else:
+		start_light_realm_strength_decrease()
 
 func update_tilemaps() -> void:
 	if is_in_shadowrealm:
@@ -50,7 +65,7 @@ func update_tilemaps() -> void:
 func can_shift_realm() -> bool:
 	if is_in_shadowrealm:
 		tile_map = tile_map_light
-	elif not is_in_shadowrealm:
+	else:
 		tile_map = tile_map_dark
 		
 	var target_tile: Vector2 = tile_map.local_to_map(player.global_position)
@@ -68,3 +83,31 @@ func can_shift_realm() -> bool:
 func _on_timer_timeout() -> void:
 	$Label.text = ""
 	can_shift = true  # Reset cooldown flag
+
+# New function to start increasing shadow realm strength
+func start_shadow_realm_strength_increase() -> void:
+	shadow_strength = 1.0
+	light_strength = 1.0
+	$ShadowStrengthTimer.start()  # Start the strength adjustment timer
+
+# New function to start decreasing light realm strength
+func start_light_realm_strength_decrease() -> void:
+	$ShadowStrengthTimer.start()  # Start the strength adjustment timer
+
+func _on_shadow_strength_timer_timeout() -> void:
+	if is_in_shadowrealm:
+		if shadow_strength < 1.5:
+			shadow_strength += strength_increase_rate
+		if light_strength > 0.5:
+			light_strength -= strength_decrease_rate
+	else:
+		# Gradually reset shadow_strength
+		if shadow_strength > 1.0:
+			shadow_strength -= strength_decrease_rate
+		# Gradually reset light_strength
+		if light_strength < 1.0:
+			light_strength += strength_decrease_rate
+		if light_strength >= 1.0:
+			$ShadowStrengthTimer.stop()  # Stop the timer when reaching the default strength
+
+# Ensure the ShadowStrengthTimer node exists and is properly configured

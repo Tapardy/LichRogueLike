@@ -2,7 +2,7 @@ extends Node2D
 @onready var sprite_2d: Sprite2D = $"../Sprite2D"
 @export var melee_damage: int = 10
 var entity: Node2D
-
+var actual_damage: float
 func _ready() -> void:
 	$MeleeAttack.visible = false
 	
@@ -31,8 +31,15 @@ func _on_melee_hitbox_area_entered(area: Node2D) -> void:
 	
 func deal_damage() -> void:
 	var attack := Attack.new()
-	attack.attack_damage = melee_damage
-	print(melee_damage)
+	if $"../RealmShift".is_in_shadowrealm:
+		actual_damage = melee_damage * $"../RealmShift".shadow_strength
+		print ($"../RealmShift".shadow_strength)
+		print("shadow: " , melee_damage)
+	else:
+		actual_damage = melee_damage * $"../RealmShift".light_strength
+		print("light: " , melee_damage)
+	attack.attack_damage = actual_damage
+	print(actual_damage)
 	entity.get_node("HealthComponent").damage(attack)
 	$"../LifeForce".add_life_force()
 
