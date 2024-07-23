@@ -25,11 +25,11 @@ func load_ability(name: String) -> void:
 		print("Already casting. Please wait until casting is finished.")
 		return
 		
-	# Don't let the player kill themselves
-	if final_self_damage >= $"../HealthComponent".health:
+	# Check if player can cast the spell
+	if not $"../HealthComponent".can_cast_spell(final_self_damage):
 		reset_spell_modifications()
 		return
-		
+	
 	$"../HealthComponent".damage_self(final_self_damage)
 	
 	casting = true  # Set casting flag to true
@@ -176,7 +176,7 @@ func increase_spell_size() -> void:
 		increase_self_damage(size_increase_self_damage)
 
 func can_apply_self_damage(self_damage: int) -> bool:
-	return final_self_damage + self_damage < $"../HealthComponent".health
+	return $"../HealthComponent".can_cast_spell(self_damage)
 
 func increase_self_damage(self_damage: int) -> void:
 	final_self_damage += self_damage

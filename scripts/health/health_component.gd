@@ -1,6 +1,6 @@
 extends Node2D
 
-var health: int = 10 
+var health: int = 10
 @export var suppress_damage: bool = false
 @export var max_health: int = 10
 
@@ -40,3 +40,8 @@ func damage_self(self_damage: int) -> void:
 		var attack: Attack = Attack.new()
 		attack.attack_damage = remaining_self_damage
 		damage(attack)
+
+# New function to check if the player can cast the spell
+func can_cast_spell(self_damage: int) -> bool:
+	var combined_health_life_force: int = health + $"../LifeForce".current_life_force
+	return combined_health_life_force >= self_damage
