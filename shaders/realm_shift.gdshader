@@ -8,6 +8,7 @@ void fragment(){
 	main_texture.b = 0.0;
 	main_texture.r = 0.0;
 	main_texture.g = 0.0;
+	main_texture.a = 0.5;
     vec4 noise_texture = texture(dissolve_texture, UV);
     main_texture.a *= floor(dissolve_value + min(1, noise_texture.x));
 

@@ -160,7 +160,6 @@ func handle_spell_duplication() -> void:
 		increase_self_damage(spell_dupe_self_damage)
 
 func increase_damage_dealt() -> void:
-	
 	if can_apply_self_damage(attack_up_self_damage):
 		if $"../RealmShift".is_in_shadowrealm:
 			damage_up = 2.0 * $"../RealmShift".shadow_strength

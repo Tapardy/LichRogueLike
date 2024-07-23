@@ -5,14 +5,16 @@ var tile_map_light: TileMap
 var tile_map_dark: TileMap
 var player: CharacterBody2D
 var tile_map: TileMap
-var can_shift: bool = true  # New variable to track cooldown
+var can_shift: bool = true  # Variable to track cooldown
 
-# New variables for strength multipliers
+# Variables for strength multipliers
 var shadow_strength: float = 1.0
 var light_strength: float = 1.0
 var strength_increase_rate: float = 0.1  # Rate at which strength increases
 var strength_decrease_rate: float = 0.05  # Rate at which strength decreases
 var strength_transition_time: float = 2.0  # Time to transition strength back to default
+
+var is_in_light: bool = false  # Variable to track if the player is in the light
 
 func _ready() -> void:
 	player = get_parent()
@@ -28,6 +30,10 @@ func set_tile_maps(light: TileMap, dark: TileMap) -> void:
 
 func handle_realm_shift() -> void:
 	if can_shift and can_shift_realm():
+		if is_in_light:
+			$Label.text = "Can't switch realms in the light"
+			return
+		
 		$"../Camera2D/AnimationPlayer".play("dissolve")
 		$"../GUI".add_item_to_main("res://Inventory/Items(Resources)/ground_stone.tres")
 		is_in_shadowrealm = !is_in_shadowrealm
@@ -79,18 +85,18 @@ func can_shift_realm() -> bool:
 		return false
 	else:
 		return true
-
+	
 func _on_timer_timeout() -> void:
 	$Label.text = ""
 	can_shift = true  # Reset cooldown flag
 
-# New function to start increasing shadow realm strength
+# Function to start increasing shadow realm strength
 func start_shadow_realm_strength_increase() -> void:
 	shadow_strength = 1.0
 	light_strength = 1.0
 	$ShadowStrengthTimer.start()  # Start the strength adjustment timer
 
-# New function to start decreasing light realm strength
+# Function to start decreasing light realm strength
 func start_light_realm_strength_decrease() -> void:
 	$ShadowStrengthTimer.start()  # Start the strength adjustment timer
 
@@ -109,5 +115,3 @@ func _on_shadow_strength_timer_timeout() -> void:
 			light_strength += strength_decrease_rate
 		if light_strength >= 1.0:
 			$ShadowStrengthTimer.stop()  # Stop the timer when reaching the default strength
-
-# Ensure the ShadowStrengthTimer node exists and is properly configured
