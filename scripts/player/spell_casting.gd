@@ -12,6 +12,8 @@ var final_self_damage: int = 0
 @export var size_increase_self_damage: int = 10
 @export var spell_dupe_self_damage: int = 15
 
+var damage_up: float = 0
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if not timer:
@@ -158,11 +160,17 @@ func handle_spell_duplication() -> void:
 		increase_self_damage(spell_dupe_self_damage)
 
 func increase_damage_dealt() -> void:
+	
 	if can_apply_self_damage(attack_up_self_damage):
-		if not spell_modifications.has("DAMAGE_INCREASE"):
-			spell_modifications["DAMAGE_INCREASE"] = 2.0  # Initial modification value
+		if $"../RealmShift".is_in_shadowrealm:
+			damage_up = 2.0 * $"../RealmShift".shadow_strength
 		else:
-			spell_modifications["DAMAGE_INCREASE"] *= 2.0  # Double the modification value
+			damage_up = 2.0 * $"../RealmShift".light_strength
+			
+		if not spell_modifications.has("DAMAGE_INCREASE"):
+			spell_modifications["DAMAGE_INCREASE"] = damage_up # Initial modification value
+		else:
+			spell_modifications["DAMAGE_INCREASE"] *= damage_up  # Double the modification value
 			
 		increase_self_damage(attack_up_self_damage)
 
