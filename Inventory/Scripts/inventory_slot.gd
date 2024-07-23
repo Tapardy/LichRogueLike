@@ -7,7 +7,7 @@ var background_texture: Texture = preload("res://assets/invslot.png")
 var special_texture: Texture = preload("res://assets/bin.png")
 var is_special: bool = false
 
-var dragged_from_hotbar: bool = false  
+var dragged_from_hotbar: bool = false
 
 func init(t: ItemData.Type, cms: Vector2, bg_texture: Texture = null, special: bool = false) -> void:
 	type = t
@@ -31,8 +31,10 @@ func set_special_icon() -> void:
 				child.texture = special_texture
 
 func _can_drop_data(_at_position: Vector2, data: Variant) -> bool:
-	if data is InventoryItem:
+	if data is InventoryItem and not is_special:
 		return type == data.data.type
+	elif data is InventoryItem and is_special:
+		return not data.dragged_from_hotbar
 	return false
 
 func is_occupied() -> bool:
@@ -42,7 +44,7 @@ func is_occupied() -> bool:
 	return false
 
 func _drop_data(_at_position: Vector2, data: Variant) -> void:
-	if is_occupied():
+	if (is_special and data.dragged_from_hotbar) or is_occupied():
 		return 
 
 	var manager := get_parent().get_parent() as InventoryManager
