@@ -1,11 +1,11 @@
-[gd_scene load_steps=30 format=3 uid="uid://bnih347l0un2n"]
+[gd_scene load_steps=32 format=3 uid="uid://bnih347l0un2n"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_wtr5s"]
 [ext_resource type="Shader" path="res://shaders/realm_shift.gdshader" id="2_8ax0c"]
-[ext_resource type="Texture2D" uid="uid://dwmwuf0tuijwf" path="res://assets/32rogues/monsters.png" id="2_t4ivk"]
 [ext_resource type="Texture2D" uid="uid://gxnc0yqmqor4" path="res://assets/invslot.png" id="3_ma3mo"]
 [ext_resource type="Script" path="res://scripts/player/player_attack.gd" id="3_sav2k"]
 [ext_resource type="Texture2D" uid="uid://qmdabwr0mq71" path="res://assets/SFX303_nyknck/Sprite-0001-Sheet-Sheet.png" id="4_4liia"]
+[ext_resource type="Texture2D" uid="uid://0fgwm3gkxa3e" path="res://assets/mc lich 2.png" id="4_lmaep"]
 [ext_resource type="Script" path="res://scripts/player/life_force.gd" id="5_ckido"]
 [ext_resource type="PackedScene" uid="uid://b6ws03lwfd0te" path="res://scenes/components/health_component.tscn" id="5_j5mnj"]
 [ext_resource type="Script" path="res://scripts/player/realm_shift.gd" id="7_iftrq"]
@@ -15,6 +15,8 @@
 [ext_resource type="Script" path="res://Inventory/Scripts/inventory_slot.gd" id="10_18vfk"]
 [ext_resource type="Texture2D" uid="uid://b123r5engv0e" path="res://assets/borderMain.png" id="10_mdkvd"]
 [ext_resource type="Texture2D" uid="uid://c75e7nwtrmuql" path="res://assets/bakground shiit.png" id="12_owca2"]
+[ext_resource type="Script" path="res://scripts/player/player_healthbar.gd" id="16_0dem2"]
+[ext_resource type="Shader" path="res://shaders/potionliquid.gdshader" id="18_6en4c"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_n7ayb"]
 
@@ -25,6 +27,57 @@ noise = SubResource("FastNoiseLite_n7ayb")
 shader = ExtResource("2_8ax0c")
 shader_parameter/dissolve_value = 0.0
 shader_parameter/dissolve_texture = SubResource("NoiseTexture2D_p1ifr")
+
+[sub_resource type="Animation" id="Animation_saujx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasLayer/Sprite2D:material:shader")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_8ax0c")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CanvasLayer/Sprite2D:material:shader_parameter/dissolve_value")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("CanvasLayer/Sprite2D:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("CanvasLayer/Sprite2D:material:shader_parameter/dissolve_texture")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("NoiseTexture2D_p1ifr")]
+}
 
 [sub_resource type="Animation" id="Animation_wkeh2"]
 resource_name = "dissolve"
@@ -78,57 +131,6 @@ tracks/3/keys = {
 "values": [SubResource("NoiseTexture2D_p1ifr")]
 }
 
-[sub_resource type="Animation" id="Animation_saujx"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("CanvasLayer/Sprite2D:material:shader")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("2_8ax0c")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("CanvasLayer/Sprite2D:material:shader_parameter/dissolve_value")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("CanvasLayer/Sprite2D:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("CanvasLayer/Sprite2D:material:shader_parameter/dissolve_texture")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [SubResource("NoiseTexture2D_p1ifr")]
-}
-
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pdrah"]
 _data = {
 "RESET": SubResource("Animation_saujx"),
@@ -137,10 +139,6 @@ _data = {
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5l7kr"]
 size = Vector2(32, 32)
-
-[sub_resource type="AtlasTexture" id="AtlasTexture_hruq3"]
-atlas = ExtResource("2_t4ivk")
-region = Rect2(64, 128, 32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gsixq"]
 size = Vector2(28, 10)
@@ -193,7 +191,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [SubResource("AtlasTexture_hruq3")]
+"values": [ExtResource("4_lmaep")]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -370,7 +368,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [SubResource("AtlasTexture_hruq3")]
+"values": [ExtResource("4_lmaep")]
 }
 
 [sub_resource type="Animation" id="Animation_vgql5"]
@@ -385,7 +383,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [SubResource("AtlasTexture_hruq3")]
+"values": [ExtResource("4_lmaep")]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_odown"]
@@ -395,6 +393,20 @@ _data = {
 "idle": SubResource("Animation_qcx5u"),
 "jump": SubResource("Animation_vgql5")
 }
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_yvt3a"]
+shader = ExtResource("18_6en4c")
+shader_parameter/backFillColour = Color(0.960784, 0.027451, 0.027451, 1)
+shader_parameter/frontFillInnerColour = Color(0.35, 1, 1, 1)
+shader_parameter/frontFillOuterColour = Color(1, 1, 1, 1)
+shader_parameter/ringColour = Color(0, 0, 0, 1)
+shader_parameter/fresnelColour = Color(1, 0, 0, 1)
+shader_parameter/innerRingGlowColour = Color(1, 1, 1, 1)
+shader_parameter/fillcolour = Color(1, 0.027451, 0.027451, 1)
+shader_parameter/ringWidth = 0.15
+shader_parameter/innerCircleRadiusOffset = 0.0
+shader_parameter/fill_per = 0.77
+shader_parameter/resolution = 33.0
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_wtr5s")
@@ -420,7 +432,7 @@ libraries = {
 shape = SubResource("RectangleShape2D_5l7kr")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = SubResource("AtlasTexture_hruq3")
+texture = ExtResource("4_lmaep")
 
 [node name="CoyoteTimer" type="Timer" parent="."]
 wait_time = 0.15
@@ -466,6 +478,14 @@ offset_left = -20.0
 offset_top = -34.0
 offset_right = 20.0
 offset_bottom = -18.0
+theme_override_font_sizes/font_size = 8
+
+[node name="Label2" type="Label" parent="HealthComponent"]
+offset_left = -20.0
+offset_top = -49.0
+offset_right = 20.0
+offset_bottom = -33.0
+theme_override_font_sizes/font_size = 8
 
 [node name="RealmShift" type="Node2D" parent="."]
 script = ExtResource("7_iftrq")
@@ -486,6 +506,7 @@ vertical_alignment = 1
 
 [node name="SpellCasting" type="Node2D" parent="."]
 script = ExtResource("9_rsxl2")
+main_spell_self_damage = 20
 
 [node name="PlayerSpells" type="CanvasLayer" parent="."]
 
@@ -658,6 +679,18 @@ offset_top = 45.0
 offset_right = 431.0
 offset_bottom = 61.0
 text = "Main Spells"
+
+[node name="Healthbars" type="CanvasLayer" parent="."]
+script = ExtResource("16_0dem2")
+
+[node name="LifeForceContainer" type="ProgressBar" parent="Healthbars"]
+material = SubResource("ShaderMaterial_yvt3a")
+offset_left = 6.0
+offset_top = 6.0
+offset_right = 38.0
+offset_bottom = 38.0
+scale = Vector2(3, 3)
+show_percentage = false
 
 [connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
 [connection signal="area_entered" from="PlayerAttack/MeleeAttack/MeleeHitbox" to="PlayerAttack" method="_on_melee_hitbox_area_entered"]

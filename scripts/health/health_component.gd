@@ -37,6 +37,6 @@ func damage_self(self_damage: int) -> void:
 	var drained_life_force: int = $"../LifeForce".cast_spell_with_life_force(self_damage)
 	var remaining_self_damage: int = self_damage - drained_life_force
 	if remaining_self_damage > 0:
-		var attack = Attack.new()
+		var attack: Attack = Attack.new()
 		attack.attack_damage = remaining_self_damage
 		damage(attack)

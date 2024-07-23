@@ -17,11 +17,11 @@ func perform_melee_attack() -> void:
 	$"../AnimationPlayer".play("attack")
 	
 	if sprite_2d.flip_h:
-		$MeleeAttack.flip_h = true
-		$MeleeAttack.position.x = sprite_2d.position.x + 32
-	else:
 		$MeleeAttack.flip_h = false
 		$MeleeAttack.position.x = sprite_2d.position.x - 28
+	else:
+		$MeleeAttack.flip_h = true
+		$MeleeAttack.position.x = sprite_2d.position.x + 32
 
 func _on_melee_hitbox_area_entered(area: Node2D) -> void:
 	print(area.owner)

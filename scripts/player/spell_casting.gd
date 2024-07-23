@@ -3,23 +3,20 @@ extends Node2D
 var cast_amount: int = 1
 var timer: Timer
 var casting: bool = false
-var spell_modifications: Dictionary = {} 
+var spell_modifications: Dictionary = {}
 
 var final_self_damage: int = 0
 
 @export var main_spell_self_damage: int = 10
-
-@export var attack_up_self_damge: int = 15
-
-@export var size_increase_self_damage = 10
-
-@export var spell_dupe_self_damage = 15
+@export var attack_up_self_damage: int = 15
+@export var size_increase_self_damage: int = 10
+@export var spell_dupe_self_damage: int = 15
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if not timer:
 		timer = Timer.new()
-		timer.wait_time = 0.1 
+		timer.wait_time = 0.1
 		timer.one_shot = true
 		add_child(timer)
 
@@ -27,11 +24,12 @@ func load_ability(name: String) -> void:
 	if casting:
 		print("Already casting. Please wait until casting is finished.")
 		return
-	
+		
 	# Don't let the player kill themselves
 	if final_self_damage >= $"../HealthComponent".health:
+		reset_spell_modifications()
 		return
-	
+		
 	$"../HealthComponent".damage_self(final_self_damage)
 	
 	casting = true  # Set casting flag to true
@@ -53,18 +51,15 @@ func load_ability(name: String) -> void:
 		player_sibling_container.add_child(sceneNode)
 		
 		timer.start()
-		await timer.timeout 
-	
+		await timer.timeout
+		
 	# Reset cast_amount to 1
 	cast_amount = 1
 	
 	# Clear spell modifications after casting
-	spell_modifications.clear()
-	
-	final_self_damage = 0
+	reset_spell_modifications()
 	
 	casting = false  # Reset casting flag after casting is complete
-
 
 func apply_modifications(sceneNode: Node) -> void:
 	for key: String in spell_modifications.keys():
@@ -85,16 +80,19 @@ func handle_sub1_type(data: ItemData) -> void:
 	match data.sub_spell_type:
 		ItemData.SubSpellType.DAMAGE_INCREASE:
 			sub_spell_type_name = "DAMAGE_INCREASE"
-			increase_damage_dealt()
+			if can_apply_self_damage(attack_up_self_damage):
+				increase_damage_dealt()
 		ItemData.SubSpellType.SIZE_INCREASE:
 			sub_spell_type_name = "SIZE_INCREASE"
-			increase_spell_size()
+			if can_apply_self_damage(size_increase_self_damage):
+				increase_spell_size()
 		ItemData.SubSpellType.SPELL_DUPLICATION:
 			sub_spell_type_name = "SPELL_DUPLICATION"
-			handle_spell_duplication()
+			if can_apply_self_damage(spell_dupe_self_damage):
+				handle_spell_duplication()
 		ItemData.SubSpellType.NONE:
 			sub_spell_type_name = "NONE"
-
+			
 	if sub_spell_type_name != "NONE":
 		print("AND THE AMAZING SUBSPELLTYPE IS %s" % sub_spell_type_name)
 	else:
@@ -107,7 +105,6 @@ func _input(event: InputEvent) -> void:
 		print_hotbar($"../PlayerSpells/Spells/MainSpellSlot2", $"../PlayerSpells/Spells/SubSpellSlots2", "Hotbar 2")
 
 func print_hotbar(main_spell_slot: Node, sub_spell_slot: Node, hotbar_name: String) -> void:
-	
 	# Check if there is a main spell, otherwise just don't execute it
 	if !has_valid_panel_container(main_spell_slot):
 		#print("Error: One or both PanelContainers have no children. Aborting function.")
@@ -115,10 +112,9 @@ func print_hotbar(main_spell_slot: Node, sub_spell_slot: Node, hotbar_name: Stri
 		
 	if casting:
 		return
-	
+		
 	process_hotbar(sub_spell_slot, "Sub Slot", hotbar_name, false)
-	
-	process_hotbar(main_spell_slot, "Main Slot", hotbar_name, true) 
+	process_hotbar(main_spell_slot, "Main Slot", hotbar_name, true)
 
 func has_valid_panel_container(slot: Node) -> bool:
 	for child in slot.get_children():
@@ -134,7 +130,7 @@ func process_hotbar(slot: Node, slot_type: String, hotbar_name: String, load_mai
 	for child:Node in children:
 		if child is PanelContainer:
 			filtered_children.append(child)
-	
+			
 	# Process filtered children to find InventoryItem
 	for child: Node in filtered_children:
 		if child.get_child_count() > 0:
@@ -142,12 +138,6 @@ func process_hotbar(slot: Node, slot_type: String, hotbar_name: String, load_mai
 			if sub_child is InventoryItem:
 				var data: ItemData = sub_child.data
 				if data:
-					# Print InventoryItem data
-					#print("%s %s ItemData:" % [hotbar_name, slot_type])
-					#print("Name: %s" % data.name.to_lower())
-					#print("Description: %s" % data.description)
-					#print("Texture: %s" % data.texture)
-					
 					# Check if data type is SUB1 and handle it
 					if data.type == ItemData.Type.SUB1:
 						handle_sub1_type(data)
@@ -156,33 +146,37 @@ func process_hotbar(slot: Node, slot_type: String, hotbar_name: String, load_mai
 						increase_self_damage(main_spell_self_damage)
 						# Load the ability if not SUB1 and if loading main spell
 						load_ability(data.name.to_lower())
-				#else:
-					#print("%s %s Child data is null" % [hotbar_name, slot_type])
-			#else:
-				#print("%s %s Child is not an InventoryItem" % [hotbar_name, slot_type])
-		#else:
-			#print("%s %s Slot has no children" % [hotbar_name, slot_type])
 
-func handle_spell_duplication()-> void:
-	cast_amount *= 2
-	increase_self_damage(spell_dupe_self_damage)
+func handle_spell_duplication() -> void:
+	if can_apply_self_damage(spell_dupe_self_damage):
+		cast_amount *= 2
+		increase_self_damage(spell_dupe_self_damage)
 
-func increase_damage_dealt()-> void:
-	if not spell_modifications.has("DAMAGE_INCREASE"):
-		spell_modifications["DAMAGE_INCREASE"] = 2.0  # Initial modification value
-	else:
-		spell_modifications["DAMAGE_INCREASE"] *= 2.0  # Double the modification value
-	
-	increase_self_damage(attack_up_self_damge)
+func increase_damage_dealt() -> void:
+	if can_apply_self_damage(attack_up_self_damage):
+		if not spell_modifications.has("DAMAGE_INCREASE"):
+			spell_modifications["DAMAGE_INCREASE"] = 2.0  # Initial modification value
+		else:
+			spell_modifications["DAMAGE_INCREASE"] *= 2.0  # Double the modification value
+			
+		increase_self_damage(attack_up_self_damage)
 
-func increase_spell_size()-> void:
-	if not spell_modifications.has("ROOT_SCALE"):
-		spell_modifications["ROOT_SCALE"] = Vector2(2, 2)  # Initial scale modification value
-	else:
-		spell_modifications["ROOT_SCALE"] *= 2.0  # Double the scale modification value
-	
-	increase_self_damage(size_increase_self_damage)
+func increase_spell_size() -> void:
+	if can_apply_self_damage(size_increase_self_damage):
+		if not spell_modifications.has("ROOT_SCALE"):
+			spell_modifications["ROOT_SCALE"] = Vector2(2, 2)  # Initial scale modification value
+		else:
+			spell_modifications["ROOT_SCALE"] *= 2.0  # Double the scale modification value
+			
+		increase_self_damage(size_increase_self_damage)
 
+func can_apply_self_damage(self_damage: int) -> bool:
+	return final_self_damage + self_damage < $"../HealthComponent".health
 
 func increase_self_damage(self_damage: int) -> void:
 	final_self_damage += self_damage
+
+func reset_spell_modifications() -> void:
+	spell_modifications.clear()
+	final_self_damage = 0
+	cast_amount = 1

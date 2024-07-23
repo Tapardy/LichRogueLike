@@ -321,12 +321,17 @@ scale = Vector2(0.65625, 1)
 shadow_enabled = true
 texture = SubResource("GradientTexture2D_5e4oq")
 
-[node name="Player" parent="." instance=ExtResource("2_qy6pw")]
-light_mask = 0
-position = Vector2(0, -15)
-
 [node name="EnemyPlaceholder" parent="." instance=ExtResource("2_r0do6")]
 position = Vector2(-168, -15)
+
+[node name="HealthComponent" parent="EnemyPlaceholder" index="0"]
+max_health = 100
+
+[node name="EnemyPlaceholder2" parent="." instance=ExtResource("2_r0do6")]
+position = Vector2(-402, -15)
+
+[node name="HealthComponent" parent="EnemyPlaceholder2" index="0"]
+max_health = 1000
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2(0, -15)
@@ -340,8 +345,13 @@ shape = SubResource("WorldBoundaryShape2D_xor44")
 position = Vector2(-115, -66)
 item = ExtResource("7_kw6c0")
 
+[node name="Player" parent="." instance=ExtResource("2_qy6pw")]
+position = Vector2(-44, -16)
+
 [connection signal="area_entered" from="Area2D" to="Area2D" method="_on_area_entered"]
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
 
 [editable path="Light"]
 [editable path="EnemyPlaceholder"]
+[editable path="EnemyPlaceholder2"]
+[editable path="Player"]

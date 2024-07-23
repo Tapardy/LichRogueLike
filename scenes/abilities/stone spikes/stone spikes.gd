@@ -23,8 +23,8 @@ func _ready() -> void:
 		print("player direction: ", direction)
 		
 		# Calculate the scale factor and position adjustment
-		var scale_factor = self.scale.x  # Assuming uniform scaling
-		var offset = 40 * (0.75 * scale_factor)
+		var scale_factor: float = self.scale.x  # Assuming uniform scaling
+		var offset: float = 40 * (0.75 * scale_factor)
 
 		if direction == -1:
 			global_position.x = player.global_position.x - offset
@@ -32,7 +32,7 @@ func _ready() -> void:
 			global_position.x = player.global_position.x + offset
 
 		# Adjust y position based on scale
-		var y_offset = 20 * (scale_factor -0.2)  # Example adjustment
+		var y_offset: float = 20 * (scale_factor -0.2)  # Example adjustment
 		global_position.y = player.global_position.y - y_offset
 
 		$AnimatedSprite2D.play("default")

@@ -34,7 +34,7 @@ project/assembly_name="LichBorne"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/SignalVisualizer/plugin.cfg")
+enabled=PackedStringArray("res://addons/AsepriteWizard/plugin.cfg", "res://addons/SignalVisualizer/plugin.cfg")
 
 [file_customization]
 
