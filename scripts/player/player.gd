@@ -16,6 +16,10 @@ func _ready() -> void:
 	$RealmShift.set_tile_maps($"../TileMapLight", $"../TileMapDark")
 	
 func _physics_process(delta: float) -> void:
+	#debug
+	$HealthComponent/Label.text = str($HealthComponent.health)
+	
+	
 	if not is_on_floor():
 		velocity.y += gravity * delta
 	

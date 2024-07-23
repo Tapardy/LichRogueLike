@@ -24,7 +24,7 @@ func handle_realm_shift() -> void:
 		is_in_shadowrealm = !is_in_shadowrealm
 		update_tilemaps()
 		can_shift = false  # Start cooldown
-		$Timer.start(0.5)  # Start the timer for 0.5 seconds
+		$Timer.start(0.75)  # Start the timer for 0.5 seconds
 
 func change_realm(value: bool) -> void:
 	print(value)

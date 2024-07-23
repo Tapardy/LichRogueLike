@@ -461,6 +461,12 @@ script = ExtResource("5_ckido")
 [node name="HealthComponent" parent="." instance=ExtResource("5_j5mnj")]
 max_health = 100
 
+[node name="Label" type="Label" parent="HealthComponent"]
+offset_left = -20.0
+offset_top = -34.0
+offset_right = 20.0
+offset_bottom = -18.0
+
 [node name="RealmShift" type="Node2D" parent="."]
 script = ExtResource("7_iftrq")
 

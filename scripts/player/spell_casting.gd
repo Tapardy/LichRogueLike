@@ -5,6 +5,16 @@ var timer: Timer
 var casting: bool = false
 var spell_modifications: Dictionary = {} 
 
+var final_self_damage: int = 0
+
+@export var main_spell_self_damage: int = 10
+
+@export var attack_up_self_damge: int = 15
+
+@export var size_increase_self_damage = 10
+
+@export var spell_dupe_self_damage = 15
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	if not timer:
@@ -17,6 +27,12 @@ func load_ability(name: String) -> void:
 	if casting:
 		print("Already casting. Please wait until casting is finished.")
 		return
+	
+	# Don't let the player kill themselves
+	if final_self_damage >= $"../HealthComponent".health:
+		return
+	
+	$"../HealthComponent".damage_self(final_self_damage)
 	
 	casting = true  # Set casting flag to true
 	print("cast_amount variable: ", cast_amount)
@@ -44,6 +60,8 @@ func load_ability(name: String) -> void:
 	
 	# Clear spell modifications after casting
 	spell_modifications.clear()
+	
+	final_self_damage = 0
 	
 	casting = false  # Reset casting flag after casting is complete
 
@@ -134,6 +152,8 @@ func process_hotbar(slot: Node, slot_type: String, hotbar_name: String, load_mai
 					if data.type == ItemData.Type.SUB1:
 						handle_sub1_type(data)
 					elif load_main_spell:
+						# Damage the player based on main spell, all do the same damage right now
+						increase_self_damage(main_spell_self_damage)
 						# Load the ability if not SUB1 and if loading main spell
 						load_ability(data.name.to_lower())
 				#else:
@@ -145,15 +165,24 @@ func process_hotbar(slot: Node, slot_type: String, hotbar_name: String, load_mai
 
 func handle_spell_duplication()-> void:
 	cast_amount *= 2
+	increase_self_damage(spell_dupe_self_damage)
 
 func increase_damage_dealt()-> void:
 	if not spell_modifications.has("DAMAGE_INCREASE"):
 		spell_modifications["DAMAGE_INCREASE"] = 2.0  # Initial modification value
 	else:
 		spell_modifications["DAMAGE_INCREASE"] *= 2.0  # Double the modification value
+	
+	increase_self_damage(attack_up_self_damge)
 
 func increase_spell_size()-> void:
 	if not spell_modifications.has("ROOT_SCALE"):
 		spell_modifications["ROOT_SCALE"] = Vector2(2, 2)  # Initial scale modification value
 	else:
 		spell_modifications["ROOT_SCALE"] *= 2.0  # Double the scale modification value
+	
+	increase_self_damage(size_increase_self_damage)
+
+
+func increase_self_damage(self_damage: int) -> void:
+	final_self_damage += self_damage
