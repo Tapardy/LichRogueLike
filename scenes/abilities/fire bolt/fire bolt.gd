@@ -20,7 +20,6 @@ func _ready() -> void:
 		$DeletionTimer.start()
 		# Set direction based on the player's direction
 		direction = player.get_direction()  # Ensure get_direction() is a valid function on the player node
-		print("player direction: ", direction)
 
 		# Flip the sprite based on direction
 		if direction == -1:
@@ -44,14 +43,14 @@ func find_player() -> Node2D:
 			return node
 	return null
 
-func _on_area_2d_area_entered(area: Area2D) -> void:
-	entity = area.owner
-	print(entity)
-	if entity.is_in_group("enemies"):
-		$AnimatedSprite2D.play("Impact")
-		speed = 0
-		$AnimatedSprite2D/ImpactTimer.start()
-		deal_damage()
+#func _on_area_2d_area_entered(area: Area2D) -> void:
+	#entity = area.owner
+	#print(entity)
+	#if entity.is_in_group("enemies"):
+		#$AnimatedSprite2D.play("Impact")
+		#speed = 0
+		#$AnimatedSprite2D/ImpactTimer.start()
+		#deal_damage()
 
 func deal_damage() -> void:
 	var attack := Attack.new()
@@ -59,12 +58,14 @@ func deal_damage() -> void:
 	print("damage dealt: ", damage)
 	entity.get_node("HealthComponent").damage(attack)
 
-#func _on_area_2d_body_entered(body: Node2D) -> void:
-	#if not body.is_in_group("player"):
-		#queue_free()
-	#print(body)
-	#if body.get_parent().get_parent().is_in_group("enemies"):
-		#print("hit an enemy")
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	entity = body
+	print(entity)
+	if entity.is_in_group("enemies"):
+		$AnimatedSprite2D.play("Impact")
+		speed = 0
+		$AnimatedSprite2D/ImpactTimer.start()
+		deal_damage()
 
 func set_damage(multiplier: float) -> void:
 	print(multiplier)

@@ -26,7 +26,7 @@ func _ready() -> void:
 func set_tile_maps(light: TileMap, dark: TileMap) -> void:
 	tile_map_light = light
 	tile_map_dark = dark
-	print(light, dark)
+	update_tilemaps()
 
 func handle_realm_shift() -> void:
 	if can_shift and can_shift_realm():
@@ -47,7 +47,6 @@ func handle_realm_shift() -> void:
 			start_light_realm_strength_decrease()
 
 func change_realm(value: bool) -> void:
-	print(value)
 	is_in_shadowrealm = value
 	update_tilemaps()
 
@@ -60,20 +59,18 @@ func update_tilemaps() -> void:
 	if is_in_shadowrealm:
 		tile_map_light.visible = false
 		tile_map_dark.visible = true
-		tile_map_light.tile_set.set_physics_layer_collision_layer(0, 2)
-		tile_map_dark.tile_set.set_physics_layer_collision_layer(0, 1)
+		update_collision_layers(tile_map_light, tile_map_dark)
 	else:
 		tile_map_light.visible = true
 		tile_map_dark.visible = false
-		tile_map_light.tile_set.set_physics_layer_collision_layer(0, 1)
-		tile_map_dark.tile_set.set_physics_layer_collision_layer(0, 2)
+		update_collision_layers(tile_map_dark, tile_map_light)
+
+func update_collision_layers(active_map: TileMap, inactive_map: TileMap) -> void:
+	active_map.tile_set.set_physics_layer_collision_layer(0, 1)
+	inactive_map.tile_set.set_physics_layer_collision_layer(0, 2)
 
 func can_shift_realm() -> bool:
-	if is_in_shadowrealm:
-		tile_map = tile_map_light
-	else:
-		tile_map = tile_map_dark
-		
+	tile_map = tile_map_light if is_in_shadowrealm else tile_map_dark
 	var target_tile: Vector2 = tile_map.local_to_map(player.global_position)
 	var tile_data: TileData = tile_map.get_cell_tile_data(0, target_tile)
 	print(tile_data)
@@ -85,18 +82,16 @@ func can_shift_realm() -> bool:
 		return false
 	else:
 		return true
-	
+
 func _on_timer_timeout() -> void:
 	$Label.text = ""
 	can_shift = true  # Reset cooldown flag
 
-# Function to start increasing shadow realm strength
 func start_shadow_realm_strength_increase() -> void:
 	shadow_strength = 1.0
 	light_strength = 1.0
 	$ShadowStrengthTimer.start()  # Start the strength adjustment timer
 
-# Function to start decreasing light realm strength
 func start_light_realm_strength_decrease() -> void:
 	$ShadowStrengthTimer.start()  # Start the strength adjustment timer
 

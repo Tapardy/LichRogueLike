@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://bnih347l0un2n"]
+[gd_scene load_steps=34 format=3 uid="uid://bnih347l0un2n"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_wtr5s"]
 [ext_resource type="Shader" path="res://shaders/realm_shift.gdshader" id="2_8ax0c"]
@@ -16,7 +16,6 @@
 [ext_resource type="Texture2D" uid="uid://b123r5engv0e" path="res://assets/borderMain.png" id="10_mdkvd"]
 [ext_resource type="Texture2D" uid="uid://c75e7nwtrmuql" path="res://assets/bakground shiit.png" id="12_owca2"]
 [ext_resource type="Script" path="res://scripts/player/player_healthbar.gd" id="16_0dem2"]
-[ext_resource type="Script" path="res://scripts/fps.gd" id="16_yupnm"]
 [ext_resource type="Shader" path="res://shaders/potionliquid.gdshader" id="18_6en4c"]
 [ext_resource type="Shader" path="res://shaders/healthbar.gdshader" id="18_new8t"]
 
@@ -429,11 +428,14 @@ shader_parameter/sky_colour = Color(0.34902, 0.027451, 0.027451, 1)
 shader_parameter/specular_colour = Color(0.34902, 0.027451, 0.027451, 1)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
+collision_layer = 5
+collision_mask = 5
 script = ExtResource("1_wtr5s")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -65)
 zoom = Vector2(2, 2)
+limit_smoothed = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
 
@@ -477,6 +479,8 @@ vframes = 6
 [node name="MeleeHitbox" type="Area2D" parent="PlayerAttack/MeleeAttack"]
 position = Vector2(-3.07336e-08, -1.93622e-06)
 scale = Vector2(1.03125, 1.03125)
+collision_layer = 0
+collision_mask = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerAttack/MeleeAttack/MeleeHitbox"]
 position = Vector2(-3, 1.5)
@@ -486,6 +490,8 @@ disabled = true
 [node name="AttackDuration" type="Timer" parent="PlayerAttack"]
 wait_time = 0.2
 one_shot = true
+
+[node name="KnocbackTimer" type="Timer" parent="PlayerAttack"]
 
 [node name="LifeForce" type="Node2D" parent="."]
 script = ExtResource("5_ckido")
@@ -697,23 +703,6 @@ offset_right = 431.0
 offset_bottom = 61.0
 text = "Main Spells"
 
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 106.0
-offset_top = 31.0
-offset_right = 146.0
-offset_bottom = 71.0
-
-[node name="CanvasLayer" type="CanvasLayer" parent="Control"]
-
-[node name="Label" type="Label" parent="Control/CanvasLayer"]
-offset_left = 975.0
-offset_top = 601.0
-offset_right = 1015.0
-offset_bottom = 617.0
-script = ExtResource("16_yupnm")
-
 [node name="Healthbars" type="CanvasLayer" parent="."]
 script = ExtResource("16_0dem2")
 
@@ -736,5 +725,6 @@ show_percentage = false
 
 [connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
 [connection signal="area_entered" from="PlayerAttack/MeleeAttack/MeleeHitbox" to="PlayerAttack" method="_on_melee_hitbox_area_entered"]
+[connection signal="body_entered" from="PlayerAttack/MeleeAttack/MeleeHitbox" to="PlayerAttack" method="_on_melee_hitbox_body_entered"]
 [connection signal="timeout" from="RealmShift/Timer" to="RealmShift" method="_on_timer_timeout"]
 [connection signal="timeout" from="RealmShift/ShadowStrengthTimer" to="RealmShift" method="_on_shadow_strength_timer_timeout"]

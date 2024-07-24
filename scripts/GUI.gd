@@ -66,10 +66,10 @@ func add_item_to_sub(item_path: String) -> void:
 		itemsLoadSub.append(item_path)
 		update_inventory()
 
-func can_add_item_to_main(item_path: String) -> bool:
+func can_add_item_to_main(_item_path: String) -> bool:
 	return itemsLoad.size() < InvSize - 1
 
-func can_add_item_to_sub(item_path: String) -> bool:
+func can_add_item_to_sub(_item_path: String) -> bool:
 	return itemsLoadSub.size() < InvSize - 1
 
 func remove_item_from_main(item: InventoryItem) -> void:
