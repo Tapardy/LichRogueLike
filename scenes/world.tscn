@@ -326,7 +326,7 @@ position = Vector2(-168, -15)
 max_health = 100
 
 [node name="EnemyPlaceholder2" parent="." instance=ExtResource("2_r0do6")]
-position = Vector2(99, -16)
+position = Vector2(92, -69)
 
 [node name="HealthComponent" parent="EnemyPlaceholder2" index="0"]
 max_health = 1000
