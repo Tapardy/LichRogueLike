@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://bnih347l0un2n"]
+[gd_scene load_steps=35 format=3 uid="uid://bnih347l0un2n"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_wtr5s"]
 [ext_resource type="Shader" path="res://shaders/realm_shift.gdshader" id="2_8ax0c"]
@@ -16,7 +16,9 @@
 [ext_resource type="Texture2D" uid="uid://b123r5engv0e" path="res://assets/borderMain.png" id="10_mdkvd"]
 [ext_resource type="Texture2D" uid="uid://c75e7nwtrmuql" path="res://assets/bakground shiit.png" id="12_owca2"]
 [ext_resource type="Script" path="res://scripts/player/player_healthbar.gd" id="16_0dem2"]
+[ext_resource type="Script" path="res://scripts/fps.gd" id="16_yupnm"]
 [ext_resource type="Shader" path="res://shaders/potionliquid.gdshader" id="18_6en4c"]
+[ext_resource type="Shader" path="res://shaders/healthbar.gdshader" id="18_new8t"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_n7ayb"]
 
@@ -408,6 +410,24 @@ shader_parameter/innerCircleRadiusOffset = 0.0
 shader_parameter/fill_per = 0.77
 shader_parameter/resolution = 33.0
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_7nc2o"]
+shader = ExtResource("18_new8t")
+shader_parameter/bg_color = Color(0, 0, 0, 1)
+shader_parameter/uv_scale = 0.0
+shader_parameter/percentage = 1.0
+shader_parameter/speed = 0.05
+shader_parameter/wave_1_speed = -1.0
+shader_parameter/wave_2_speed = 1.0
+shader_parameter/wave_1_freq = 1.225
+shader_parameter/wave_2_freq = 1.0
+shader_parameter/wave_1_amp = 0.015
+shader_parameter/wave_2_amp = 0.01
+shader_parameter/sun_dir = Vector3(-0.2, 0.4, 1)
+shader_parameter/water_colour = Color(0.34902, 0.027451, 0.027451, 1)
+shader_parameter/foam_colour = Color(0.34902, 0.027451, 0.027451, 1)
+shader_parameter/sky_colour = Color(0.960784, 0, 0, 1)
+shader_parameter/specular_colour = Color(0.34902, 0.027451, 0.027451, 1)
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 script = ExtResource("1_wtr5s")
 
@@ -645,6 +665,7 @@ is_hotbar = true
 
 [node name="GUI" type="CanvasLayer" parent="."]
 unique_name_in_owner = true
+visible = false
 script = ExtResource("9_isori")
 
 [node name="Panel" type="Panel" parent="GUI"]
@@ -683,6 +704,23 @@ offset_right = 431.0
 offset_bottom = 61.0
 text = "Main Spells"
 
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 106.0
+offset_top = 31.0
+offset_right = 146.0
+offset_bottom = 71.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="Control"]
+
+[node name="Label" type="Label" parent="Control/CanvasLayer"]
+offset_left = 975.0
+offset_top = 601.0
+offset_right = 1015.0
+offset_bottom = 617.0
+script = ExtResource("16_yupnm")
+
 [node name="Healthbars" type="CanvasLayer" parent="."]
 script = ExtResource("16_0dem2")
 
@@ -693,6 +731,14 @@ offset_top = 6.0
 offset_right = 38.0
 offset_bottom = 38.0
 scale = Vector2(3, 3)
+show_percentage = false
+
+[node name="Healthbar" type="ProgressBar" parent="Healthbars"]
+material = SubResource("ShaderMaterial_7nc2o")
+offset_left = 106.0
+offset_top = 31.0
+offset_right = 364.0
+offset_bottom = 77.0
 show_percentage = false
 
 [connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]

@@ -6,7 +6,7 @@ var entity: Node2D
 var player: Node2D  # Reference to the player node
 
 
-var base_damage: int = 10 
+var base_damage: int = 20 
 var damage: int = base_damage 
 var base_size: Vector2 = Vector2(1, 1)
 var size: Vector2 = base_size

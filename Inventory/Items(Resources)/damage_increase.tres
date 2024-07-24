@@ -7,7 +7,7 @@
 script = ExtResource("1_vb8c1")
 type = 1
 name = "Damage Increase"
-description = "Doubles damage
+description = "Spells do 150% damage
 
 Self damage: 15%"
 texture = ExtResource("2_4d8xv")

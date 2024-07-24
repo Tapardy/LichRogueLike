@@ -3,7 +3,7 @@ extends CharacterBody2D
 const SPEED = 300.0
 const JUMP_VELOCITY = -400.0
 const COYOTE_TIME = 0.1  # Time in seconds to allow jumps after leaving the ground
-const FALL_GRAVITY := 1500
+const FALL_GRAVITY := 980
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var coyote_timer: Timer = $CoyoteTimer
 var can_move: bool = true
@@ -18,7 +18,7 @@ func _ready() -> void:
 func _physics_process(delta: float) -> void:
 	#debug
 	$HealthComponent/Label.text = str("hp: ", $HealthComponent.health)
-	$HealthComponent/Label2.text = str("lf: ", $LifeForce.current_life_force)
+	$HealthComponent/Label2.text = str("VV: ", velocity.y)
 	
 	if not is_on_floor():
 		velocity.y += get_gravity(velocity) * delta

@@ -162,9 +162,9 @@ func handle_spell_duplication() -> void:
 func increase_damage_dealt() -> void:
 	if can_apply_self_damage(attack_up_self_damage):
 		if $"../RealmShift".is_in_shadowrealm:
-			damage_up = 2.0 * $"../RealmShift".shadow_strength
+			damage_up = 1.5 * ($"../RealmShift".shadow_strength - 0.2)
 		else:
-			damage_up = 2.0 * $"../RealmShift".light_strength
+			damage_up = 1.5 * $"../RealmShift".light_strength
 			
 		if not spell_modifications.has("DAMAGE_INCREASE"):
 			spell_modifications["DAMAGE_INCREASE"] = damage_up # Initial modification value
