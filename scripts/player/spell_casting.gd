@@ -129,7 +129,7 @@ func has_valid_panel_container(slot: Node) -> bool:
 			return child.get_child_count() > 0
 	return false
 
-func process_hotbar(slot: Node, slot_type: String, hotbar_name: String, load_main_spell: bool) -> void:
+func process_hotbar(slot: Node, _slot_type: String, _hotbar_name: String, load_main_spell: bool) -> void:
 	var children: Array = slot.get_children()
 	var filtered_children: Array = []
 	

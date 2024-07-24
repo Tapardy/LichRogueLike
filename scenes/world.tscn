@@ -319,6 +319,18 @@ scale = Vector2(0.65625, 1)
 shadow_enabled = true
 texture = SubResource("GradientTexture2D_5e4oq")
 
+[node name="Light2" parent="." instance=ExtResource("4_x0uxo")]
+position = Vector2(-238, -32)
+
+[node name="CollisionShape2D" parent="Light2/Area2D" index="0"]
+position = Vector2(0, 1)
+shape = SubResource("RectangleShape2D_0aa0e")
+
+[node name="PointLight2D" parent="Light2" index="1"]
+scale = Vector2(0.65625, 1)
+shadow_enabled = true
+texture = SubResource("GradientTexture2D_5e4oq")
+
 [node name="EnemyPlaceholder" parent="." instance=ExtResource("2_r0do6")]
 position = Vector2(-168, -15)
 
@@ -350,6 +362,7 @@ position = Vector2(-44, -16)
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
 
 [editable path="Light"]
+[editable path="Light2"]
 [editable path="EnemyPlaceholder"]
 [editable path="EnemyPlaceholder2"]
 [editable path="Player"]

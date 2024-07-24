@@ -7,7 +7,7 @@ const COYOTE_TIME = 0.1  # Time in seconds to allow jumps after leaving the grou
 const FALL_GRAVITY := 980
 const KNOCKBACK_DECAY = 0.8  # Knockback decay rate
 const KNOCKBACK_MULTIPLIER_STANDING = 1.0  # Knockback multiplier when standing still
-const KNOCKBACK_MULTIPLIER_MOVING = 0.5    # Knockback multiplier when moving (adjusted to be less severe)
+const KNOCKBACK_MULTIPLIER_MOVING = 0.5   # Knockback multiplier when moving (adjusted to be less severe)
 const KNOCKBACK_STOP_DURATION = 0.1  # Duration to stop movement during knockback
 
 @onready var sprite_2d: Sprite2D = $Sprite2D
@@ -93,12 +93,12 @@ func get_direction() -> int:
 	else:
 		return 1
 
-func get_gravity(velocity: Vector2) -> float:
+func get_gravity(_velocity: Vector2) -> float:
 	if velocity.y < 0:
 		return gravity
 	return FALL_GRAVITY
 
-func knockback(force: float, x_pos: float, up_force: float):
+func knockback(force: float, _x_pos: float, up_force: float) -> void:
 	var multiplier := KNOCKBACK_MULTIPLIER_STANDING
 	if direction != 0:
 		multiplier = KNOCKBACK_MULTIPLIER_MOVING

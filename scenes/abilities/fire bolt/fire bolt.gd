@@ -20,7 +20,6 @@ func _ready() -> void:
 		$DeletionTimer.start()
 		# Set direction based on the player's direction
 		direction = player.get_direction()  # Ensure get_direction() is a valid function on the player node
-		print("player direction: ", direction)
 
 		# Flip the sprite based on direction
 		if direction == -1:
