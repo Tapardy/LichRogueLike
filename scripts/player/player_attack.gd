@@ -22,12 +22,12 @@ func perform_melee_attack() -> void:
 	else:
 		$MeleeAttack.flip_h = true
 		$MeleeAttack.position.x = sprite_2d.position.x + 32
-
-func _on_melee_hitbox_area_entered(area: Node2D) -> void:
-	print(area.owner)
-	entity = area.owner
-	if entity.is_in_group("enemies"):
-		deal_damage()
+#
+#func _on_melee_hitbox_area_entered(area: Node2D) -> void:
+	#print(area.owner)
+	#entity = area
+	#if entity.is_in_group("enemies"):
+		#deal_damage()
 	
 func deal_damage() -> void:
 	var attack := Attack.new()
@@ -48,3 +48,10 @@ func damage_self() -> void:
 	# Subject to change, due to the transmutation spell self damage
 	attack.attack_damage = melee_damage
 	$"../HealthComponent".damage(attack)
+
+
+func _on_melee_hitbox_body_entered(body: Node2D) -> void:
+	print(body)
+	entity = body
+	if body.is_in_group("enemies"):
+		deal_damage()
