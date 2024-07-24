@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://bnih347l0un2n"]
+[gd_scene load_steps=34 format=3 uid="uid://bnih347l0un2n"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_wtr5s"]
 [ext_resource type="Shader" path="res://shaders/realm_shift.gdshader" id="2_8ax0c"]
@@ -16,7 +16,6 @@
 [ext_resource type="Texture2D" uid="uid://b123r5engv0e" path="res://assets/borderMain.png" id="10_mdkvd"]
 [ext_resource type="Texture2D" uid="uid://c75e7nwtrmuql" path="res://assets/bakground shiit.png" id="12_owca2"]
 [ext_resource type="Script" path="res://scripts/player/player_healthbar.gd" id="16_0dem2"]
-[ext_resource type="Script" path="res://scripts/fps.gd" id="16_yupnm"]
 [ext_resource type="Shader" path="res://shaders/potionliquid.gdshader" id="18_6en4c"]
 [ext_resource type="Shader" path="res://shaders/healthbar.gdshader" id="18_new8t"]
 
@@ -703,23 +702,6 @@ offset_top = 45.0
 offset_right = 431.0
 offset_bottom = 61.0
 text = "Main Spells"
-
-[node name="Control" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 106.0
-offset_top = 31.0
-offset_right = 146.0
-offset_bottom = 71.0
-
-[node name="CanvasLayer" type="CanvasLayer" parent="Control"]
-
-[node name="Label" type="Label" parent="Control/CanvasLayer"]
-offset_left = 975.0
-offset_top = 601.0
-offset_right = 1015.0
-offset_bottom = 617.0
-script = ExtResource("16_yupnm")
 
 [node name="Healthbars" type="CanvasLayer" parent="."]
 script = ExtResource("16_0dem2")

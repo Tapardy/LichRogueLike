@@ -43,8 +43,10 @@ func _physics_process(delta: float) -> void:
 			can_jump = false 
 	
 	direction = Input.get_axis("move_left", "move_right")
-	sprite_2d.flip_h = direction < 0
-
+	if direction ==1: 
+		sprite_2d.flip_h = false
+	elif direction == -1:
+		sprite_2d.flip_h = true
 	if knockback_timer.is_stopped():
 		velocity.x = direction * SPEED if direction != 0 else move_toward(velocity.x, 0, SPEED)
 

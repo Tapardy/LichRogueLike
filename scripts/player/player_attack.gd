@@ -51,7 +51,7 @@ func deal_damage() -> void:
 	entity.get_node("HealthComponent").damage(attack)
 
 	if entity.has_method("knockback"):
-		entity.knockback(125.0, global_position.x, 0)
+		entity.knockback(75.0, global_position.x, 0)
 		
 		# Apply knockback to the player
 		var knockback_force: float = 100.0  # Adjust this value as needed
