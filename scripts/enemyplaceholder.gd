@@ -9,6 +9,7 @@ func _ready() -> void:
 
 func _physics_process(_delta: float) -> void:
 	$Label.text = str($HealthComponent.health)
+	
 
 func die() -> void:
 	call_deferred("_drop_item")
