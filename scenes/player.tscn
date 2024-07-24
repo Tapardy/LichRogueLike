@@ -430,7 +430,7 @@ shader_parameter/specular_colour = Color(0.34902, 0.027451, 0.027451, 1)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_layer = 5
-collision_mask = 65533
+collision_mask = 5
 script = ExtResource("1_wtr5s")
 
 [node name="Camera2D" type="Camera2D" parent="."]
