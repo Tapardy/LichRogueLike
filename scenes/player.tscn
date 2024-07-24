@@ -415,7 +415,7 @@ shader = ExtResource("18_new8t")
 shader_parameter/bg_color = Color(0, 0, 0, 1)
 shader_parameter/uv_scale = 0.0
 shader_parameter/percentage = 1.0
-shader_parameter/speed = 0.05
+shader_parameter/speed = 0.1
 shader_parameter/wave_1_speed = -1.0
 shader_parameter/wave_2_speed = 1.0
 shader_parameter/wave_1_freq = 1.225
@@ -425,7 +425,7 @@ shader_parameter/wave_2_amp = 0.01
 shader_parameter/sun_dir = Vector3(-0.2, 0.4, 1)
 shader_parameter/water_colour = Color(0.34902, 0.027451, 0.027451, 1)
 shader_parameter/foam_colour = Color(0.34902, 0.027451, 0.027451, 1)
-shader_parameter/sky_colour = Color(0.960784, 0, 0, 1)
+shader_parameter/sky_colour = Color(0.34902, 0.027451, 0.027451, 1)
 shader_parameter/specular_colour = Color(0.34902, 0.027451, 0.027451, 1)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
@@ -492,13 +492,6 @@ script = ExtResource("5_ckido")
 
 [node name="HealthComponent" parent="." instance=ExtResource("5_j5mnj")]
 max_health = 100
-
-[node name="Label" type="Label" parent="HealthComponent"]
-offset_left = -20.0
-offset_top = -34.0
-offset_right = 20.0
-offset_bottom = -18.0
-theme_override_font_sizes/font_size = 8
 
 [node name="Label2" type="Label" parent="HealthComponent"]
 offset_left = -20.0

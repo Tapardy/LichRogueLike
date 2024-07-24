@@ -17,7 +17,6 @@ func _ready() -> void:
 	
 func _physics_process(delta: float) -> void:
 	#debug
-	$HealthComponent/Label.text = str("hp: ", $HealthComponent.health)
 	$HealthComponent/Label2.text = str("VV: ", velocity.y)
 	
 	if not is_on_floor():
