@@ -26,7 +26,7 @@ func _ready() -> void:
 func set_tile_maps(light: TileMap, dark: TileMap) -> void:
 	tile_map_light = light
 	tile_map_dark = dark
-	print(light, dark)
+	update_tilemaps()
 
 func handle_realm_shift() -> void:
 	if can_shift and can_shift_realm():

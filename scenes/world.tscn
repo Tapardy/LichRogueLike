@@ -308,7 +308,7 @@ layer_1/tile_data = PackedInt32Array()
 visible = false
 
 [node name="Light" parent="." instance=ExtResource("4_x0uxo")]
-position = Vector2(192, -32)
+position = Vector2(192, -35)
 
 [node name="CollisionShape2D" parent="Light/Area2D" index="0"]
 position = Vector2(0, 1)
@@ -320,7 +320,7 @@ shadow_enabled = true
 texture = SubResource("GradientTexture2D_5e4oq")
 
 [node name="Light2" parent="." instance=ExtResource("4_x0uxo")]
-position = Vector2(-238, -32)
+position = Vector2(-234, -38)
 
 [node name="CollisionShape2D" parent="Light2/Area2D" index="0"]
 position = Vector2(0, 1)
