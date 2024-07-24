@@ -7,6 +7,8 @@
 script = ExtResource("1_8ndxc")
 type = 1
 name = "Size Increase"
-description = "Doubles size"
+description = "Doubles size
+ 
+Self damage: 10%"
 texture = ExtResource("2_syf5k")
 sub_spell_type = 1

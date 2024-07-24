@@ -11,6 +11,8 @@ region = Rect2(32, 0, 32, 32)
 script = ExtResource("1_i04u2")
 type = 0
 name = "Rock"
-description = "big ass rock lmao"
+description = "big ass rock lmao
+
+Self damage: 20%"
 texture = SubResource("AtlasTexture_0ye54")
 sub_spell_type = 3

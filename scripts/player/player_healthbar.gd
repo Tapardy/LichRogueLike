@@ -8,9 +8,9 @@ var remaining_health: float = 10
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	update_shader_fill(life_force.max_life_force / 100)
-	life_force.connect("life_force_changed", self.update_health)
+	life_force.connect("life_force_changed", self.update_life_force)
 
-func update_health() -> void:
+func update_life_force() -> void:
 	remaining_health = life_force.current_life_force
 	update_shader_fill(remaining_health / 100)
 
