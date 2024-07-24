@@ -436,6 +436,7 @@ script = ExtResource("1_wtr5s")
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(0, -65)
 zoom = Vector2(2, 2)
+limit_smoothed = true
 
 [node name="CanvasLayer" type="CanvasLayer" parent="Camera2D"]
 
@@ -490,6 +491,8 @@ disabled = true
 [node name="AttackDuration" type="Timer" parent="PlayerAttack"]
 wait_time = 0.2
 one_shot = true
+
+[node name="KnocbackTimer" type="Timer" parent="PlayerAttack"]
 
 [node name="LifeForce" type="Node2D" parent="."]
 script = ExtResource("5_ckido")
