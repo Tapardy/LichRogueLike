@@ -23,11 +23,11 @@ func perform_melee_attack() -> void:
 		$MeleeAttack.flip_h = true
 		$MeleeAttack.position.x = sprite_2d.position.x + 32
 #
-#func _on_melee_hitbox_area_entered(area: Node2D) -> void:
-	#print(area.owner)
-	#entity = area
-	#if entity.is_in_group("enemies"):
-		#deal_damage()
+func _on_melee_hitbox_area_entered(area: Node2D) -> void:
+	print(area.owner)
+	entity = area
+	if entity.is_in_group("enemies"):
+		deal_damage()
 	
 func deal_damage() -> void:
 	var attack := Attack.new()

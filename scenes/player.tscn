@@ -429,6 +429,8 @@ shader_parameter/sky_colour = Color(0.34902, 0.027451, 0.027451, 1)
 shader_parameter/specular_colour = Color(0.34902, 0.027451, 0.027451, 1)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
+collision_layer = 5
+collision_mask = 65533
 script = ExtResource("1_wtr5s")
 
 [node name="Camera2D" type="Camera2D" parent="."]
@@ -478,7 +480,7 @@ vframes = 6
 position = Vector2(-3.07336e-08, -1.93622e-06)
 scale = Vector2(1.03125, 1.03125)
 collision_layer = 0
-collision_mask = 2
+collision_mask = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerAttack/MeleeAttack/MeleeHitbox"]
 position = Vector2(-3, 1.5)
