@@ -1,4 +1,4 @@
-extends Node2D
+extends CharacterBody2D
 
 @export var items: Array[ItemData] = []
 @export var drop_chance: float = 0.5 

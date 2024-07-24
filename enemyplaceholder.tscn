@@ -13,7 +13,7 @@ region = Rect2(0, 128, 32, 32)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qsgcq"]
 size = Vector2(21, 27.5)
 
-[node name="enemyplaceholder" type="Node2D" groups=["enemies"]]
+[node name="EnemyPlaceholder" type="CharacterBody2D" groups=["enemies"]]
 script = ExtResource("1_nvvq2")
 items = Array[Resource("res://Inventory/Items(Resources)/item_data.gd")]([ExtResource("2_j678m"), ExtResource("3_klv45")])
 
