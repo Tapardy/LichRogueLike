@@ -491,7 +491,7 @@ disabled = true
 wait_time = 0.2
 one_shot = true
 
-[node name="KnocbackTimer" type="Timer" parent="PlayerAttack"]
+[node name="KnockbackTimer" type="Timer" parent="PlayerAttack"]
 
 [node name="LifeForce" type="Node2D" parent="."]
 script = ExtResource("5_ckido")
@@ -723,8 +723,13 @@ offset_right = 364.0
 offset_bottom = 77.0
 show_percentage = false
 
+[node name="DashTimer" type="Timer" parent="."]
+wait_time = 0.1
+one_shot = true
+
 [connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
 [connection signal="area_entered" from="PlayerAttack/MeleeAttack/MeleeHitbox" to="PlayerAttack" method="_on_melee_hitbox_area_entered"]
 [connection signal="body_entered" from="PlayerAttack/MeleeAttack/MeleeHitbox" to="PlayerAttack" method="_on_melee_hitbox_body_entered"]
 [connection signal="timeout" from="RealmShift/Timer" to="RealmShift" method="_on_timer_timeout"]
 [connection signal="timeout" from="RealmShift/ShadowStrengthTimer" to="RealmShift" method="_on_shadow_strength_timer_timeout"]
+[connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
