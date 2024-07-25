@@ -52,7 +52,6 @@ func knockback(force: float, x_pos: float, up_force: float) -> void:
 	if not is_on_floor():
 		knockback_value.x *= 0.5  # Reduce horizontal force by half if in the air
 
-	# Apply vertical knockback
 	knockback_value.y = -up_force
 
 	# Reset knockback duration
@@ -79,3 +78,16 @@ func _drop_item() -> void:
 					item_instance.global_position = global_position
 					
 					get_tree().current_scene.add_child(item_instance)
+
+
+#func _on_area_2d_body_entered(body: Node2D) -> void:
+	#if body.is_in_group("player"):
+		#if body.get_node("RealmShift").is_in_shadowrealm:
+			#var attack := Attack.new()
+			#attack.attack_damage = 10
+			#body.get_node("HealthComponent").damage(attack)
+		#
+		#
+			#var knockback_force: float = 300.0  # Adjust this value as needed
+			#body.knockback(knockback_force, global_position.x, 0)
+		

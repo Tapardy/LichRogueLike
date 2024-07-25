@@ -5,6 +5,7 @@ var health: int = 10
 @export var max_health: int = 10
 
 signal health_changed
+signal player_damaged
 signal player_death
 
 # Called when the node enters the scene tree for the first time.
@@ -13,6 +14,9 @@ func _ready() -> void:
 
 func damage(attack: Attack) -> void:
 	if not suppress_damage:
+		if get_parent().is_in_group("player"):
+			emit_signal("player_damaged")
+			
 		health -= attack.attack_damage
 		emit_signal("health_changed")
 		if health <= 0:
