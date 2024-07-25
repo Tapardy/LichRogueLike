@@ -6,9 +6,10 @@ func _ready() -> void:
 	ghosting()
 
 
-func set_property(tx_pos: Vector2, tx_scale: Vector2):
+func set_property(tx_pos: Vector2, tx_scale: Vector2, tx_texture: Texture2D):
 	position = tx_pos
 	scale = tx_scale
+	texture = tx_texture
 	
 func ghosting():
 	var tween_fade = get_tree().create_tween()

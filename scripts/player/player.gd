@@ -10,6 +10,9 @@ const KNOCKBACK_MULTIPLIER_STANDING = 1.0
 const KNOCKBACK_MULTIPLIER_MOVING = 0.5
 const KNOCKBACK_STOP_DURATION = 0.1
 
+@export var ghost_node: PackedScene
+@onready var ghost_timer: Timer = $Sprite2D/GhostTimer
+
 @onready var sprite_2d: Sprite2D = $Sprite2D
 @onready var coyote_timer: Timer = $CoyoteTimer
 @onready var knockback_timer: Timer = $PlayerAttack/KnockbackTimer
@@ -52,6 +55,8 @@ func _physics_process(delta: float) -> void:
 
 	# Update dash logic to check can_dash flag
 	if not dashing and Input.is_action_just_pressed("dash") and can_dash:
+		ghost_timer.start()
+		
 		dashing = true
 		SPEED = 500
 		FALL_GRAVITY = 0
@@ -111,8 +116,18 @@ func _on_knockback_timer_timeout() -> void:
 
 func _on_dash_timer_timeout() -> void:
 	dashing = false
+	ghost_timer.stop()
 	SPEED = 200
 	FALL_GRAVITY = 980
 
 func _on_dash_cooldown_timer_timeout() -> void:
 	can_dash = true
+
+func add_ghost():
+	var ghost = ghost_node.instantiate()
+	ghost.set_property(position, $Sprite2D.scale, $Sprite2D.texture)
+	get_tree().current_scene.add_child(ghost)
+
+
+func _on_ghost_timer_timeout() -> void:
+	add_ghost()
