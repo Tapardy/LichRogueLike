@@ -6,7 +6,7 @@ const JUMP_VELOCITY = -400.0
 const COYOTE_TIME = 0.1
 var FALL_GRAVITY: float = 980
 const KNOCKBACK_DECAY = 0.8
-const KNOCKBACK_MULTIPLIER_STANDING = 1.0
+const KNOCKBACK_MULTIPLIER_STANDING = 0.5
 const KNOCKBACK_MULTIPLIER_MOVING = 0.5
 const KNOCKBACK_STOP_DURATION = 0.1
 
@@ -54,7 +54,7 @@ func _physics_process(delta: float) -> void:
 				can_jump = false 
 
 	# Update dash logic to check can_dash flag
-	if not dashing and Input.is_action_just_pressed("dash") and can_dash:
+	if not dashing and Input.is_action_just_pressed("dash") and can_dash and direction != 0:
 		ghost_timer.start()
 		
 		dashing = true
@@ -110,6 +110,9 @@ func knockback(force: float, _x_pos: float, up_force: float) -> void:
 	knockback_velocity = Vector2(force * multiplier * -get_direction(), -force * up_force)
 	velocity.x = 0
 	knockback_timer.start()
+	dash_timer.stop()  # Stop dash timer when knockback occurs
+	# Ensure to stop dashing and reset dash parameters
+	_on_dash_timer_timeout()
 
 func _on_knockback_timer_timeout() -> void:
 	velocity.x = direction * (SPEED * (RUN_MULTIPLIER if direction != 0 else 1.0))
@@ -125,7 +128,7 @@ func _on_dash_cooldown_timer_timeout() -> void:
 
 func add_ghost():
 	var ghost = ghost_node.instantiate()
-	ghost.set_property(position, $Sprite2D.scale, $Sprite2D.texture)
+	ghost.set_property(position, $Sprite2D.scale, $Sprite2D.texture, $Sprite2D.flip_h)
 	get_tree().current_scene.add_child(ghost)
 
 

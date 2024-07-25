@@ -275,7 +275,7 @@ texture = ExtResource("2_8cikc")
 4:6/0/custom_data_0 = true
 
 [sub_resource type="TileSet" id="TileSet_qcldw"]
-physics_layer_0/collision_layer = 1
+physics_layer_0/collision_layer = 5
 custom_data_layer_0/name = "solid"
 custom_data_layer_0/type = 1
 sources/0 = SubResource("TileSetAtlasSource_b84fn")
@@ -339,7 +339,7 @@ position = Vector2(-168, -15)
 max_health = 100
 
 [node name="EnemyPlaceholder2" parent="." instance=ExtResource("2_r0do6")]
-position = Vector2(38, -59)
+position = Vector2(40, -94)
 
 [node name="HealthComponent" parent="EnemyPlaceholder2" index="0"]
 max_health = 1000

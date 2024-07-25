@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://cq2hmwewp8lbt"]
+[gd_scene load_steps=8 format=3 uid="uid://cq2hmwewp8lbt"]
 
 [ext_resource type="Texture2D" uid="uid://dwmwuf0tuijwf" path="res://assets/32rogues/monsters.png" id="1_g1yxk"]
 [ext_resource type="Script" path="res://scripts/enemyplaceholder.gd" id="1_nvvq2"]
 [ext_resource type="PackedScene" uid="uid://b6ws03lwfd0te" path="res://scenes/components/health_component.tscn" id="2_mj0ab"]
+[ext_resource type="PackedScene" uid="uid://dbj4psxo20tkm" path="res://scenes/components/hurtbox_component.tscn" id="4_jgiwa"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_llsmy"]
 atlas = ExtResource("1_g1yxk")
@@ -10,6 +11,9 @@ region = Rect2(0, 128, 32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nmyvf"]
 size = Vector2(21, 27)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_14267"]
+size = Vector2(15, 27)
 
 [node name="EnemyPlaceholder" type="CharacterBody2D" groups=["enemies"]]
 collision_layer = 2
@@ -31,3 +35,11 @@ texture = SubResource("AtlasTexture_llsmy")
 [node name="EnemyCollision" type="CollisionShape2D" parent="."]
 position = Vector2(-1.5, 0.5)
 shape = SubResource("RectangleShape2D_nmyvf")
+
+[node name="HurtboxComponent" parent="." instance=ExtResource("4_jgiwa")]
+collision_layer = 1
+collision_mask = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent"]
+position = Vector2(-1.5, 0.5)
+shape = SubResource("RectangleShape2D_14267")

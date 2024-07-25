@@ -7,7 +7,7 @@
 script = ExtResource("1_tsssf")
 type = 1
 name = "Spell Duplication"
-description = "Doubles spells cast
+description = "Cast an extra spell
 
 Self damage: 15%"
 texture = ExtResource("2_suvrj")
