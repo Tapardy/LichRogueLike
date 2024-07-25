@@ -14,6 +14,7 @@ const KNOCKBACK_STOP_DURATION = 0.1
 @onready var coyote_timer: Timer = $CoyoteTimer
 @onready var knockback_timer: Timer = $PlayerAttack/KnockbackTimer
 @onready var dash_timer: Timer = $DashTimer
+@onready var dash_cooldown_timer: Timer = $DashCooldownTimer  # New timer for dash cooldown
 
 var can_move: bool = true
 var gravity: int = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -29,12 +30,16 @@ func _ready() -> void:
 	coyote_timer.wait_time = COYOTE_TIME
 	knockback_timer.wait_time = KNOCKBACK_STOP_DURATION
 	knockback_timer.one_shot = true
+	dash_cooldown_timer.one_shot = true  # Ensure the cooldown timer is one-shot
 	
 	$Camera2D/CanvasLayer/Sprite2D.visible = false
 	$RealmShift.set_tile_maps($"../TileMapLight", $"../TileMapDark")
 
 func _physics_process(delta: float) -> void:
 	$HealthComponent/Label2.text = str("VV: ", velocity.y)
+	
+	var was_on_floor: bool = is_on_floor()
+	
 	if not dashing:
 		direction = Input.get_axis("move_left", "move_right")
 		if Input.is_action_just_released("jump") and velocity.y < 0:
@@ -44,15 +49,16 @@ func _physics_process(delta: float) -> void:
 			if can_jump:
 				velocity.y = JUMP_VELOCITY
 				can_jump = false 
-	
+
 	# Update dash logic to check can_dash flag
 	if not dashing and Input.is_action_just_pressed("dash") and can_dash:
 		dashing = true
-		SPEED = 600
+		SPEED = 500
 		FALL_GRAVITY = 0
 		velocity.y = 0
 		dash_timer.start()  # Start the dash timer
-		can_dash = false  # Disable dashing until grounded
+		dash_cooldown_timer.start()  # Start the cooldown timer
+		can_dash = false  # Disable dashing until the cooldown is over
 
 	if not is_on_floor():
 		velocity.y += get_gravity(velocity) * delta
@@ -69,15 +75,14 @@ func _physics_process(delta: float) -> void:
 	
 	if is_on_floor():
 		knockback_velocity.y = 0
-		can_dash = true  # Reset dash ability when grounded
 
-	var was_on_floor: bool = is_on_floor()
 	move_and_slide()
 
 	if was_on_floor and not is_on_floor():
 		coyote_timer.start()
-	elif not is_on_floor():
+	elif is_on_floor():
 		can_jump = true
+		coyote_timer.stop()
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("realm_shift"):
@@ -108,3 +113,6 @@ func _on_dash_timer_timeout() -> void:
 	dashing = false
 	SPEED = 200
 	FALL_GRAVITY = 980
+
+func _on_dash_cooldown_timer_timeout() -> void:
+	can_dash = true

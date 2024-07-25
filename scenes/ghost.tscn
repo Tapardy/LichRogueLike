@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://c3g3n0k2w4v2f"]
+
+[ext_resource type="Texture2D" uid="uid://0fgwm3gkxa3e" path="res://assets/mc lich 2.png" id="1_qqy1x"]
+[ext_resource type="Script" path="res://scripts/player/ghost_dash.gd" id="2_042i1"]
+
+[node name="Ghost" type="Sprite2D"]
+modulate = Color(0.412152, 0.412152, 0.412152, 1)
+show_behind_parent = true
+texture = ExtResource("1_qqy1x")
+script = ExtResource("2_042i1")
