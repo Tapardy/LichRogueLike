@@ -10,6 +10,8 @@ const KNOCKBACK_MULTIPLIER_STANDING = 0.5
 const KNOCKBACK_MULTIPLIER_MOVING = 0.5
 const KNOCKBACK_STOP_DURATION = 0.1
 
+@onready var animation_tree: AnimationTree = $AnimationTree
+
 @export var ghost_node: PackedScene
 @onready var ghost_timer: Timer = $Sprite2D/GhostTimer
 
@@ -30,6 +32,7 @@ var dashing = false
 var can_dash = true  # New flag to control dash ability
 
 func _ready() -> void:
+	animation_tree.active = true
 	coyote_timer.wait_time = COYOTE_TIME
 	knockback_timer.wait_time = KNOCKBACK_STOP_DURATION
 	knockback_timer.one_shot = true
@@ -39,6 +42,7 @@ func _ready() -> void:
 	$RealmShift.set_tile_maps($"../TileMapLight", $"../TileMapDark")
 
 func _physics_process(delta: float) -> void:
+
 	$HealthComponent/Label2.text = str("VV: ", velocity.y)
 	
 	var was_on_floor: bool = is_on_floor()
@@ -127,10 +131,9 @@ func _on_dash_cooldown_timer_timeout() -> void:
 	can_dash = true
 
 func add_ghost():
-	var ghost = ghost_node.instantiate()
+	var ghost: Node2D = ghost_node.instantiate()
 	ghost.set_property(position, $Sprite2D.scale, $Sprite2D.texture, $Sprite2D.flip_h)
 	get_tree().current_scene.add_child(ghost)
-
 
 func _on_ghost_timer_timeout() -> void:
 	add_ghost()

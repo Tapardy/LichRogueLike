@@ -1,4 +1,4 @@
-[gd_scene load_steps=43 format=3 uid="uid://bnih347l0un2n"]
+[gd_scene load_steps=35 format=3 uid="uid://bnih347l0un2n"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_wtr5s"]
 [ext_resource type="Shader" path="res://shaders/realm_shift.gdshader" id="2_8ax0c"]
@@ -141,38 +141,6 @@ _data = {
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5l7kr"]
 size = Vector2(27, 32)
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_7bav6"]
-animation = &"attack"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3dqhe"]
-animation = &"idle"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tt10t"]
-animation = &"jump"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_j3jok"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_k4i6t"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vuddo"]
-switch_mode = 2
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mnrht"]
-advance_mode = 0
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_vi262"]
-states/Start/position = Vector2(249, 90)
-states/attack/node = SubResource("AnimationNodeAnimation_7bav6")
-states/attack/position = Vector2(434, 237)
-states/idle/node = SubResource("AnimationNodeAnimation_3dqhe")
-states/idle/position = Vector2(434, 79)
-states/jump/node = SubResource("AnimationNodeAnimation_tt10t")
-states/jump/position = Vector2(663, 79)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_j3jok"), "idle", "attack", SubResource("AnimationNodeStateMachineTransition_k4i6t"), "attack", "idle", SubResource("AnimationNodeStateMachineTransition_vuddo"), "idle", "jump", SubResource("AnimationNodeStateMachineTransition_mnrht")]
-graph_offset = Vector2(-571, -3)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gsixq"]
 size = Vector2(28, 10)
@@ -496,10 +464,6 @@ wait_time = 0.05
 [node name="CoyoteTimer" type="Timer" parent="."]
 wait_time = 0.15
 autostart = true
-
-[node name="AnimationTree" type="AnimationTree" parent="."]
-tree_root = SubResource("AnimationNodeStateMachine_vi262")
-anim_player = NodePath("../AnimationPlayer")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
