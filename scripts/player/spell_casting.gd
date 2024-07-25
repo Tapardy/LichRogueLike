@@ -156,7 +156,7 @@ func process_hotbar(slot: Node, _slot_type: String, _hotbar_name: String, load_m
 
 func handle_spell_duplication() -> void:
 	if can_apply_self_damage(spell_dupe_self_damage):
-		cast_amount *= 2
+		cast_amount +=1
 		increase_self_damage(spell_dupe_self_damage)
 
 func increase_damage_dealt() -> void:

@@ -6,5 +6,6 @@
 [node name="Ghost" type="Sprite2D"]
 modulate = Color(0.412152, 0.412152, 0.412152, 1)
 show_behind_parent = true
+light_mask = 0
 texture = ExtResource("1_qqy1x")
 script = ExtResource("2_042i1")
