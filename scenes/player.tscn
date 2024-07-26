@@ -433,7 +433,7 @@ script = ExtResource("1_wtr5s")
 ghost_node = ExtResource("2_oc3px")
 
 [node name="DashCooldownTimer" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 1.5
 one_shot = true
 
 [node name="DashTimer" type="Timer" parent="."]
@@ -443,7 +443,7 @@ one_shot = true
 [node name="InvincibleTimer" type="Timer" parent="."]
 
 [node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(0, -65)
+position = Vector2(0, -16)
 zoom = Vector2(2, 2)
 limit_smoothed = true
 

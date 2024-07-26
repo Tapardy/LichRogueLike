@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 var speed: float = 200.0
 const RUN_MULTIPLIER: float = 1.75
-var jump_velocity: float = -400.0
+var jump_velocity: float = -450.0
 const COYOTE_TIME: float = 0.1
 var fall_gravity: float = 1300
 const KNOCKBACK_DECAY: float = 0.8
