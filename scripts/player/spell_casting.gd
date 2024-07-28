@@ -2,6 +2,7 @@ extends Node2D
 
 var cast_amount: int = 1
 var timer: Timer
+var cooldown_timer: Timer
 var casting: bool = false
 var spell_modifications: Dictionary = {}
 
@@ -21,15 +22,25 @@ func _ready() -> void:
 		timer.wait_time = 0.1
 		timer.one_shot = true
 		add_child(timer)
+	
+	if not cooldown_timer:
+		cooldown_timer = Timer.new()
+		cooldown_timer.wait_time = 1.0  # Cooldown of 1 second
+		cooldown_timer.one_shot = true
+		add_child(cooldown_timer)
 
 func load_ability(name: String) -> void:
-	#if casting:
-		#print("Already casting. Please wait until casting is finished.")
-		#reset_spell_modifications()
-		#return
+	if casting:
+		print("Already casting. Please wait until casting is finished.")
+		reset_spell_modifications()
+		return
 	if is_casting:
 		reset_spell_modifications()
-		return	
+		return
+	if cooldown_timer.is_stopped() == false:  # Check if cooldown timer is active
+		print("Ability is on cooldown. Please wait.")
+		reset_spell_modifications()
+		return
 		
 	# Check if player can cast the spell
 	if not $"../HealthComponent".can_cast_spell(final_self_damage):
@@ -72,6 +83,9 @@ func load_ability(name: String) -> void:
 	reset_spell_modifications()
 	
 	casting = false  # Reset casting flag after casting is complete
+	
+	# Start cooldown timer
+	cooldown_timer.start()
 
 func apply_modifications(sceneNode: Node) -> void:
 	for key: String in spell_modifications.keys():

@@ -47,29 +47,29 @@ func _ready() -> void:
 	dash_cooldown_timer.one_shot = true  # Ensure the cooldown timer is one-shot
 	
 	$Camera2D/CanvasLayer/Sprite2D.visible = false
-	$RealmShift.set_tile_maps($"../TileMapLight", $"../TileMapDark", $"../TileMapLight/ParallaxForestLight")
+	$RealmShift.set_tile_maps($"../TileMapLight", $"../TileMapDark", $"../TileMapLight/ParallaxForestLight", $"../TileMapDark/ParallaxForestDark")
 
 func change_parallax(light: ParallaxBackground, dark: ParallaxBackground) -> void:
 	$RealmShift.set_parallax(light,dark)
 	
 func _physics_process(delta: float) -> void:
 	$HealthComponent/Label2.text = str("VV: ", velocity.y)
-	
+
 	var was_on_floor: bool = is_on_floor()
-	
+
 	if not dashing:
 		direction = Input.get_axis("move_left", "move_right")
 		is_moving = direction != 0  # Update moving flag
-		if Input.is_action_just_pressed("jump") and (is_on_floor() or !coyote_timer.is_stopped()):
+		if Input.is_action_just_pressed("jump") and (is_on_floor() or not coyote_timer.is_stopped()):
 			if can_jump:
 				jump()
 			else:
 				jump_buffer = true
 				get_tree().create_timer(jump_buffer_time).timeout.connect(on_jump_buffer_timeout)
+				
 	# Update dash logic to check can_dash flag
 	if not dashing and Input.is_action_just_pressed("dash") and can_dash and direction != 0:
 		ghost_timer.start()
-		
 		dashing = true
 		speed = 500
 		fall_gravity = 0
@@ -77,28 +77,29 @@ func _physics_process(delta: float) -> void:
 		dash_timer.start()  # Start the dash timer
 		dash_cooldown_timer.start()  # Start the cooldown timer
 		can_dash = false  # Disable dashing until the cooldown is over
-		
+
 	if not is_on_floor():
 		velocity.y += get_gravity(velocity) * delta
-		
-	if direction == 0 and not $PlayerAttack.currently_attacking() or !$SpellCasting.get_cast_status():
+
+	# Only switch to idle if not moving and not attacking or casting a spell
+	if direction == 0 and not $PlayerAttack.currently_attacking() and not $SpellCasting.get_cast_status():
 		$AnimationPlayer.play("idle")
-	if direction == 1: 
+	elif direction == 1:
 		sprite_2d.flip_h = false
 	elif direction == -1:
 		sprite_2d.flip_h = true
-		
+
 	if knockback_timer.is_stopped():
 		velocity.x = direction * speed if direction != 0 else move_toward(velocity.x, 0, speed)
-		
+
 	velocity += knockback_velocity
 	knockback_velocity *= KNOCKBACK_DECAY
-	
+
 	if is_on_floor():
 		knockback_velocity.y = 0
-		
+
 	move_and_slide()
-	
+
 	if was_on_floor and not is_on_floor():
 		coyote_timer.start()
 	elif is_on_floor():
@@ -115,8 +116,6 @@ func _input(event: InputEvent) -> void:
 	if Input.is_action_just_released("jump") and velocity.y < 0:
 		velocity.y = velocity.y * 0.2  # Prevent extra height gain
 		
-
-
 
 func jump() -> void:
 	velocity.y = jump_velocity
@@ -176,6 +175,3 @@ func _on_invincible_timer_timeout() -> void:
 	invincible = false
 	$HealthComponent.suppress_damage = false
 	self.collision_layer = base_collision_layer
-
-
-

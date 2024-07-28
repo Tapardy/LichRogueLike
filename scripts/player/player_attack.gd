@@ -5,35 +5,44 @@ extends Node2D
 var entity: Node2D
 var actual_damage: float
 var hit_registered: bool = false  # Track if a hit has been registered during the current attack
-var is_attacking: bool = true
+var is_attacking: bool = false
+
+@onready var melee_hitbox: CollisionShape2D = $MeleeAttack/MeleeHitbox/CollisionShape2D
 
 func _ready() -> void:
 	$MeleeAttack.visible = false
-	$MeleeAttack/MeleeHitbox/CollisionShape2D.disabled = true
+	melee_hitbox.disabled = true
+
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("melee_attack"):
+		print("Melee attack input detected")  # Debug print
 		perform_melee_attack()
 
-func perform_melee_attack() -> void:	 
+func _physics_process(delta: float) -> void:
+	if is_attacking:
+		update_attack_hitbox()
+
+func perform_melee_attack() -> void:
 	is_attacking = true
 	$"../AnimationPlayer".play("attack")
 	$AttackDuration.start()
-	print("balls")
-	if sprite_2d.flip_h:
-		$MeleeAttack.flip_h = false
-		$MeleeAttack.position.x = sprite_2d.position.x - 28
-	else:
-		$MeleeAttack.flip_h = true
-		$MeleeAttack.position.x = sprite_2d.position.x + 32
+	$MeleeAttack.visible = true
+	melee_hitbox.disabled = false  # Enable the collision shape
 	
+	update_attack_hitbox()
 	hit_registered = false  # Reset hit registration at the start of a new attack
 
-func currently_attacking()-> bool: 
-	if is_attacking:
-		return true
+func update_attack_hitbox() -> void:
+	if sprite_2d.flip_h:
+		$MeleeAttack.flip_h = false
+		$MeleeAttack.position.x = sprite_2d.position.x - 42
 	else:
-		return false
-		
+		$MeleeAttack.flip_h = true
+		$MeleeAttack.position.x = sprite_2d.position.x
+
+func currently_attacking() -> bool:
+	return is_attacking
+
 func _on_melee_hitbox_area_entered(area: Node2D) -> void:
 	if not hit_registered and area.is_in_group("enemies"):
 		hit_registered = true
@@ -58,7 +67,7 @@ func deal_damage() -> void:
 	attack.attack_damage = actual_damage
 	print(actual_damage)
 	entity.get_node("HealthComponent").damage(attack)
-
+	
 	if entity.has_method("knockback"):
 		entity.knockback(75.0, global_position.x, 0)
 		
@@ -67,8 +76,12 @@ func deal_damage() -> void:
 		var player: CharacterBody2D = get_parent()  # Adjust this path if necessary
 		if player.has_method("knockback"):
 			player.knockback(knockback_force, global_position.x, 0)
-
+			
 	$"../LifeForce".add_life_force()
 
 func _on_attack_duration_timeout() -> void:
+	print("Attack duration timeout")  # Debug print
 	is_attacking = false
+	$MeleeAttack.visible = false
+	melee_hitbox.disabled = true  # Disable the collision shape
+	print("CollisionShape2D disabled and hidden")  # Debug print

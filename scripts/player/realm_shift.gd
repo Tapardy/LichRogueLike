@@ -25,16 +25,16 @@ func _ready() -> void:
 	# Ensure the ShadowStrengthTimer is properly set up
 	$ShadowStrengthTimer.wait_time = 0.1  # Adjust this value as needed for your update frequency
 
-func set_tile_maps(light: TileMap, dark: TileMap, outer_parallax_light: ParallaxBackground) -> void:
+func set_tile_maps(light: TileMap, dark: TileMap, outer_parallax_light: ParallaxBackground, outer_parallax_dark: ParallaxBackground) -> void:
 	tile_map_light = light
 	tile_map_dark = dark
 	parallax_light = outer_parallax_light
-	#parallax dark
+	parallax_dark = outer_parallax_dark
 	print(light, dark)
 
 func set_parallax(new_parallax_light: ParallaxBackground, new_parallax_dark: ParallaxBackground) -> void:
 	parallax_light = new_parallax_light
-	#parallax dark
+	parallax_dark = new_parallax_dark
 func handle_realm_shift() -> void:
 	if can_shift and can_shift_realm():
 		if is_in_light:
@@ -74,7 +74,7 @@ func update_tilemaps() -> void:
 	else:
 		tile_map_light.visible = true
 		parallax_light.visible = true
-		parallax_dark.visible = false
+		#parallax_dark.visible = false
 		tile_map_dark.visible = false
 		tile_map_light.tile_set.set_physics_layer_collision_layer(0, 1)
 		tile_map_dark.tile_set.set_physics_layer_collision_layer(0, 2)
@@ -105,24 +105,12 @@ func _on_timer_timeout() -> void:
 func start_shadow_realm_strength_increase() -> void:
 	shadow_strength = 1.0
 	light_strength = 1.0
-	$ShadowStrengthTimer.start()  # Start the strength adjustment timer
+	#$ShadowStrengthTimer.start()  # Start the strength adjustment timer
 
 # Function to start decreasing light realm strength
 func start_light_realm_strength_decrease() -> void:
-	$ShadowStrengthTimer.start()  # Start the strength adjustment timer
+	#$ShadowStrengthTimer.start()  # Start the strength adjustment timer
+	pass
 
 func _on_shadow_strength_timer_timeout() -> void:
-	if is_in_shadowrealm:
-		if shadow_strength < 1.5:
-			shadow_strength += strength_increase_rate
-		if light_strength > 0.5:
-			light_strength -= strength_decrease_rate
-	else:
-		# Gradually reset shadow_strength
-		if shadow_strength > 1.0:
-			shadow_strength -= strength_decrease_rate
-		# Gradually reset light_strength
-		if light_strength < 1.0:
-			light_strength += strength_decrease_rate
-		if light_strength >= 1.0:
-			$ShadowStrengthTimer.stop()  # Stop the timer when reaching the default strength
+	pass

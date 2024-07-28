@@ -11,9 +11,6 @@ signal player_death
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	health = max_health
-func _process(delta: float) -> void:
-	if get_parent().is_in_group("player"):
-		print(health) 
 		
 func damage(attack: Attack) -> void:
 	if not suppress_damage:
@@ -46,7 +43,9 @@ func damage_self(self_damage: int) -> void:
 	if remaining_self_damage > 0:
 		var attack: Attack = Attack.new()
 		attack.attack_damage = remaining_self_damage
+
 		damage(attack)
+
 		
 
 # New function to check if the player can cast the spell
