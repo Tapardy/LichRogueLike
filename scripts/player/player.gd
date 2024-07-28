@@ -47,8 +47,11 @@ func _ready() -> void:
 	dash_cooldown_timer.one_shot = true  # Ensure the cooldown timer is one-shot
 	
 	$Camera2D/CanvasLayer/Sprite2D.visible = false
-	$RealmShift.set_tile_maps($"../TileMapLight", $"../TileMapDark")
+	$RealmShift.set_tile_maps($"../TileMapLight", $"../TileMapDark", $"../TileMapLight/ParallaxForestLight")
 
+func change_parallax(light: ParallaxBackground, dark: ParallaxBackground) -> void:
+	$RealmShift.set_parallax(light,dark)
+	
 func _physics_process(delta: float) -> void:
 	$HealthComponent/Label2.text = str("VV: ", velocity.y)
 	

@@ -2,7 +2,7 @@
 extends CanvasLayer
 class_name InventoryManager
 
-var InvSize: int = 24
+var InvSize: int = 20
 @export var itemsLoad: Array = [
 	"res://Inventory/Items(Resources)/firebolt.tres",
 	"res://Inventory/Items(Resources)/rock.tres",

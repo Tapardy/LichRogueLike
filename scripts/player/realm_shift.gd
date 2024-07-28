@@ -3,6 +3,8 @@ extends Node2D
 var is_in_shadowrealm: bool = false
 var tile_map_light: TileMap
 var tile_map_dark: TileMap
+var parallax_light: ParallaxBackground
+var parallax_dark: ParallaxBackground
 var player: CharacterBody2D
 var tile_map: TileMap
 var can_shift: bool = true  # Variable to track cooldown
@@ -23,11 +25,16 @@ func _ready() -> void:
 	# Ensure the ShadowStrengthTimer is properly set up
 	$ShadowStrengthTimer.wait_time = 0.1  # Adjust this value as needed for your update frequency
 
-func set_tile_maps(light: TileMap, dark: TileMap) -> void:
+func set_tile_maps(light: TileMap, dark: TileMap, outer_parallax_light: ParallaxBackground) -> void:
 	tile_map_light = light
 	tile_map_dark = dark
+	parallax_light = outer_parallax_light
+	#parallax dark
 	print(light, dark)
 
+func set_parallax(new_parallax_light: ParallaxBackground, new_parallax_dark: ParallaxBackground) -> void:
+	parallax_light = new_parallax_light
+	#parallax dark
 func handle_realm_shift() -> void:
 	if can_shift and can_shift_realm():
 		if is_in_light:
@@ -59,11 +66,15 @@ func change_realm(value: bool) -> void:
 func update_tilemaps() -> void:
 	if is_in_shadowrealm:
 		tile_map_light.visible = false
+		parallax_light.visible = false
+		parallax_dark.visible = true
 		tile_map_dark.visible = true
 		tile_map_light.tile_set.set_physics_layer_collision_layer(0, 2)
 		tile_map_dark.tile_set.set_physics_layer_collision_layer(0, 1)
 	else:
 		tile_map_light.visible = true
+		parallax_light.visible = true
+		parallax_dark.visible = false
 		tile_map_dark.visible = false
 		tile_map_light.tile_set.set_physics_layer_collision_layer(0, 1)
 		tile_map_dark.tile_set.set_physics_layer_collision_layer(0, 2)
