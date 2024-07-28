@@ -1,0 +1,51 @@
+[gd_scene load_steps=8 format=3 uid="uid://ce8kprqlafpv8"]
+
+[ext_resource type="Script" path="res://scripts/loadingscreen.gd" id="1_lx654"]
+[ext_resource type="Texture2D" uid="uid://d0maub3qlkexm" path="res://assets/concept arts/Defeated_knightt.png" id="1_nq27e"]
+[ext_resource type="Texture2D" uid="uid://djyppnwdae3mj" path="res://assets/concept arts/Earth_snail_1.png" id="2_urkog"]
+[ext_resource type="Texture2D" uid="uid://ipcv2pnlpoij" path="res://assets/concept arts/Gorthulon_Spellmaw.png" id="3_wwkk1"]
+[ext_resource type="Texture2D" uid="uid://crj0845migjm0" path="res://assets/concept arts/Seeking_motherr.png" id="4_nmbet"]
+[ext_resource type="Texture2D" uid="uid://t2vohtug4q5q" path="res://assets/concept arts/snail_ca.png" id="5_ji0sp"]
+[ext_resource type="Texture2D" uid="uid://drtskmca7ojsv" path="res://assets/concept arts/soull_cagee.png" id="6_xstpm"]
+
+[node name="Loadingscreen" type="Node2D"]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 10
+script = ExtResource("1_lx654")
+
+[node name="DefeatedKnightt" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(320, 174)
+scale = Vector2(0.3125, 0.3026)
+texture = ExtResource("1_nq27e")
+
+[node name="EarthSnail1" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(320, 183)
+scale = Vector2(0.3125, 0.288416)
+texture = ExtResource("2_urkog")
+
+[node name="GorthulonSpellmaw" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(320, 183)
+scale = Vector2(0.3125, 0.288416)
+texture = ExtResource("3_wwkk1")
+
+[node name="SeekingMotherr" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(320, 183)
+scale = Vector2(0.3125, 0.288416)
+texture = ExtResource("4_nmbet")
+
+[node name="SnailCa" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(320, 183)
+scale = Vector2(0.3125, 0.288416)
+texture = ExtResource("5_ji0sp")
+
+[node name="SoullCagee" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(320, 183)
+scale = Vector2(0.3125, 0.288416)
+texture = ExtResource("6_xstpm")
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer"]
+offset_left = 128.0
+offset_top = 320.0
+offset_right = 512.0
+offset_bottom = 340.0
