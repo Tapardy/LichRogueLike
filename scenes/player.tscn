@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://bnih347l0un2n"]
+[gd_scene load_steps=40 format=3 uid="uid://bnih347l0un2n"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_wtr5s"]
 [ext_resource type="Shader" path="res://shaders/realm_shift.gdshader" id="2_8ax0c"]
@@ -9,7 +9,10 @@
 [ext_resource type="Texture2D" uid="uid://0fgwm3gkxa3e" path="res://assets/mc lich 2.png" id="4_lmaep"]
 [ext_resource type="Script" path="res://scripts/player/life_force.gd" id="5_ckido"]
 [ext_resource type="PackedScene" uid="uid://b6ws03lwfd0te" path="res://scenes/components/health_component.tscn" id="5_j5mnj"]
+[ext_resource type="Texture2D" uid="uid://qk1f1a6e4cvd" path="res://assets/playeranim/mc lich melee.png" id="6_uvwe1"]
 [ext_resource type="Script" path="res://scripts/player/realm_shift.gd" id="7_iftrq"]
+[ext_resource type="Texture2D" uid="uid://dykwlxcg2fb4v" path="res://mc lich IDLE.png" id="7_pbigk"]
+[ext_resource type="Texture2D" uid="uid://dmbppujqk0mln" path="res://assets/playeranim/mc lich cast.png" id="8_wf2ym"]
 [ext_resource type="FontFile" uid="uid://gn3ut7dc70bk" path="res://assets/m3x6.ttf" id="8_y631v"]
 [ext_resource type="Script" path="res://scripts/GUI.gd" id="9_isori"]
 [ext_resource type="Script" path="res://scripts/player/spell_casting.gd" id="9_rsxl2"]
@@ -142,224 +145,8 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_5l7kr"]
 size = Vector2(27, 32)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_gsixq"]
-size = Vector2(28, 10)
-
 [sub_resource type="Animation" id="Animation_c5e25"]
 length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerAttack/MeleeAttack:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("4_4liia")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("PlayerAttack/MeleeAttack:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [6]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("PlayerAttack/MeleeAttack:vframes")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [6]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Sprite2D:texture")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("4_lmaep")]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("PlayerAttack/MeleeAttack:visible")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("PlayerAttack/MeleeAttack:frame")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("PlayerAttack/MeleeAttack/MeleeHitbox/CollisionShape2D:shape")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [SubResource("RectangleShape2D_gsixq")]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("PlayerAttack/MeleeAttack/MeleeHitbox/CollisionShape2D:position")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(-3, 1.5)]
-}
-tracks/8/type = "value"
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/path = NodePath("PlayerAttack/MeleeAttack/MeleeHitbox/CollisionShape2D:disabled")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-
-[sub_resource type="Animation" id="Animation_oblaf"]
-resource_name = "attack"
-length = 0.3
-step = 0.05
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("PlayerAttack/MeleeAttack:texture")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [ExtResource("4_4liia")]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("PlayerAttack/MeleeAttack:hframes")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [6]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("PlayerAttack/MeleeAttack:vframes")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [6]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("PlayerAttack/MeleeAttack:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("PlayerAttack/MeleeAttack:frame")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("PlayerAttack/MeleeAttack/MeleeHitbox/CollisionShape2D:shape")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [SubResource("RectangleShape2D_gsixq")]
-}
-tracks/6/type = "value"
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/path = NodePath("PlayerAttack/MeleeAttack/MeleeHitbox/CollisionShape2D:position")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 0,
-"values": [Vector2(-3, 1.5), Vector2(-2, -4), Vector2(-2, -8)]
-}
-tracks/7/type = "value"
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/path = NodePath("PlayerAttack/MeleeAttack/MeleeHitbox/CollisionShape2D:disabled")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/keys = {
-"times": PackedFloat32Array(0, 0.15),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
-
-[sub_resource type="Animation" id="Animation_qcx5u"]
-resource_name = "idle"
-loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -371,6 +158,219 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [ExtResource("4_lmaep")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:vframes")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PlayerAttack/MeleeAttack/MeleeHitbox/CollisionShape2D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("PlayerAttack/MeleeAttack/MeleeHitbox/CollisionShape2D:shape:size")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(25, 17)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("PlayerAttack/MeleeAttack/MeleeHitbox/CollisionShape2D:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(17.5, -6)]
+}
+
+[sub_resource type="Animation" id="Animation_oblaf"]
+resource_name = "attack"
+length = 0.59
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:hframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:vframes")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:texture")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("6_uvwe1")]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5, 0.55),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("PlayerAttack/MeleeAttack/MeleeHitbox/CollisionShape2D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0.25, 0.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("PlayerAttack/MeleeAttack/MeleeHitbox/CollisionShape2D:shape:size")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0.25, 0.3, 0.35, 0.4, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(25, 32), Vector2(34, 32), Vector2(34, 32), Vector2(28, 32), Vector2(28, 32)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("PlayerAttack/MeleeAttack/MeleeHitbox/CollisionShape2D:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0.25, 0.3, 0.35, 0.4, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(17.5, -3.18323e-12), Vector2(22, 0), Vector2(22, -3.18323e-12), Vector2(19, -3.18323e-12), Vector2(19, -3.18323e-12)]
+}
+
+[sub_resource type="Animation" id="Animation_qcx5u"]
+resource_name = "idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 8]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("7_pbigk")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:hframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:vframes")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
 }
 
 [sub_resource type="Animation" id="Animation_vgql5"]
@@ -388,13 +388,99 @@ tracks/0/keys = {
 "values": [ExtResource("4_lmaep")]
 }
 
+[sub_resource type="Animation" id="Animation_ixgal"]
+resource_name = "casting"
+length = 0.53
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:hframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("8_wf2ym")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11]
+}
+
+[sub_resource type="Animation" id="Animation_tep5e"]
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_odown"]
 _data = {
 "RESET": SubResource("Animation_c5e25"),
 "attack": SubResource("Animation_oblaf"),
+"casting": SubResource("Animation_ixgal"),
+"default": SubResource("Animation_tep5e"),
 "idle": SubResource("Animation_qcx5u"),
 "jump": SubResource("Animation_vgql5")
 }
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_gsixq"]
+size = Vector2(25, 17)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yvt3a"]
 shader = ExtResource("18_6en4c")
@@ -450,7 +536,7 @@ limit_smoothed = true
 
 [node name="Sprite2D" type="Sprite2D" parent="Camera2D/CanvasLayer"]
 material = SubResource("ShaderMaterial_5b5tc")
-position = Vector2(646, 355)
+position = Vector2(638, 356)
 scale = Vector2(27.1953, 14.1515)
 texture = ExtResource("3_ma3mo")
 
@@ -465,7 +551,30 @@ shape = SubResource("RectangleShape2D_5l7kr")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 show_behind_parent = true
+texture_filter = 1
+position = Vector2(0, -8)
 texture = ExtResource("4_lmaep")
+hframes = 4
+vframes = 4
+metadata/_aseprite_wizard_config_ = {
+"i_mode": -1,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "res://assets/playeranim",
+"o_name": "",
+"only_visible": false,
+"player": "AnimationPlayer",
+"slice": "",
+"source": "res://assets/playeranim/mc lich cast.aseprite"
+}
+metadata/_aseprite_wizard_interface_config_ = {
+"animation_section": true,
+"layer_section": true,
+"output_section": true,
+"slice_section": true
+}
+metadata/_aseprite_wizard_source_file_hash_ = "a10573386f0e18359ad45280e8fdc526"
 
 [node name="GhostTimer" type="Timer" parent="Sprite2D"]
 wait_time = 0.05
@@ -489,6 +598,7 @@ scale = Vector2(0.969697, 0.969697)
 texture = ExtResource("4_4liia")
 hframes = 6
 vframes = 6
+frame = 5
 
 [node name="MeleeHitbox" type="Area2D" parent="PlayerAttack/MeleeAttack"]
 position = Vector2(-3.07336e-08, -1.93622e-06)
@@ -497,12 +607,11 @@ collision_layer = 0
 collision_mask = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="PlayerAttack/MeleeAttack/MeleeHitbox"]
-position = Vector2(-3, 1.5)
+position = Vector2(17.5, -6)
 shape = SubResource("RectangleShape2D_gsixq")
-disabled = true
 
 [node name="AttackDuration" type="Timer" parent="PlayerAttack"]
-wait_time = 0.2
+wait_time = 0.59
 one_shot = true
 
 [node name="KnockbackTimer" type="Timer" parent="PlayerAttack"]
@@ -544,6 +653,10 @@ wait_time = 2.0
 [node name="SpellCasting" type="Node2D" parent="."]
 script = ExtResource("9_rsxl2")
 main_spell_self_damage = 20
+
+[node name="castTimer" type="Timer" parent="SpellCasting"]
+wait_time = 0.53
+one_shot = true
 
 [node name="PlayerSpells" type="CanvasLayer" parent="."]
 
@@ -752,6 +865,9 @@ show_percentage = false
 [connection signal="timeout" from="CoyoteTimer" to="." method="_on_coyote_timer_timeout"]
 [connection signal="area_entered" from="PlayerAttack/MeleeAttack/MeleeHitbox" to="PlayerAttack" method="_on_melee_hitbox_area_entered"]
 [connection signal="body_entered" from="PlayerAttack/MeleeAttack/MeleeHitbox" to="PlayerAttack" method="_on_melee_hitbox_body_entered"]
+[connection signal="timeout" from="PlayerAttack/AttackDuration" to="." method="_on_attack_duration_timeout"]
+[connection signal="timeout" from="PlayerAttack/AttackDuration" to="PlayerAttack" method="_on_attack_duration_timeout"]
 [connection signal="timeout" from="PlayerAttack/KnockbackTimer" to="." method="_on_knockback_timer_timeout"]
 [connection signal="timeout" from="RealmShift/Timer" to="RealmShift" method="_on_timer_timeout"]
 [connection signal="timeout" from="RealmShift/ShadowStrengthTimer" to="RealmShift" method="_on_shadow_strength_timer_timeout"]
+[connection signal="timeout" from="SpellCasting/castTimer" to="SpellCasting" method="_on_cast_timer_timeout"]

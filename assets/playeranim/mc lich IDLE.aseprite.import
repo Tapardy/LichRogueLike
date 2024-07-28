@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://cvjumnq7gf48g"
+path="res://.godot/imported/mc lich IDLE.aseprite-74cc07e7f135602697abc396bfd7a58c.res"
+
+[deps]
+
+source_file="res://assets/playeranim/mc lich IDLE.aseprite"
+dest_files=["res://.godot/imported/mc lich IDLE.aseprite-74cc07e7f135602697abc396bfd7a58c.res"]
+
+[params]
+

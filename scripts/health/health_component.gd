@@ -11,7 +11,10 @@ signal player_death
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	health = max_health
-
+func _process(delta: float) -> void:
+	if get_parent().is_in_group("player"):
+		print(health) 
+		
 func damage(attack: Attack) -> void:
 	if not suppress_damage:
 		if get_parent().is_in_group("player"):

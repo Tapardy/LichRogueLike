@@ -11,7 +11,7 @@ var final_self_damage: int = 0
 @export var attack_up_self_damage: int = 15
 @export var size_increase_self_damage: int = 10
 @export var spell_dupe_self_damage: int = 15
-
+var is_casting: bool = false
 var damage_up: float = 0
 
 # Called when the node enters the scene tree for the first time.
@@ -23,22 +23,27 @@ func _ready() -> void:
 		add_child(timer)
 
 func load_ability(name: String) -> void:
-	if casting:
-		print("Already casting. Please wait until casting is finished.")
-		return
+	#if casting:
+		#print("Already casting. Please wait until casting is finished.")
+		#reset_spell_modifications()
+		#return
+	if is_casting:
+		reset_spell_modifications()
+		return	
 		
 	# Check if player can cast the spell
 	if not $"../HealthComponent".can_cast_spell(final_self_damage):
 		reset_spell_modifications()
 		return
-	
 	$"../HealthComponent".damage_self(final_self_damage)
-	
+	$"../AnimationPlayer".play("casting")
+	is_casting = true
+
 	casting = true  # Set casting flag to true
 
 	print("cast_amount variable: ", cast_amount)
 	var scene: PackedScene = load("res://scenes/abilities/" + name + "/" + name + ".tscn")
-	
+	$castTimer.start()
 	# Get the player's parent node (which is the root node or any sibling container)
 	var player_sibling_container: Node2D = get_parent().get_parent()
 	
@@ -192,3 +197,12 @@ func reset_spell_modifications() -> void:
 	spell_modifications.clear()
 	final_self_damage = 0
 	cast_amount = 1
+
+func get_cast_status()-> bool:
+	if is_casting:
+		return true
+	else:
+		return false
+
+func _on_cast_timer_timeout() -> void:
+	is_casting = false

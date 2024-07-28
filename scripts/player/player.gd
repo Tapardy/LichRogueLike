@@ -35,7 +35,7 @@ var jump_buffer: bool = false
 var is_jumping: bool = false
 var is_moving: bool = false
 var dashing: bool = false
-
+var is_attacking: bool = false
 var invincible: bool = false
 var base_collision_layer: int = self.collision_layer
 
@@ -81,6 +81,8 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y += get_gravity(velocity) * delta
 		
+	if direction == 0 and not $PlayerAttack.currently_attacking() or !$SpellCasting.get_cast_status():
+		$AnimationPlayer.play("idle")
 	if direction == 1: 
 		sprite_2d.flip_h = false
 	elif direction == -1:
@@ -112,6 +114,9 @@ func _input(event: InputEvent) -> void:
 		$RealmShift.handle_realm_shift()
 	if Input.is_action_just_released("jump") and velocity.y < 0:
 		velocity.y = velocity.y * 0.2  # Prevent extra height gain
+		
+
+
 
 func jump() -> void:
 	velocity.y = jump_velocity
@@ -171,3 +176,6 @@ func _on_invincible_timer_timeout() -> void:
 	invincible = false
 	$HealthComponent.suppress_damage = false
 	self.collision_layer = base_collision_layer
+
+
+

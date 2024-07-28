@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://cfqv2jl4maxjp"
+path="res://.godot/imported/mc lich cast.aseprite-2c244e27c123c945d6677b7f1eb30f18.res"
+
+[deps]
+
+source_file="res://assets/playeranim/mc lich cast.aseprite"
+dest_files=["res://.godot/imported/mc lich cast.aseprite-2c244e27c123c945d6677b7f1eb30f18.res"]
+
+[params]
+

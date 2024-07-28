@@ -5,17 +5,20 @@ extends Node2D
 var entity: Node2D
 var actual_damage: float
 var hit_registered: bool = false  # Track if a hit has been registered during the current attack
+var is_attacking: bool = true
 
 func _ready() -> void:
 	$MeleeAttack.visible = false
-
+	$MeleeAttack/MeleeHitbox/CollisionShape2D.disabled = true
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("melee_attack"):
 		perform_melee_attack()
 
-func perform_melee_attack() -> void:
+func perform_melee_attack() -> void:	 
+	is_attacking = true
 	$"../AnimationPlayer".play("attack")
-	
+	$AttackDuration.start()
+	print("balls")
 	if sprite_2d.flip_h:
 		$MeleeAttack.flip_h = false
 		$MeleeAttack.position.x = sprite_2d.position.x - 28
@@ -25,6 +28,12 @@ func perform_melee_attack() -> void:
 	
 	hit_registered = false  # Reset hit registration at the start of a new attack
 
+func currently_attacking()-> bool: 
+	if is_attacking:
+		return true
+	else:
+		return false
+		
 func _on_melee_hitbox_area_entered(area: Node2D) -> void:
 	if not hit_registered and area.is_in_group("enemies"):
 		hit_registered = true
@@ -60,3 +69,6 @@ func deal_damage() -> void:
 			player.knockback(knockback_force, global_position.x, 0)
 
 	$"../LifeForce".add_life_force()
+
+func _on_attack_duration_timeout() -> void:
+	is_attacking = false

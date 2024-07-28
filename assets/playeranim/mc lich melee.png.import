@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b66jl3byole7n"
-path="res://.godot/imported/mc lich melee.png-a7c464e0fb193441fa46f8d55076aa4b.ctex"
+uid="uid://qk1f1a6e4cvd"
+path="res://.godot/imported/mc lich melee.png-50a2cefba24eb70d0e890464549e7636.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://mc lich melee.png"
-dest_files=["res://.godot/imported/mc lich melee.png-a7c464e0fb193441fa46f8d55076aa4b.ctex"]
+source_file="res://assets/playeranim/mc lich melee.png"
+dest_files=["res://.godot/imported/mc lich melee.png-50a2cefba24eb70d0e890464549e7636.ctex"]
 
 [params]
 

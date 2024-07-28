@@ -12,8 +12,6 @@ func _ready() -> void:
 	life_force.connect("life_force_changed", self.update_life_force)
 	$"../HealthComponent".connect("health_changed", self.update_health)
 	
-	
-	
 func update_life_force() -> void:
 	remaining_life_force = life_force.current_life_force
 	update_shader_fill(remaining_life_force / 100)
