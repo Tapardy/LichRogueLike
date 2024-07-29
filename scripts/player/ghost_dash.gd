@@ -5,7 +5,7 @@ func _ready() -> void:
 	ghosting()
 
 func set_property(tx_pos: Vector2, tx_scale: Vector2, _tx_texture: Texture2D, tx_flip_h: bool, frame_rect: Rect2) -> void:
-	var adjusted_position = tx_pos + Vector2(0, -7)  # Adjust the y-position by the required value
+	var adjusted_position: Vector2 = tx_pos + Vector2(0, -7)  # Adjust the y-position by the required value
 	position = adjusted_position
 	scale = tx_scale
 	self.flip_h = tx_flip_h

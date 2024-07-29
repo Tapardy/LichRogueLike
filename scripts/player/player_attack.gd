@@ -18,7 +18,7 @@ func _input(event: InputEvent) -> void:
 		print("Melee attack input detected")  # Debug print
 		perform_melee_attack()
 
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	if is_attacking:
 		update_attack_hitbox()
 
@@ -80,8 +80,6 @@ func deal_damage() -> void:
 	$"../LifeForce".add_life_force()
 
 func _on_attack_duration_timeout() -> void:
-	print("Attack duration timeout")  # Debug print
 	is_attacking = false
 	$MeleeAttack.visible = false
 	melee_hitbox.disabled = true  # Disable the collision shape
-	print("CollisionShape2D disabled and hidden")  # Debug print

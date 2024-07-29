@@ -81,11 +81,10 @@ func _physics_process(delta: float) -> void:
 	if not is_on_floor():
 		velocity.y += get_gravity(velocity) * delta
 
-	# Only switch to idle if not moving and not attacking or casting a spell
 	if direction == 0 and not $PlayerAttack.currently_attacking() and not $SpellCasting.get_cast_status():
 		$AnimationPlayer.play("idle")
 	elif direction != 0 and not $PlayerAttack.currently_attacking() and not $SpellCasting.get_cast_status():
-		$AnimationPlayer.play("running")  # Play the running animation when moving
+		$AnimationPlayer.play("running") 
 
 	if direction == 1:
 		sprite_2d.flip_h = false
@@ -159,8 +158,8 @@ func _on_dash_cooldown_timer_timeout() -> void:
 
 func add_ghost() -> void:
 	var ghost: Node2D = ghost_node.instantiate()
-	var frame_size = Vector2(sprite_2d.texture.get_width() / sprite_2d.hframes, sprite_2d.texture.get_height() / sprite_2d.vframes)
-	var frame_rect = Rect2(
+	var frame_size: Vector2 = Vector2(sprite_2d.texture.get_width() / sprite_2d.hframes, sprite_2d.texture.get_height() / sprite_2d.vframes)
+	var frame_rect: Rect2 = Rect2(
 		sprite_2d.region_rect.position + frame_size * Vector2(sprite_2d.frame % sprite_2d.hframes, sprite_2d.frame / sprite_2d.hframes),
 		frame_size
 	)
