@@ -1,0 +1,14 @@
+[remap]
+
+importer="aseprite_wizard.plugin.noop"
+type="PackedDataContainer"
+uid="uid://ncg1p1xgabsf"
+path="res://.godot/imported/mc lich running.aseprite-594b6eb11eba0fff383a73dd5dda7f0a.res"
+
+[deps]
+
+source_file="res://assets/playeranim/mc lich running.aseprite"
+dest_files=["res://.godot/imported/mc lich running.aseprite-594b6eb11eba0fff383a73dd5dda7f0a.res"]
+
+[params]
+

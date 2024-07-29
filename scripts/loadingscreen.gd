@@ -12,7 +12,7 @@ var sprites: Array[Sprite2D] = []
 var time_elapsed: float = 0.0
 var total_time: float = 4.0
 var progress_stages: Array[float] = [0.0, 0.1, 0.25, 0.45, 0.7, 1.0]
-var stage_durations: Array[float] = [0.5, 0.5, 1.0, 1.0, 1.0]
+var stage_durations: Array[float] = [0.5, 0.5, 0.5, 1.0, 1.5]
 var has_printed: bool = false
 
 func _ready() -> void:

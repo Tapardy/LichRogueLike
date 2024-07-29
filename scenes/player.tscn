@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://bnih347l0un2n"]
+[gd_scene load_steps=42 format=3 uid="uid://bnih347l0un2n"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_wtr5s"]
 [ext_resource type="Shader" path="res://shaders/realm_shift.gdshader" id="2_8ax0c"]
@@ -14,6 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://dykwlxcg2fb4v" path="res://mc lich IDLE.png" id="7_pbigk"]
 [ext_resource type="Texture2D" uid="uid://dmbppujqk0mln" path="res://assets/playeranim/mc lich cast.png" id="8_wf2ym"]
 [ext_resource type="FontFile" uid="uid://gn3ut7dc70bk" path="res://assets/m3x6.ttf" id="8_y631v"]
+[ext_resource type="Texture2D" uid="uid://c4txkxfegcowp" path="res://assets/playeranim/mc lich running.png" id="9_dkemh"]
 [ext_resource type="Script" path="res://scripts/GUI.gd" id="9_isori"]
 [ext_resource type="Script" path="res://scripts/player/spell_casting.gd" id="9_rsxl2"]
 [ext_resource type="Script" path="res://Inventory/Scripts/inventory_slot.gd" id="10_18vfk"]
@@ -345,6 +346,86 @@ tracks/7/keys = {
 "values": [true, false]
 }
 
+[sub_resource type="Animation" id="Animation_ixgal"]
+resource_name = "casting"
+length = 0.53
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:hframes")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:texture")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("8_wf2ym")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D:vframes")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D:frame")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11]
+}
+
+[sub_resource type="Animation" id="Animation_tep5e"]
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+
 [sub_resource type="Animation" id="Animation_qcx5u"]
 resource_name = "idle"
 loop_mode = 1
@@ -412,33 +493,32 @@ tracks/0/keys = {
 "values": [ExtResource("4_lmaep")]
 }
 
-[sub_resource type="Animation" id="Animation_ixgal"]
-resource_name = "casting"
-length = 0.53
-step = 0.05
+[sub_resource type="Animation" id="Animation_1sv5h"]
+resource_name = "running"
+length = 0.915
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:hframes")
+tracks/0/path = NodePath("Sprite2D:texture")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [4]
+"values": [ExtResource("9_dkemh")]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:texture")
+tracks/1/path = NodePath("Sprite2D:hframes")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [ExtResource("8_wf2ym")]
+"values": [4]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -459,38 +539,10 @@ tracks/3/path = NodePath("Sprite2D:frame")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.1, 0.15, 0.2, 0.25, 0.3, 0.35, 0.4, 0.45, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 11]
-}
-
-[sub_resource type="Animation" id="Animation_tep5e"]
-length = 1.2
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:visible")
-tracks/0/interp = 1
-tracks/0/loop_wrap = false
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = false
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1, 1.1),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11]
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_odown"]
@@ -500,7 +552,8 @@ _data = {
 "casting": SubResource("Animation_ixgal"),
 "default": SubResource("Animation_tep5e"),
 "idle": SubResource("Animation_qcx5u"),
-"jump": SubResource("Animation_vgql5")
+"jump": SubResource("Animation_vgql5"),
+"running": SubResource("Animation_1sv5h")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gsixq"]
@@ -578,7 +631,6 @@ show_behind_parent = true
 texture_filter = 1
 position = Vector2(0, -8)
 texture = ExtResource("4_lmaep")
-flip_h = true
 hframes = 4
 vframes = 4
 metadata/_aseprite_wizard_config_ = {
@@ -591,7 +643,7 @@ metadata/_aseprite_wizard_config_ = {
 "only_visible": false,
 "player": "AnimationPlayer",
 "slice": "",
-"source": "res://assets/playeranim/mc lich cast.aseprite"
+"source": "res://assets/playeranim/mc lich running.aseprite"
 }
 metadata/_aseprite_wizard_interface_config_ = {
 "animation_section": true,
@@ -599,7 +651,7 @@ metadata/_aseprite_wizard_interface_config_ = {
 "output_section": true,
 "slice_section": true
 }
-metadata/_aseprite_wizard_source_file_hash_ = "a10573386f0e18359ad45280e8fdc526"
+metadata/_aseprite_wizard_source_file_hash_ = "8b1c4535d180c07f1b8b7fcc70e1e54b"
 
 [node name="GhostTimer" type="Timer" parent="Sprite2D"]
 wait_time = 0.05

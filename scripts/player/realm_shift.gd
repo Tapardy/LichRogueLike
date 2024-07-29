@@ -36,6 +36,7 @@ func set_parallax(new_parallax_light: ParallaxBackground, new_parallax_dark: Par
 	parallax_light = new_parallax_light
 	parallax_dark = new_parallax_dark
 	update_tilemaps()
+	
 func handle_realm_shift() -> void:
 	if can_shift and can_shift_realm():
 		if is_in_light:
@@ -75,7 +76,7 @@ func update_tilemaps() -> void:
 	else:
 		tile_map_light.visible = true
 		parallax_light.visible = true
-		#parallax_dark.visible = false
+		parallax_dark.visible = false
 		tile_map_dark.visible = false
 		tile_map_light.tile_set.set_physics_layer_collision_layer(0, 1)
 		tile_map_dark.tile_set.set_physics_layer_collision_layer(0, 2)

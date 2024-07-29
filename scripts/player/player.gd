@@ -84,7 +84,10 @@ func _physics_process(delta: float) -> void:
 	# Only switch to idle if not moving and not attacking or casting a spell
 	if direction == 0 and not $PlayerAttack.currently_attacking() and not $SpellCasting.get_cast_status():
 		$AnimationPlayer.play("idle")
-	elif direction == 1:
+	elif direction != 0 and not $PlayerAttack.currently_attacking() and not $SpellCasting.get_cast_status():
+		$AnimationPlayer.play("running")  # Play the running animation when moving
+
+	if direction == 1:
 		sprite_2d.flip_h = false
 	elif direction == -1:
 		sprite_2d.flip_h = true
