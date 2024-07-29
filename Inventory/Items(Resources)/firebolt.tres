@@ -11,7 +11,7 @@ region = Rect2(0, 0, 32, 32)
 script = ExtResource("1_vjjrt")
 type = 0
 name = "Fire Bolt"
-description = "Transmute a strong ball of fire
+description = "Transmute a ball of fire
 
 Self damage: 20%"
 texture = SubResource("AtlasTexture_ot5et")

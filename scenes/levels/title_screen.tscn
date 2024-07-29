@@ -1,0 +1,25 @@
+[gd_scene load_steps=3 format=3 uid="uid://jpubhh25frtw"]
+
+[ext_resource type="Texture2D" uid="uid://dpw7xm1dufirq" path="res://assets/concept arts/Cover_art_Lichborn.png" id="1_1y6sh"]
+[ext_resource type="Script" path="res://scripts/title_screen.gd" id="1_t76k3"]
+
+[node name="Title screen" type="Node2D"]
+script = ExtResource("1_t76k3")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="CoverArtLichborn" type="Sprite2D" parent="CanvasLayer"]
+position = Vector2(322, 111)
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("1_1y6sh")
+
+[node name="Button" type="Button" parent="CanvasLayer"]
+offset_left = 224.0
+offset_top = 256.0
+offset_right = 416.0
+offset_bottom = 304.0
+theme_override_font_sizes/font_size = 32
+text = "Play
+"
+
+[connection signal="pressed" from="CanvasLayer/Button" to="." method="_on_button_pressed"]

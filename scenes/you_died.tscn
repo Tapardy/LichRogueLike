@@ -1,0 +1,41 @@
+[gd_scene load_steps=2 format=3 uid="uid://u4te2uspwbyv"]
+
+[ext_resource type="Script" path="res://scripts/you_died.gd" id="1_2a2ik"]
+
+[node name="You died" type="Control"]
+process_mode = 2
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2a2ik")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Panel" type="Panel" parent="CanvasLayer"]
+offset_right = 640.0
+offset_bottom = 384.0
+
+[node name="Button2" type="Button" parent="CanvasLayer/Panel"]
+layout_mode = 0
+offset_left = 256.0
+offset_top = 192.0
+offset_right = 384.0
+offset_bottom = 216.0
+text = "Retry
+"
+
+[node name="Label" type="Label" parent="CanvasLayer/Panel"]
+modulate = Color(1, 0, 0, 1)
+layout_mode = 0
+offset_left = 256.0
+offset_top = 128.0
+offset_right = 384.0
+offset_bottom = 144.0
+text = "You Died"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="CanvasLayer/Panel/Button2" to="." method="_on_button_2_pressed"]

@@ -4056,7 +4056,7 @@ offset_top = -36.0
 offset_right = 652.0
 offset_bottom = -1.0
 theme_override_font_sizes/font_size = 8
-text = "Press H to heal
+text = "Hold H to heal
 using life force"
 metadata/_edit_use_anchors_ = true
 
@@ -4356,3 +4356,4 @@ scale = Vector2(1.2, 1.2)
 [editable path="Light2"]
 [editable path="FireBoltCollectible"]
 [editable path="Player"]
+[editable path="Player/You died"]

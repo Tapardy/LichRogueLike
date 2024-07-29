@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://bnih347l0un2n"]
+[gd_scene load_steps=44 format=3 uid="uid://bnih347l0un2n"]
 
 [ext_resource type="Script" path="res://scripts/player/player.gd" id="1_wtr5s"]
 [ext_resource type="Shader" path="res://shaders/realm_shift.gdshader" id="2_8ax0c"]
@@ -23,6 +23,7 @@
 [ext_resource type="Script" path="res://scripts/player/player_healthbar.gd" id="16_0dem2"]
 [ext_resource type="Shader" path="res://shaders/potionliquid.gdshader" id="18_6en4c"]
 [ext_resource type="Shader" path="res://shaders/healthbar.gdshader" id="18_new8t"]
+[ext_resource type="PackedScene" uid="uid://u4te2uspwbyv" path="res://scenes/you_died.tscn" id="24_gt3jr"]
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_n7ayb"]
 
@@ -559,6 +560,11 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gsixq"]
 size = Vector2(25, 17)
 
+[sub_resource type="Gradient" id="Gradient_qk64v"]
+interpolation_color_space = 1
+offsets = PackedFloat32Array(0, 0.930233, 1)
+colors = PackedColorArray(0, 0, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1)
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yvt3a"]
 shader = ExtResource("18_6en4c")
 shader_parameter/backFillColour = Color(0.960784, 0.027451, 0.027451, 1)
@@ -696,6 +702,24 @@ one_shot = true
 
 [node name="LifeForce" type="Node2D" parent="."]
 script = ExtResource("5_ckido")
+
+[node name="HealTimer" type="Timer" parent="LifeForce"]
+wait_time = 1.5
+one_shot = true
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="LifeForce"]
+z_index = 7
+amount = 30
+lifetime = 0.75
+emission_shape = 1
+emission_sphere_radius = 18.55
+direction = Vector2(1, 1)
+spread = 180.0
+gravity = Vector2(0, -100)
+radial_accel_min = 10.0
+radial_accel_max = 10.0
+color = Color(0.933326, 4.9334e-06, 1.92523e-07, 1)
+color_ramp = SubResource("Gradient_qk64v")
 
 [node name="HealthComponent" parent="." instance=ExtResource("5_j5mnj")]
 max_health = 100
@@ -936,6 +960,11 @@ offset_bottom = 70.0
 scale = Vector2(0.6, 0.6)
 show_percentage = false
 
+[node name="You died" parent="." instance=ExtResource("24_gt3jr")]
+
+[node name="CanvasLayer" parent="You died" index="0"]
+visible = false
+
 [connection signal="timeout" from="DashCooldownTimer" to="." method="_on_dash_cooldown_timer_timeout"]
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="InvincibleTimer" to="." method="_on_invincible_timer_timeout"]
@@ -946,6 +975,9 @@ show_percentage = false
 [connection signal="timeout" from="PlayerAttack/AttackDuration" to="." method="_on_attack_duration_timeout"]
 [connection signal="timeout" from="PlayerAttack/AttackDuration" to="PlayerAttack" method="_on_attack_duration_timeout"]
 [connection signal="timeout" from="PlayerAttack/KnockbackTimer" to="." method="_on_knockback_timer_timeout"]
+[connection signal="timeout" from="LifeForce/HealTimer" to="LifeForce" method="_on_heal_timer_timeout"]
 [connection signal="timeout" from="RealmShift/Timer" to="RealmShift" method="_on_timer_timeout"]
 [connection signal="timeout" from="RealmShift/ShadowStrengthTimer" to="RealmShift" method="_on_shadow_strength_timer_timeout"]
 [connection signal="timeout" from="SpellCasting/castTimer" to="SpellCasting" method="_on_cast_timer_timeout"]
+
+[editable path="You died"]

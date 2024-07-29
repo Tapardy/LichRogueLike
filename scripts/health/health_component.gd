@@ -23,7 +23,7 @@ func damage(attack: Attack) -> void:
 			if get_parent().is_in_group("enemies"):
 				get_parent().die()
 			else:
-				get_parent().queue_free()
+				get_parent().die()
 
 func heal(amount: int) -> void:
 	health += amount

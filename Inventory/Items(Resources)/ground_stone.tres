@@ -11,7 +11,7 @@ region = Rect2(224, 0, 32, 32)
 script = ExtResource("1_ep7n5")
 type = 0
 name = "Stone Spikes"
-description = "Summon mighty stone spikes out of the ground
+description = "Transmute stone spikes
 
 Self damage: 20%"
 texture = SubResource("AtlasTexture_nhrmo")

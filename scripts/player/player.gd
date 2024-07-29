@@ -57,7 +57,7 @@ func _physics_process(delta: float) -> void:
 
 	var was_on_floor: bool = is_on_floor()
 
-	if not dashing:
+	if not dashing and can_move:  # Ensure can_move is checked
 		direction = Input.get_axis("move_left", "move_right")
 		is_moving = direction != 0  # Update moving flag
 		if Input.is_action_just_pressed("jump") and (is_on_floor() or not coyote_timer.is_stopped()):
@@ -68,7 +68,7 @@ func _physics_process(delta: float) -> void:
 				get_tree().create_timer(jump_buffer_time).timeout.connect(on_jump_buffer_timeout)
 				
 	# Update dash logic to check can_dash flag
-	if not dashing and Input.is_action_just_pressed("dash") and can_dash and direction != 0:
+	if not dashing and Input.is_action_just_pressed("dash") and can_dash and direction != 0 and can_move:
 		ghost_timer.start()
 		dashing = true
 		speed = 500
@@ -117,12 +117,12 @@ func _input(event: InputEvent) -> void:
 		$RealmShift.handle_realm_shift()
 	if Input.is_action_just_released("jump") and velocity.y < 0:
 		velocity.y = velocity.y * 0.2  # Prevent extra height gain
-		
 
 func jump() -> void:
 	velocity.y = jump_velocity
 	can_jump = false 
 	is_jumping = true  # Update jumping flag
+
 func change_realm(value: int) -> void:
 	$RealmShift.change_realm(value)
 
@@ -143,6 +143,10 @@ func knockback(force: float, _x_pos: float, up_force: float) -> void:
 	dash_timer.stop()  # Stop dash timer when knockback occurs
 	# Ensure to stop dashing and reset dash parameters
 	_on_dash_timer_timeout()
+	$LifeForce.is_healing = false
+	$LifeForce/HealTimer.stop()
+	$LifeForce/CPUParticles2D.emitting = false
+	can_move = true
 
 func _on_knockback_timer_timeout() -> void:
 	velocity.x = direction * (speed * (RUN_MULTIPLIER if direction != 0 else 1.0))
@@ -166,7 +170,6 @@ func add_ghost() -> void:
 	ghost.set_property(position, scale, sprite_2d.texture, sprite_2d.flip_h, frame_rect)
 	get_tree().current_scene.add_child(ghost)
 
-
 func give_iframes() -> void:
 	self.collision_layer = 0
 	invincible = true
@@ -183,3 +186,6 @@ func _on_invincible_timer_timeout() -> void:
 	invincible = false
 	$HealthComponent.suppress_damage = false
 	self.collision_layer = base_collision_layer
+
+func die() -> void:
+	$"You died".player_died()
