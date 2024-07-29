@@ -4021,9 +4021,9 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Label5" type="Label" parent="."]
 offset_left = 305.0
-offset_top = -106.0
+offset_top = -36.0
 offset_right = 449.0
-offset_bottom = -71.0
+offset_bottom = -1.0
 theme_override_font_sizes/font_size = 8
 text = "J to melee attack
 Siphons life force"
@@ -4031,9 +4031,9 @@ metadata/_edit_use_anchors_ = true
 
 [node name="Label6" type="Label" parent="."]
 offset_left = 757.0
-offset_top = -106.0
+offset_top = -36.0
 offset_right = 909.0
-offset_bottom = -52.0
+offset_bottom = 18.0
 theme_override_font_sizes/font_size = 8
 text = "I to open inventory
 K/L to cast spells
@@ -4041,19 +4041,19 @@ Consumes Life force"
 metadata/_edit_use_anchors_ = true
 
 [node name="Label7" type="Label" parent="."]
-offset_left = -76.0
-offset_top = -106.0
-offset_right = 76.0
-offset_bottom = -52.0
+offset_left = -19.0
+offset_top = -36.0
+offset_right = 133.0
+offset_bottom = 18.0
 theme_override_font_sizes/font_size = 8
 text = "A and D to move"
 metadata/_edit_use_anchors_ = true
 
 [node name="Label4" type="Label" parent="."]
 offset_left = 524.0
-offset_top = -106.0
+offset_top = -36.0
 offset_right = 652.0
-offset_bottom = -71.0
+offset_bottom = -1.0
 theme_override_font_sizes/font_size = 8
 text = "Press H to heal
 using life force"

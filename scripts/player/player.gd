@@ -159,8 +159,14 @@ func _on_dash_cooldown_timer_timeout() -> void:
 
 func add_ghost() -> void:
 	var ghost: Node2D = ghost_node.instantiate()
-	ghost.set_property(position, $Sprite2D.scale, $Sprite2D.texture, $Sprite2D.flip_h)
+	var frame_size = Vector2(sprite_2d.texture.get_width() / sprite_2d.hframes, sprite_2d.texture.get_height() / sprite_2d.vframes)
+	var frame_rect = Rect2(
+		sprite_2d.region_rect.position + frame_size * Vector2(sprite_2d.frame % sprite_2d.hframes, sprite_2d.frame / sprite_2d.hframes),
+		frame_size
+	)
+	ghost.set_property(position, scale, sprite_2d.texture, sprite_2d.flip_h, frame_rect)
 	get_tree().current_scene.add_child(ghost)
+
 
 func give_iframes() -> void:
 	self.collision_layer = 0
