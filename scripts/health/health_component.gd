@@ -20,10 +20,7 @@ func damage(attack: Attack) -> void:
 		health -= attack.attack_damage
 		emit_signal("health_changed")
 		if health <= 0:
-			if get_parent().is_in_group("enemies"):
-				get_parent().die()
-			else:
-				get_parent().die()
+			get_parent().die()
 
 func heal(amount: int) -> void:
 	health += amount

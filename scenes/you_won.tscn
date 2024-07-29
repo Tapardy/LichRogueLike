@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=3 uid="uid://dcnert7t4q4vt"]
+
+[ext_resource type="PackedScene" uid="uid://u4te2uspwbyv" path="res://scenes/you_died.tscn" id="1_3jyii"]
+[ext_resource type="Script" path="res://scripts/you_won.gd" id="2_v0eqd"]
+
+[node name="You won" instance=ExtResource("1_3jyii")]
+script = ExtResource("2_v0eqd")
+
+[node name="Button2" parent="CanvasLayer/Panel" index="0"]
+text = "Replay
+"
+
+[node name="Label" parent="CanvasLayer/Panel" index="1"]
+modulate = Color(0, 1, 0, 1)
+offset_left = 224.0
+offset_right = 416.0
+text = "You Win!!!"

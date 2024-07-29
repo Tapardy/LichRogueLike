@@ -33,6 +33,8 @@ func set_tile_maps(light: TileMap, dark: TileMap, outer_parallax_light: Parallax
 	print(light, dark)
 
 func set_parallax(new_parallax_light: ParallaxBackground, new_parallax_dark: ParallaxBackground) -> void:
+	parallax_light.visible = false
+	parallax_dark.visible = false
 	parallax_light = new_parallax_light
 	parallax_dark = new_parallax_dark
 	update_tilemaps()

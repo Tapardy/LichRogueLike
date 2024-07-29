@@ -3,6 +3,8 @@ extends Node2D
 var player_exited: bool = false
 var attacked: bool = false
 var is_player_actually_gone: bool = false
+@export var poison_damage: float = 20
+@export var active: bool = true
 enum LoopMode {
 	LOOP_NONE,
 	LOOP_LINEAR,
@@ -12,7 +14,7 @@ func _ready() -> void:
 	$GPUParticles2D.emitting = false
 	
 func _on_area_2d_body_entered(body: Node2D) -> void:
-	if body.is_in_group("player"):
+	if body.is_in_group("player") and active:
 		player_exited = false
 		# Start looping animation
 		$AnimationPlayer.play("Spew")
@@ -31,7 +33,7 @@ func _on_poison_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player") and attacked == false:
 		attacked = true
 		var attack := Attack.new()
-		attack.attack_damage = 20
+		attack.attack_damage = poison_damage
 		body.get_node("HealthComponent").damage(attack)
 		$PoisonDelay.start()
 

@@ -16,5 +16,5 @@ func _process(delta: float) -> void:
 	$Label.text = str($HealthComponent.health)
 
 func die() -> void:
-	queue_free()
+	$"You won".player_won()
 

@@ -33,7 +33,9 @@ func _on_attack_cooldown_timeout() -> void:
 func _on_player_detection_body_entered(body: Node2D) -> void:
 	print("kanker")
 	if body.is_in_group("player"):
+		var camera: Camera2D = body.get_node("Camera2D")
 		if initial_trigger:
+			camera.position.y -= 50
 			initial_trigger = false
 			attack_cooldown_timer.start()  # Start the timer on the first detection
 			collision_shape_2d.set_deferred("disabled", true)  # Disable the hitbox

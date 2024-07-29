@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://bdgxbchnxbixg"]
+[gd_scene load_steps=21 format=3 uid="uid://bdgxbchnxbixg"]
 
 [ext_resource type="Texture2D" uid="uid://bcmum6s6s8kbu" path="res://assets/Gorthulon/Gorth attacks.png" id="1_jkkoo"]
 [ext_resource type="Script" path="res://scripts/gorthulon/gorthulon.gd" id="1_xxsun"]
@@ -9,6 +9,10 @@
 [ext_resource type="Script" path="res://scripts/gorthulon/LeftSweep.gd" id="5_a8o1j"]
 [ext_resource type="Script" path="res://scripts/gorthulon/RightSweep.gd" id="7_nowpy"]
 [ext_resource type="Script" path="res://scripts/gorthulon/Tongue.gd" id="8_alq3x"]
+[ext_resource type="PackedScene" uid="uid://dcnert7t4q4vt" path="res://scenes/you_won.tscn" id="10_gnn51"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_pv1hu"]
+light_mode = 1
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_val7k"]
 size = Vector2(195, 58)
@@ -417,7 +421,7 @@ radius = 78.0256
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s5crr"]
 size = Vector2(445, 246)
 
-[node name="Gorthulon" type="CharacterBody2D" groups=["enemies"]]
+[node name="Gorthulon" type="CharacterBody2D" groups=["boss", "enemies"]]
 z_index = -1
 collision_layer = 2
 collision_mask = 2
@@ -430,6 +434,7 @@ max_health = 750
 [node name="Hands" type="Sprite2D" parent="."]
 z_index = 15
 texture_filter = 1
+material = SubResource("CanvasItemMaterial_pv1hu")
 texture = ExtResource("2_ub28h")
 hframes = 3
 vframes = 3
@@ -452,6 +457,7 @@ metadata/_aseprite_wizard_source_file_hash_ = "55090f2840041ff19230670d93ad7c17"
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
+material = SubResource("CanvasItemMaterial_pv1hu")
 texture = ExtResource("1_jkkoo")
 hframes = 8
 vframes = 7
@@ -534,9 +540,16 @@ script = ExtResource("8_alq3x")
 wait_time = 3.0
 one_shot = true
 
+[node name="You won" parent="." instance=ExtResource("10_gnn51")]
+
+[node name="CanvasLayer" parent="You won" index="0"]
+visible = false
+
 [connection signal="body_entered" from="Sprite2D/Area2D" to="." method="_on_area_2d_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer" to="FiniteStateMachine/LeftSweep" method="_on_animation_player_animation_finished"]
 [connection signal="animation_finished" from="AnimationPlayer" to="FiniteStateMachine/RightSweep" method="_on_animation_player_animation_finished"]
 [connection signal="animation_finished" from="AnimationPlayer" to="FiniteStateMachine/Tongue" method="_on_animation_player_animation_finished"]
 [connection signal="body_entered" from="PlayerDetection" to="FiniteStateMachine/Idle" method="_on_player_detection_body_entered"]
 [connection signal="timeout" from="AttackCooldown" to="FiniteStateMachine/Idle" method="_on_attack_cooldown_timeout"]
+
+[editable path="You won"]
