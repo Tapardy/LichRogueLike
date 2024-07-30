@@ -1,14 +1,14 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://c4j3ccjydelwv"]
 
 [ext_resource type="Script" path="res://Inventory/Items(Resources)/item_data.gd" id="1_vb8c1"]
-[ext_resource type="Texture2D" uid="uid://c75e7nwtrmuql" path="res://assets/bakground shiit.png" id="2_4d8xv"]
+[ext_resource type="Texture2D" uid="uid://bnwbk0uaq2qi1" path="res://assets/subspells/bone.png" id="2_args2"]
 
 [resource]
 script = ExtResource("1_vb8c1")
 type = 1
-name = "Damage Increase"
+name = "Bone"
 description = "Spells do 150% damage
 
 Self damage: 15%"
-texture = ExtResource("2_4d8xv")
+texture = ExtResource("2_args2")
 sub_spell_type = 0

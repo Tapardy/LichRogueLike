@@ -28,7 +28,7 @@ func _physics_process(_delta: float) -> void:
 		heal_timer.stop()
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("heal") and not is_healing and not $"../HealthComponent".is_max_hp() and not get_parent().is_moving:
+	if event.is_action_pressed("heal") and not is_healing and not $"../HealthComponent".is_max_hp() and not get_parent().is_moving and not get_parent().is_jumping:
 		is_healing = true
 		heal_timer.start()
 		$CPUParticles2D.emitting = true
@@ -45,14 +45,10 @@ func add_life_force() -> void:
 
 func heal() -> void:
 	if not $"../HealthComponent".is_max_hp():
-		print("life force before heal ", current_life_force)
 		current_life_force = clamp(current_life_force - heal_threshold, 0, max_life_force)
-		print("just healed, current life force ", current_life_force)
 		$"../HealthComponent".heal(heal_amount)
 		emit_signal("life_force_changed")
-	else:
-		print("max hp")
-
+		
 # Returns the remaining life force after the initial value
 func cast_spell_with_life_force(cast_cost: int) -> int:
 	var remaining_life_force: float = current_life_force - cast_cost
@@ -73,5 +69,3 @@ func _on_heal_timer_timeout() -> void:
 		can_move = true
 		if current_life_force >= heal_threshold:
 			heal()
-		else:
-			print("Not enough life force to heal")

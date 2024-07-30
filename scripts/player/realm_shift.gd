@@ -20,7 +20,6 @@ var is_in_light: bool = false  # Variable to track if the player is in the light
 
 func _ready() -> void:
 	player = get_parent()
-	print(player)
 	
 	# Ensure the ShadowStrengthTimer is properly set up
 	$ShadowStrengthTimer.wait_time = 0.1  # Adjust this value as needed for your update frequency
@@ -33,7 +32,6 @@ func set_tile_maps(light: TileMap, dark: TileMap, outer_parallax_light: Parallax
 	tile_map_dark = dark
 	parallax_light = outer_parallax_light
 	parallax_dark = outer_parallax_dark
-	print(light, dark)
 
 func set_parallax(new_parallax_light: ParallaxBackground, new_parallax_dark: ParallaxBackground) -> void:
 	parallax_light.visible = false
@@ -61,7 +59,6 @@ func handle_realm_shift() -> void:
 			start_light_realm_strength_decrease()
 
 func change_realm(value: bool) -> void:
-	print(value)
 	is_in_shadowrealm = value
 	update_tilemaps()
 
@@ -94,7 +91,6 @@ func can_shift_realm() -> bool:
 		
 	var target_tile: Vector2 = tile_map.local_to_map(player.global_position)
 	var tile_data: TileData = tile_map.get_cell_tile_data(0, target_tile)
-	print(tile_data)
 	if !tile_data:
 		return true
 	if tile_data.get_custom_data("solid") == true:

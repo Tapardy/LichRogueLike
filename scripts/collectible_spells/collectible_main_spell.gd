@@ -13,5 +13,3 @@ func _on_interactable_area_body_entered(body: Node2D) -> void:
 		if inventory_manager.can_add_item_to_main(item.resource_path):
 			inventory_manager.add_item_to_main(item.resource_path)
 			queue_free()  # Remove the item from the scene
-		else:
-			print("Inventory is full. Cannot add item.")

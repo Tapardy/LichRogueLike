@@ -20,7 +20,6 @@ func transition() -> void:
 
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
-	print(anim_name)
 	has_transitioned = true
 	transition()  # Call transition to change the state
 		# Optionally disconnect the signal here to avoid future triggers

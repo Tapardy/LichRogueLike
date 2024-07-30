@@ -1,14 +1,14 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://bc2ok3uumu0iy"]
 
 [ext_resource type="Script" path="res://Inventory/Items(Resources)/item_data.gd" id="1_tsssf"]
-[ext_resource type="Texture2D" uid="uid://dbfewev670jy7" path="res://assets/Foozle_2DE0001_Pixel_Magic_Effects/Explosion/003.png" id="2_suvrj"]
+[ext_resource type="Texture2D" uid="uid://b1eb0gqqf6d06" path="res://assets/subspells/mushroom.png" id="2_0lmu7"]
 
 [resource]
 script = ExtResource("1_tsssf")
 type = 1
-name = "Spell Duplication"
+name = "Mushroom"
 description = "Cast an extra spell
 
 Self damage: 15%"
-texture = ExtResource("2_suvrj")
+texture = ExtResource("2_0lmu7")
 sub_spell_type = 2

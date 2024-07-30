@@ -12,7 +12,6 @@ func set_property(tx_pos: Vector2, tx_scale: Vector2, _tx_texture: Texture2D, tx
 	texture = _tx_texture
 	region_enabled = true
 	region_rect = frame_rect
-	print("Set Frame Rect: ", region_rect)  # Debug print
 
 func ghosting() -> void:
 	var tween_fade: Tween = get_tree().create_tween()

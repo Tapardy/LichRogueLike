@@ -31,14 +31,12 @@ func _ready() -> void:
 
 func load_ability(name: String) -> void:
 	if casting:
-		print("Already casting. Please wait until casting is finished.")
 		reset_spell_modifications()
 		return
 	if is_casting:
 		reset_spell_modifications()
 		return
 	if cooldown_timer.is_stopped() == false:  # Check if cooldown timer is active
-		print("Ability is on cooldown. Please wait.")
 		reset_spell_modifications()
 		return
 		
@@ -52,7 +50,6 @@ func load_ability(name: String) -> void:
 
 	casting = true  # Set casting flag to true
 
-	print("cast_amount variable: ", cast_amount)
 	var scene: PackedScene = load("res://scenes/abilities/" + name + "/" + name + ".tscn")
 	$castTimer.start()
 	# Get the player's parent node (which is the root node or any sibling container)
@@ -119,10 +116,6 @@ func handle_sub1_type(data: ItemData) -> void:
 		ItemData.SubSpellType.NONE:
 			sub_spell_type_name = "NONE"
 			
-	if sub_spell_type_name != "NONE":
-		print("AND THE AMAZING SUBSPELLTYPE IS %s" % sub_spell_type_name)
-	else:
-		print("SubSpellType is NONE or not set")
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("spell_slot1"):

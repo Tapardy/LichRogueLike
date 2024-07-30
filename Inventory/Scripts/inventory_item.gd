@@ -16,7 +16,6 @@ func _ready() -> void:
 
 func _get_drag_data(at_position: Vector2) -> Variant:
 	dragged_from_hotbar = get_parent().is_hotbar
-	print(dragged_from_hotbar)
 	set_drag_preview(make_drag_preview(at_position))
 	return self
 

@@ -1,7 +1,6 @@
 extends States
 
 @onready var collision_shape_2d: CollisionShape2D = $"../../PlayerDetection/CollisionShape2D"
-@onready var hp: TextureProgressBar = $"../../HP"
 @onready var attack_cooldown_timer: Timer = $"../../AttackCooldown"
 
 var states = ["LeftSweep", "RightSweep", "Tongue"]
@@ -31,10 +30,11 @@ func _on_attack_cooldown_timeout() -> void:
 	transition()  # Trigger transition after cooldown
 
 func _on_player_detection_body_entered(body: Node2D) -> void:
-	print("kanker")
 	if body.is_in_group("player"):
 		var camera: Camera2D = body.get_node("Camera2D")
 		if initial_trigger:
+			$"../../BossHP".visible = true
+			
 			camera.position.y -= 50
 			initial_trigger = false
 			attack_cooldown_timer.start()  # Start the timer on the first detection

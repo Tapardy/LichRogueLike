@@ -25,7 +25,6 @@ func update_shader_fill(value: float) -> void:
 	var shader_material := life_force_container.material
 	if shader_material is ShaderMaterial:
 		shader_material.set_shader_parameter("fill_per", value)
-		print(shader_material.get_shader_parameter("fill_per"))
 
 func update_health_shader(value: float) -> void:
 	var shader_material:= healthbar.material

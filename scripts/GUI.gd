@@ -51,7 +51,6 @@ func _ready() -> void:
 func _process(_delta: float) -> void:
 	if Input.is_action_just_pressed("open_inventory"):
 		$"../Healthbars".visible = ! $"../Healthbars".visible
-		print("triggered inventory")
 		self.visible = !self.visible
 
 # Public function to add an item to the main inventory
@@ -90,9 +89,6 @@ func remove_item(item: InventoryItem) -> void:
 		remove_item_from_main(item)
 	elif item.data.type == ItemData.Type.SUB1:
 		remove_item_from_sub(item)
-	else:
-		print("Error: Item type not recognized.")
-
 # Update inventory display
 func update_inventory() -> void:
 	# Clear existing items in primary inventory slots

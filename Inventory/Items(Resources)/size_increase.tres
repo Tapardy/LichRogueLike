@@ -1,14 +1,14 @@
 [gd_resource type="Resource" script_class="ItemData" load_steps=3 format=3 uid="uid://bpjngxpdldcbc"]
 
 [ext_resource type="Script" path="res://Inventory/Items(Resources)/item_data.gd" id="1_8ndxc"]
-[ext_resource type="Texture2D" uid="uid://do2ini21tye6x" path="res://assets/Foozle_2DE0001_Pixel_Magic_Effects/Wind/002.png" id="2_syf5k"]
+[ext_resource type="Texture2D" uid="uid://c53klwp3rfnhm" path="res://assets/subspells/rock.png" id="2_stgee"]
 
 [resource]
 script = ExtResource("1_8ndxc")
 type = 1
-name = "Size Increase"
-description = "Doubles size
+name = "Rock"
+description = "Doubles spell size
  
 Self damage: 10%"
-texture = ExtResource("2_syf5k")
+texture = ExtResource("2_stgee")
 sub_spell_type = 1

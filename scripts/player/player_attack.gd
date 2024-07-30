@@ -15,7 +15,6 @@ func _ready() -> void:
 
 func _input(event: InputEvent) -> void:
 	if event.is_action_pressed("melee_attack"):
-		print("Melee attack input detected")  # Debug print
 		perform_melee_attack()
 
 func _physics_process(_delta: float) -> void:
@@ -59,13 +58,9 @@ func deal_damage() -> void:
 	var attack := Attack.new()
 	if $"../RealmShift".is_in_shadowrealm:
 		actual_damage = melee_damage * $"../RealmShift".shadow_strength
-		print($"../RealmShift".shadow_strength)
-		print("shadow: ", melee_damage)
 	else:
 		actual_damage = melee_damage * $"../RealmShift".light_strength
-		print("light: ", melee_damage)
 	attack.attack_damage = actual_damage
-	print(actual_damage)
 	entity.get_node("HealthComponent").damage(attack)
 	
 	if entity.has_method("knockback"):

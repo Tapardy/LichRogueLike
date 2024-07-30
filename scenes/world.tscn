@@ -4549,7 +4549,7 @@ position = Vector2(5763, 808)
 position = Vector2(5469, 808)
 
 [node name="Player" parent="." instance=ExtResource("2_qy6pw")]
-position = Vector2(-15, 64)
+position = Vector2(7712, 480)
 
 [node name="Gorthulon" parent="." instance=ExtResource("34_1g0km")]
 position = Vector2(8003, 695)
@@ -4601,6 +4601,44 @@ position = Vector2(-6, 0)
 shape = SubResource("CircleShape2D_apv1f")
 
 [node name="PointLight2D" parent="light/SoulLantern5/Light" index="1"]
+position = Vector2(-4, 0)
+scale = Vector2(1.22656, 1.14844)
+color = Color(0.294118, 0.505882, 1, 0.827451)
+energy = 2.45
+texture = ExtResource("40_2gs6l")
+height = 2.0
+
+[node name="SoulLantern11" type="Sprite2D" parent="light"]
+position = Vector2(7776, 823)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("38_xitxg")
+
+[node name="Light" parent="light/SoulLantern11" instance=ExtResource("4_x0uxo")]
+
+[node name="CollisionShape2D" parent="light/SoulLantern11/Light/Area2D" index="0"]
+position = Vector2(-6, 0)
+shape = SubResource("CircleShape2D_apv1f")
+
+[node name="PointLight2D" parent="light/SoulLantern11/Light" index="1"]
+position = Vector2(-4, 0)
+scale = Vector2(1.22656, 1.14844)
+color = Color(0.294118, 0.505882, 1, 0.827451)
+energy = 2.45
+texture = ExtResource("40_2gs6l")
+height = 2.0
+
+[node name="SoulLantern12" type="Sprite2D" parent="light"]
+position = Vector2(8256, 823)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("38_xitxg")
+
+[node name="Light" parent="light/SoulLantern12" instance=ExtResource("4_x0uxo")]
+
+[node name="CollisionShape2D" parent="light/SoulLantern12/Light/Area2D" index="0"]
+position = Vector2(-6, 0)
+shape = SubResource("CircleShape2D_apv1f")
+
+[node name="PointLight2D" parent="light/SoulLantern12/Light" index="1"]
 position = Vector2(-4, 0)
 scale = Vector2(1.22656, 1.14844)
 color = Color(0.294118, 0.505882, 1, 0.827451)
@@ -4768,6 +4806,8 @@ height = 2.0
 [editable path="Player/You died"]
 [editable path="light/SoulLantern4/Light"]
 [editable path="light/SoulLantern5/Light"]
+[editable path="light/SoulLantern11/Light"]
+[editable path="light/SoulLantern12/Light"]
 [editable path="light/SoulLantern6/Light"]
 [editable path="light/SoulLantern7/Light"]
 [editable path="light/SoulLantern8/Light"]

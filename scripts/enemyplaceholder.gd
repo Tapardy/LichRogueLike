@@ -12,9 +12,6 @@ var knockback_value: Vector2 = Vector2.ZERO
 var knockback_duration: float = 0.1  # Duration for how long knockback should be applied
 var speed: float = 100
 # Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	print(self.position, self.global_position)
-
 func _physics_process(delta: float) -> void:
 	$Label.text = str($HealthComponent.health)
 	# Apply gravity if not on the floor

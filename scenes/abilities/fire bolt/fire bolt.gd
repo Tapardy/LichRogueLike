@@ -31,8 +31,7 @@ func _ready() -> void:
 
 		# Set the initial position of the projectile to be at the player's location
 		global_position = player.global_position
-	else:
-		print("Player not found")
+
 
 func _physics_process(delta: float) -> void:
 	global_position.x += direction * speed * delta
@@ -55,12 +54,10 @@ func find_player() -> Node2D:
 func deal_damage() -> void:
 	var attack := Attack.new()
 	attack.attack_damage = damage
-	print("damage dealt: ", damage)
 	entity.get_node("HealthComponent").damage(attack)
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	entity = body
-	print(entity)
 	if entity.is_in_group("enemies"):
 		$AnimatedSprite2D.play("Impact")
 		speed = 0
@@ -68,18 +65,14 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 		deal_damage()
 
 func set_damage(multiplier: float) -> void:
-	print(multiplier)
 	damage = base_damage * multiplier
-	print("Damage set to: ", damage)
 
 func get_damage() -> int:
 	return damage
 
 func set_size(new_size: Vector2) -> void:
-	print(new_size)
 	size = new_size
 	self.scale = size
-	print("Size set to: ", size)
 
 
 func _on_deletion_timer_timeout() -> void:

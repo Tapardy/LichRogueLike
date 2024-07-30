@@ -135,9 +135,10 @@ func get_direction() -> int:
 func get_gravity(_velocity: Vector2) -> float:
 	return fall_gravity if velocity.y >= 0 else gravity
 
-func knockback(force: float, _x_pos: float, up_force: float) -> void:
-	var multiplier := KNOCKBACK_MULTIPLIER_STANDING if direction == 0 else KNOCKBACK_MULTIPLIER_MOVING
-	knockback_velocity = Vector2(force * multiplier * -get_direction(), -force * up_force)
+func knockback(force: float, attacker_x_position: float, up_force: float) -> void:
+	var direction = -1 if attacker_x_position > position.x else 1  # Determine direction based on attacker's x position
+	var multiplier = KNOCKBACK_MULTIPLIER_STANDING if direction == 0 else KNOCKBACK_MULTIPLIER_MOVING
+	knockback_velocity = Vector2(force * multiplier * direction, -force * up_force)
 	velocity.x = 0
 	knockback_timer.start()
 	dash_timer.stop()  # Stop dash timer when knockback occurs
@@ -147,6 +148,7 @@ func knockback(force: float, _x_pos: float, up_force: float) -> void:
 	$LifeForce/HealTimer.stop()
 	$LifeForce/CPUParticles2D.emitting = false
 	can_move = true
+
 
 func _on_knockback_timer_timeout() -> void:
 	velocity.x = direction * (speed * (RUN_MULTIPLIER if direction != 0 else 1.0))

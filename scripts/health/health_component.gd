@@ -15,6 +15,7 @@ func _ready() -> void:
 func damage(attack: Attack) -> void:
 	if not suppress_damage:
 		if get_parent().is_in_group("player"):
+			$"../AnimationPlayer2".play("hit")  # Ensure "hit" animation is always played
 			emit_signal("player_damaged")
 			
 		health -= attack.attack_damage
@@ -24,6 +25,8 @@ func damage(attack: Attack) -> void:
 			get_parent().die()
 
 func heal(amount: int) -> void:
+	if get_parent().is_in_group("player"):
+		$"../AnimationPlayer2".play("heal")
 	health += amount
 	health = min(health, max_health)
 	emit_signal("health_changed")
@@ -43,8 +46,6 @@ func damage_self(self_damage: int) -> void:
 		attack.attack_damage = remaining_self_damage
 
 		damage(attack)
-
-		
 
 # New function to check if the player can cast the spell
 func can_cast_spell(self_damage: int) -> bool:
