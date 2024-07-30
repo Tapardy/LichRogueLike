@@ -1,8 +1,8 @@
 extends CharacterBody2D
 
-var is_moving_left = false
+var is_moving_left: bool = false
 
-var gravity = 10
+var gravity:float = 10
 @export var items: Array[ItemData] = []
 @export var drop_chance: float = 0.3
 @export var friction: float = 20.0
@@ -12,17 +12,17 @@ var gravity = 10
 
 var knockback_value: Vector2 = Vector2.ZERO
 var knockback_duration: float = 0.1
-var speed = 32
+var speed: float = 32
 var player_entered: bool = true
 
-func _ready():
+func _ready() -> void:
 	$AnimationPlayer.play("walk")
 	$HealthComponent.connect("health_changed", self.handle_damage)
 	
 func handle_damage()-> void:
 	$AnimationPlayer2.play("hit")
 	
-func _process(delta):
+func _process(delta: float) -> void:
 	if knockback_duration > 0:
 		# Apply knockback effect
 		velocity += knockback_value
@@ -39,7 +39,7 @@ func _process(delta):
 	move_character()
 	detect_turn_around()
 
-func move_character():
+func move_character() -> void:
 	if knockback_duration <= 0:
 		velocity.x = -speed if is_moving_left else speed
 	
@@ -51,29 +51,29 @@ func move_character():
 		$AnimationPlayer.play("walk")
 	move_and_slide()
 
-func detect_turn_around():
+func detect_turn_around() -> void:
 	if not $RayCast2D.is_colliding() and is_on_floor():
 		is_moving_left = !is_moving_left
 		scale.x = -scale.x
 	if $RayCast2D2.is_colliding():
-		var entity = $RayCast2D2.get_collider()
+		var entity:Node2D = $RayCast2D2.get_collider()
 		if not entity.is_in_group("player"):
 			is_moving_left = !is_moving_left
 			scale.x = -scale.x
 			
 	if $RayCast2D3.is_colliding():
-		var entity = $RayCast2D3.get_collider()
+		var entity: Node2D = $RayCast2D3.get_collider()
 		if entity.is_in_group("player"):
 			is_moving_left = !is_moving_left
 			scale.x = -scale.x
 
-func hit():
+func hit() -> void:
 	$AttackDetector.monitoring = true
 
-func end_of_hit():
+func end_of_hit()-> void:
 	$AttackDetector.monitoring = false
 
-func start_walk():
+func start_walk() -> void:
 	$AnimationPlayer.play("walk")
 
 func knockback(force: float, x_pos: float, up_force: float) -> void:
