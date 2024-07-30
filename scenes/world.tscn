@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=3 uid="uid://bl1ivlm1thybo"]
+[gd_scene load_steps=63 format=3 uid="uid://bl1ivlm1thybo"]
 
 [ext_resource type="PackedScene" uid="uid://bnih347l0un2n" path="res://scenes/player.tscn" id="2_qy6pw"]
 [ext_resource type="Texture2D" uid="uid://cav1sewv2rawe" path="res://assets/tilemap/Platformpillars_EDGY.png" id="3_8xqox"]
@@ -35,6 +35,7 @@
 [ext_resource type="Texture2D" uid="uid://djydrbcghlk4v" path="res://assets/parallax/cave/dark/2.png" id="26_jxsnf"]
 [ext_resource type="PackedScene" uid="uid://bdgxbchnxbixg" path="res://scenes/gorthulon/gorthulon.tscn" id="34_1g0km"]
 [ext_resource type="Script" path="res://scripts/parallax_change.gd" id="35_x41dd"]
+[ext_resource type="Script" path="res://scripts/sunlight_area.gd" id="36_1wxlp"]
 [ext_resource type="PackedScene" uid="uid://djgm4ink7hu32" path="res://scenes/platform.tscn" id="36_27i0h"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_3tmyd"]
@@ -3993,7 +3994,7 @@ a = Vector2(-1595, -7)
 b = Vector2(2501, -7)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_tgnph"]
-polygon = PackedVector2Array(-88, -238, 128.168, -238.767, 194, -239, 193, -297, 15.5724, -293.225, -89, -291, -84, -246)
+polygon = PackedVector2Array(-88, -238, 128.168, -238.767, 194, -239, 193, -297, 75.738, -294.505, 15.5724, -293.225, -89, -291, -84, -246)
 
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_bwpbx"]
 polygon = PackedVector2Array(4224, -352, 4480, -352, 4480, 32, 4224, 32)
@@ -4399,16 +4400,12 @@ occluder = SubResource("OccluderPolygon2D_tgnph")
 position = Vector2(-436, -552)
 occluder = SubResource("OccluderPolygon2D_tgnph")
 
-[node name="LightOccluder2D3" type="LightOccluder2D" parent="Light3"]
-position = Vector2(-95, -509)
-occluder = SubResource("OccluderPolygon2D_tgnph")
-
 [node name="LightOccluder2D4" type="LightOccluder2D" parent="Light3"]
-position = Vector2(768, -468)
+position = Vector2(762, -468)
 occluder = SubResource("OccluderPolygon2D_tgnph")
 
 [node name="LightOccluder2D5" type="LightOccluder2D" parent="Light3"]
-position = Vector2(1066, -459)
+position = Vector2(1023, -459)
 occluder = SubResource("OccluderPolygon2D_tgnph")
 
 [node name="LightOccluder2D6" type="LightOccluder2D" parent="Light3"]
@@ -4420,11 +4417,19 @@ position = Vector2(2273, -418)
 occluder = SubResource("OccluderPolygon2D_tgnph")
 
 [node name="LightOccluder2D12" type="LightOccluder2D" parent="Light3"]
-position = Vector2(2537, -420)
+position = Vector2(2526, -420)
 occluder = SubResource("OccluderPolygon2D_tgnph")
 
 [node name="LightOccluder2D13" type="LightOccluder2D" parent="Light3"]
-position = Vector2(3115, -453)
+position = Vector2(3120, -453)
+occluder = SubResource("OccluderPolygon2D_tgnph")
+
+[node name="LightOccluder2D23" type="LightOccluder2D" parent="Light3"]
+position = Vector2(4446, -509)
+occluder = SubResource("OccluderPolygon2D_tgnph")
+
+[node name="LightOccluder2D24" type="LightOccluder2D" parent="Light3"]
+position = Vector2(4186, -480)
 occluder = SubResource("OccluderPolygon2D_tgnph")
 
 [node name="LightOccluder2D8" type="LightOccluder2D" parent="Light3"]
@@ -4479,11 +4484,17 @@ occluder = SubResource("OccluderPolygon2D_a80b8")
 position = Vector2(5329, 814)
 
 [node name="Player" parent="." instance=ExtResource("2_qy6pw")]
-position = Vector2(7694, 464)
+position = Vector2(15, 41)
 
 [node name="Gorthulon" parent="." instance=ExtResource("34_1g0km")]
 position = Vector2(8003, 695)
 scale = Vector2(1.2, 1.2)
+
+[node name="SunlightArea" type="Area2D" parent="."]
+script = ExtResource("36_1wxlp")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SunlightArea"]
+polygon = PackedVector2Array(-96, -288, -96, 128, 672, 128, 672, -416, 1216, -416, 1216, 192, 1472, 192, 1472, 160, 1600, 160, 1600, 128, 1696, 128, 1696, 192, 1888, 192, 1888, 160, 1952, 160, 1952, -448, 2688, -448, 2720, -448, 2720, 128, 2848, 128, 2848, 320, 3008, 320, 3040, 320, 3040, -448, 3264, -448, 3296, -448, 3296, 320, 3360, 320, 3360, 128, 3680, 128, 3680, 480, 3904, 480, 3904, 64, 4096, 64, 4096, -512, 4640, -512, 4640, 64, 4768, 64, 4768, 352, 5184, 352, 5184, 32, 5472, 32, 5472, -704, -96, -704)
 
 [node name="Parallax change" type="Area2D" parent="."]
 script = ExtResource("35_x41dd")
@@ -4498,6 +4509,8 @@ polygon = PackedVector2Array(-241, 446, -215, -608, 5826, -563, 5822, 612, 3051,
 [connection signal="body_entered" from="Area2D2" to="Area2D2" method="_on_body_entered"]
 [connection signal="area_entered" from="Area2D3" to="Area2D3" method="_on_area_entered"]
 [connection signal="body_entered" from="Area2D3" to="Area2D3" method="_on_body_entered"]
+[connection signal="body_entered" from="SunlightArea" to="SunlightArea" method="_on_body_entered"]
+[connection signal="body_exited" from="SunlightArea" to="SunlightArea" method="_on_body_exited"]
 [connection signal="body_entered" from="Parallax change" to="Parallax change" method="_on_body_entered"]
 [connection signal="body_exited" from="Parallax change" to="Parallax change" method="_on_body_exited"]
 

@@ -540,9 +540,12 @@ script = ExtResource("8_alq3x")
 wait_time = 3.0
 one_shot = true
 
+[node name="BossHP" type="CanvasLayer" parent="."]
+
 [node name="You won" parent="." instance=ExtResource("10_gnn51")]
 
 [node name="CanvasLayer" parent="You won" index="0"]
+layer = 10
 visible = false
 
 [connection signal="body_entered" from="Sprite2D/Area2D" to="." method="_on_area_2d_body_entered"]

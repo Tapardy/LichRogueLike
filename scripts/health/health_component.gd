@@ -20,6 +20,7 @@ func damage(attack: Attack) -> void:
 		health -= attack.attack_damage
 		emit_signal("health_changed")
 		if health <= 0:
+			emit_signal("health_changed")
 			get_parent().die()
 
 func heal(amount: int) -> void:
