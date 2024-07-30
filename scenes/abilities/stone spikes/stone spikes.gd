@@ -54,6 +54,8 @@ func deal_damage() -> void:
 	var attack := Attack.new()
 	attack.attack_damage = damage
 	entity.get_node("HealthComponent").damage(attack)
+	if entity.has_method("knockback"):
+		entity.knockback(75.0, global_position.x, 0)
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	entity = body
