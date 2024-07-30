@@ -54,5 +54,3 @@ script = ExtResource("2_43ime")
 [node name="AnimatedSprite2D" parent="." index="1"]
 sprite_frames = SubResource("SpriteFrames_i2std")
 animation = &"default"
-frame = 0
-frame_progress = 0.0

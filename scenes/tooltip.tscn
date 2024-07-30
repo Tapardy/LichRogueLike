@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://dws0uiaps0qqq"]
+
+[ext_resource type="Script" path="res://scripts/tooltip.gd" id="1_f13m6"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_cj4lu"]
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Tooltip" type="Control"]
+z_as_relative = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+script = ExtResource("1_f13m6")
+
+[node name="Label" type="Label" parent="."]
+z_index = 100
+layout_mode = 0
+offset_right = 16.0
+offset_bottom = 16.0
+label_settings = SubResource("LabelSettings_cj4lu")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="ColorRect" type="ColorRect" parent="."]
+z_index = 94
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+color = Color(0, 0, 0, 0.541176)

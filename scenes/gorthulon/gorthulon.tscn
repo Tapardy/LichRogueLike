@@ -677,6 +677,7 @@ one_shot = true
 
 [node name="BossHP" type="CanvasLayer" parent="."]
 layer = 5
+visible = false
 script = ExtResource("10_jrmaa")
 
 [node name="Label" type="Label" parent="BossHP"]

@@ -67,7 +67,6 @@ func deal_damage() -> void:
 		entity.knockback(75.0, global_position.x, 0)
 		
 		# Apply knockback to the player
-		var knockback_force: float = 100.0  # Adjust this value as needed
 		#var player: CharacterBody2D = get_parent()  # Adjust this path if necessary
 		#if player.has_method("knockback"):
 			#player.knockback(knockback_force, global_position.x, 0)
