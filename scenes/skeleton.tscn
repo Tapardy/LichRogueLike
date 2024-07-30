@@ -518,7 +518,7 @@ target_position = Vector2(13, 0)
 
 [node name="RayCast2D3" type="RayCast2D" parent="."]
 position = Vector2(-1, 1)
-target_position = Vector2(-19, 0)
+target_position = Vector2(-30, 0)
 
 [node name="PlayerDetector" type="Area2D" parent="."]
 

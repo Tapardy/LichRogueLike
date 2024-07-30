@@ -552,7 +552,7 @@ void fragment()
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_bxmjl"]
 shader = SubResource("Shader_2skwt")
-shader_parameter/bg_color = Color(0, 0, 0, 0)
+shader_parameter/bg_color = Color(0.34902, 0.027451, 0.027451, 0)
 shader_parameter/uv_scale = 0.0
 shader_parameter/percentage = 1.0
 shader_parameter/speed = 0.1
@@ -677,7 +677,6 @@ one_shot = true
 
 [node name="BossHP" type="CanvasLayer" parent="."]
 layer = 5
-visible = false
 script = ExtResource("10_jrmaa")
 
 [node name="Label" type="Label" parent="BossHP"]
@@ -704,6 +703,7 @@ offset_left = 194.0
 offset_top = 314.0
 offset_right = 446.0
 offset_bottom = 342.0
+show_percentage = false
 
 [node name="You won" parent="." instance=ExtResource("10_gnn51")]
 

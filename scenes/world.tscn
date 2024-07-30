@@ -4459,7 +4459,7 @@ position = Vector2(3826, 714)
 item = ExtResource("37_jqiiv")
 
 [node name="FireBoltCollectible" parent="." instance=ExtResource("6_qctje")]
-position = Vector2(683, -29)
+position = Vector2(821, 41)
 item = ExtResource("7_kw6c0")
 
 [node name="CollisionShape2D" parent="FireBoltCollectible/InteractableArea" index="0"]
