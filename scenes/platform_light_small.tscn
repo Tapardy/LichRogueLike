@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://cy1s86ge1sb4"]
+
+[ext_resource type="PackedScene" uid="uid://djud8h65s10la" path="res://scenes/platform_dark_small.tscn" id="1_31caj"]
+[ext_resource type="Texture2D" uid="uid://dbvpqaw632kyc" path="res://assets/tilemap/TILE_MAP_SILENT_FOREST_REAL.png" id="2_n2d5d"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_pqy7m"]
+atlas = ExtResource("2_n2d5d")
+region = Rect2(0, 112, 48, 16)
+
+[node name="PlatformLightSmall" instance=ExtResource("1_31caj")]
+
+[node name="Sprite2D" parent="." index="1"]
+texture = SubResource("AtlasTexture_pqy7m")

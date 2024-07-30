@@ -1,0 +1,26 @@
+[gd_scene load_steps=6 format=3 uid="uid://bug8ubrd8b0fp"]
+
+[ext_resource type="PackedScene" uid="uid://djgm4ink7hu32" path="res://scenes/platform.tscn" id="1_sruir"]
+[ext_resource type="Texture2D" uid="uid://cn6qhn4d07t4y" path="res://assets/tilemap/platformsforoneside.png" id="2_vqlvx"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v5gri"]
+size = Vector2(80, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_28jtk"]
+atlas = ExtResource("2_vqlvx")
+region = Rect2(80, 176, 80, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yvmm3"]
+size = Vector2(80, 30)
+
+[node name="PlatformLightMedium" instance=ExtResource("1_sruir")]
+
+[node name="CollisionShape2D" parent="." index="0"]
+position = Vector2(0, 0)
+shape = SubResource("RectangleShape2D_v5gri")
+
+[node name="Sprite2D" parent="." index="1"]
+texture = SubResource("AtlasTexture_28jtk")
+
+[node name="CollisionShape2D" parent="Area2D" index="0"]
+shape = SubResource("RectangleShape2D_yvmm3")

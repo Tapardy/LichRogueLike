@@ -741,6 +741,7 @@ one_shot = true
 
 [node name="Label" type="Label" parent="RealmShift"]
 modulate = Color(1, 0, 0, 1)
+z_index = 17
 offset_left = -74.0
 offset_top = -40.0
 offset_right = 75.0

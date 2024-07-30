@@ -24,6 +24,9 @@ func _ready() -> void:
 	
 	# Ensure the ShadowStrengthTimer is properly set up
 	$ShadowStrengthTimer.wait_time = 0.1  # Adjust this value as needed for your update frequency
+	$ShadowStrengthTimer.one_shot = true  # Ensure the timer only runs once per start
+	$Timer.wait_time = 1  # Adjust this value as needed for your cooldown period
+	$Timer.one_shot = true  # Ensure the timer only runs once per start
 
 func set_tile_maps(light: TileMap, dark: TileMap, outer_parallax_light: ParallaxBackground, outer_parallax_dark: ParallaxBackground) -> void:
 	tile_map_light = light
@@ -43,14 +46,14 @@ func handle_realm_shift() -> void:
 	if can_shift and can_shift_realm():
 		if is_in_light:
 			$Label.text = "Can't switch realms in the light"
+			$Timer.start()  # Start the cooldown timer
 			return
 		
 		$"../Camera2D/AnimationPlayer".play("dissolve")
-		$"../GUI".add_item_to_main("res://Inventory/Items(Resources)/ground_stone.tres")
 		is_in_shadowrealm = !is_in_shadowrealm
 		update_tilemaps()
 		can_shift = false  # Start cooldown
-		$Timer.start(0.75)  # Start the cooldown timer
+		$Timer.start()  # Start the cooldown timer
 
 		if is_in_shadowrealm:
 			start_shadow_realm_strength_increase()
@@ -95,7 +98,7 @@ func can_shift_realm() -> bool:
 	if !tile_data:
 		return true
 	if tile_data.get_custom_data("solid") == true:
-		$Timer.start()
+		$Timer.start()  # Start the cooldown timer for realm shift
 		$Label.text = "Can't switch realms"
 		return false
 	else:

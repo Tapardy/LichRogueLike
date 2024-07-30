@@ -1,0 +1,13 @@
+[gd_scene load_steps=4 format=3 uid="uid://ca8atwx3vd4if"]
+
+[ext_resource type="PackedScene" uid="uid://djgm4ink7hu32" path="res://scenes/platform.tscn" id="1_pxs7c"]
+[ext_resource type="Texture2D" uid="uid://cn6qhn4d07t4y" path="res://assets/tilemap/platformsforoneside.png" id="2_ducxc"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6yftl"]
+atlas = ExtResource("2_ducxc")
+region = Rect2(80, 144, 112, 16)
+
+[node name="PlatformLightLarge" instance=ExtResource("1_pxs7c")]
+
+[node name="Sprite2D" parent="." index="1"]
+texture = SubResource("AtlasTexture_6yftl")

@@ -1,0 +1,27 @@
+[gd_scene load_steps=6 format=3 uid="uid://djud8h65s10la"]
+
+[ext_resource type="PackedScene" uid="uid://djgm4ink7hu32" path="res://scenes/platform.tscn" id="1_3wvng"]
+[ext_resource type="Texture2D" uid="uid://dc7u8j4wnn24h" path="res://assets/tilemap/TILE_MAP_SILENT_FOREST_EDGY.png" id="2_m80oi"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xl7ib"]
+size = Vector2(47, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ygh1v"]
+atlas = ExtResource("2_m80oi")
+region = Rect2(0, 112, 48, 16)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_poly7"]
+size = Vector2(47, 30)
+
+[node name="PlatformDarkSmall" instance=ExtResource("1_3wvng")]
+
+[node name="CollisionShape2D" parent="." index="0"]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_xl7ib")
+
+[node name="Sprite2D" parent="." index="1"]
+texture = SubResource("AtlasTexture_ygh1v")
+
+[node name="CollisionShape2D" parent="Area2D" index="0"]
+position = Vector2(0.5, -7)
+shape = SubResource("RectangleShape2D_poly7")
