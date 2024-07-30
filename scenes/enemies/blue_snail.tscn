@@ -1,0 +1,122 @@
+[gd_scene load_steps=8 format=3 uid="uid://bn6a36chhf58n"]
+
+[ext_resource type="PackedScene" uid="uid://vbr4coln4tw4" path="res://scenes/enemies/purple_snail.tscn" id="1_cmyq2"]
+[ext_resource type="Script" path="res://scripts/blue_snail.gd" id="2_jsiid"]
+[ext_resource type="Texture2D" uid="uid://dtlvjnais1d13" path="res://scenes/enemies/Blue snail ANIMATION1.png" id="2_wq1a6"]
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lphue"]
+particle_flag_disable_z = true
+angle_max = 720.0
+direction = Vector3(0, -1, 0)
+spread = 0.0
+initial_velocity_min = 50.0
+initial_velocity_max = 100.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.2
+scale_max = 0.2
+scale_over_velocity_max = 234.95
+color = Color(0, 0, 1, 0.133333)
+hue_variation_min = 1.0
+hue_variation_max = 1.0
+
+[sub_resource type="Animation" id="Animation_4a1wi"]
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 4, 3, 2, 1, 0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("GPUParticles2D:emitting")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_giwk0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("GPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lhvdo"]
+_data = {
+"RESET": SubResource("Animation_giwk0"),
+"default": SubResource("Animation_4a1wi")
+}
+
+[node name="BlueSnail" instance=ExtResource("1_cmyq2")]
+script = ExtResource("2_jsiid")
+
+[node name="Sprite2D" parent="." index="1"]
+texture = ExtResource("2_wq1a6")
+hframes = 3
+vframes = 2
+metadata/_aseprite_wizard_config_ = {
+"i_mode": 0,
+"keep_anim_length": false,
+"layer": "",
+"o_ex_p": "",
+"o_folder": "",
+"o_name": "",
+"only_visible": true,
+"player": "AnimationPlayer2",
+"slice": "",
+"source": "C:/Users/yoris/Downloads/Blue snail ANIMATION1.aseprite"
+}
+metadata/_aseprite_wizard_source_file_hash_ = "60782de2f903bb59fd896d8332b56183"
+
+[node name="GPUParticles2D" parent="." index="2"]
+emitting = false
+process_material = SubResource("ParticleProcessMaterial_lphue")
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="." index="4"]
+libraries = {
+"": SubResource("AnimationLibrary_lhvdo")
+}

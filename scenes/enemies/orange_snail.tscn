@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://b3re5wmun74pi"]
+[gd_scene load_steps=11 format=3 uid="uid://b3re5wmun74pi"]
 
 [ext_resource type="Script" path="res://scripts/enemies/orange_snail.gd" id="1_xxnvk"]
 [ext_resource type="Texture2D" uid="uid://g7gw3f4uombr" path="res://Orange snail ANIMATION.png" id="2_0hymj"]
@@ -17,18 +17,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("PoisonArea/CollisionShape2D:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
 }
 
 [sub_resource type="Animation" id="Animation_qw61r"]
@@ -70,23 +58,39 @@ tracks/2/keys = {
 "update": 1,
 "values": [true]
 }
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("PoisonArea/CollisionShape2D:disabled")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
+
+[sub_resource type="Animation" id="Animation_qprft"]
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = false
+tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 4, 3, 2, 1, 0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_08gcr"]
 _data = {
 "RESET": SubResource("Animation_au8nv"),
-"Spew": SubResource("Animation_qw61r")
+"Spew": SubResource("Animation_qw61r"),
+"default": SubResource("Animation_qprft")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8upm7"]
@@ -112,6 +116,7 @@ hue_variation_max = 1.0
 
 [node name="OrangeSnail" type="Node2D"]
 script = ExtResource("1_xxnvk")
+poison_damage = 20.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 root_node = NodePath("../Sprite2D")
@@ -156,7 +161,6 @@ position = Vector2(0, -38)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/PoisonArea"]
 position = Vector2(1, -7.5)
 shape = SubResource("RectangleShape2D_rt6e0")
-disabled = true
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="."]
 position = Vector2(1, -38)

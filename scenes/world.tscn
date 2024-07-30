@@ -1,4 +1,4 @@
-[gd_scene load_steps=63 format=3 uid="uid://bl1ivlm1thybo"]
+[gd_scene load_steps=71 format=3 uid="uid://bl1ivlm1thybo"]
 
 [ext_resource type="PackedScene" uid="uid://bnih347l0un2n" path="res://scenes/player.tscn" id="2_qy6pw"]
 [ext_resource type="Texture2D" uid="uid://cav1sewv2rawe" path="res://assets/tilemap/Platformpillars_EDGY.png" id="3_8xqox"]
@@ -37,6 +37,11 @@
 [ext_resource type="Script" path="res://scripts/parallax_change.gd" id="35_x41dd"]
 [ext_resource type="Script" path="res://scripts/sunlight_area.gd" id="36_1wxlp"]
 [ext_resource type="PackedScene" uid="uid://djgm4ink7hu32" path="res://scenes/platform.tscn" id="36_27i0h"]
+[ext_resource type="Texture2D" uid="uid://8kaxjhwleqh7" path="res://assets/lantern/soul_lantern.png" id="38_xitxg"]
+[ext_resource type="Texture2D" uid="uid://dedu6to56xd2s" path="res://assets/lantern/Chain - Bronze.png" id="39_xd4su"]
+[ext_resource type="Texture2D" uid="uid://p0ppxmuhbyvt" path="res://assets/kenney_particle-pack/PNG (Transparent)/circle_05.png" id="40_2gs6l"]
+[ext_resource type="PackedScene" uid="uid://bn6a36chhf58n" path="res://scenes/enemies/blue_snail.tscn" id="41_qnldb"]
+[ext_resource type="PackedScene" uid="uid://vbr4coln4tw4" path="res://scenes/enemies/purple_snail.tscn" id="42_oncjg"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_3tmyd"]
 light_mode = 1
@@ -4023,6 +4028,15 @@ polygon = PackedVector2Array(1568, 160, 1568, 160, 1536, 160, 1536, 192, 1568, 1
 [sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_a80b8"]
 polygon = PackedVector2Array(-527, -160, -96, -160, -96, 128, 864, 128, 896, 128, 896, 192, 1440, 192, 1440, 384, -527, 384)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_apv1f"]
+radius = 106.17
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nvowx"]
+radius = 112.018
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_aio8b"]
+radius = 112.02
+
 [node name="World" type="Node2D"]
 
 [node name="Platform" parent="." instance=ExtResource("36_27i0h")]
@@ -4428,6 +4442,10 @@ occluder = SubResource("OccluderPolygon2D_tgnph")
 position = Vector2(4446, -509)
 occluder = SubResource("OccluderPolygon2D_tgnph")
 
+[node name="LightOccluder2D25" type="LightOccluder2D" parent="Light3"]
+position = Vector2(4857, -515)
+occluder = SubResource("OccluderPolygon2D_tgnph")
+
 [node name="LightOccluder2D24" type="LightOccluder2D" parent="Light3"]
 position = Vector2(4186, -480)
 occluder = SubResource("OccluderPolygon2D_tgnph")
@@ -4480,11 +4498,21 @@ occluder = SubResource("OccluderPolygon2D_14vyh")
 position = Vector2(15, 0)
 occluder = SubResource("OccluderPolygon2D_a80b8")
 
-[node name="OrangeSnail" parent="." instance=ExtResource("13_5for1")]
-position = Vector2(5329, 814)
+[node name="Enemies" type="Node" parent="."]
+
+[node name="Snails" type="Node" parent="Enemies"]
+
+[node name="OrangeSnail" parent="Enemies/Snails" instance=ExtResource("13_5for1")]
+position = Vector2(5329, 808)
+
+[node name="BlueSnail" parent="Enemies/Snails" instance=ExtResource("41_qnldb")]
+position = Vector2(5763, 808)
+
+[node name="PurpleSnail" parent="Enemies/Snails" instance=ExtResource("42_oncjg")]
+position = Vector2(5469, 808)
 
 [node name="Player" parent="." instance=ExtResource("2_qy6pw")]
-position = Vector2(15, 41)
+position = Vector2(5559, 811)
 
 [node name="Gorthulon" parent="." instance=ExtResource("34_1g0km")]
 position = Vector2(8003, 695)
@@ -4503,6 +4531,187 @@ script = ExtResource("35_x41dd")
 visible = false
 polygon = PackedVector2Array(-241, 446, -215, -608, 5826, -563, 5822, 612, 3051, 623, -271, 434)
 
+[node name="SoulLantern4" type="Sprite2D" parent="."]
+position = Vector2(6227, 710)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("38_xitxg")
+
+[node name="Light" parent="SoulLantern4" instance=ExtResource("4_x0uxo")]
+
+[node name="CollisionShape2D" parent="SoulLantern4/Light/Area2D" index="0"]
+position = Vector2(-6, 0)
+shape = SubResource("CircleShape2D_apv1f")
+
+[node name="PointLight2D" parent="SoulLantern4/Light" index="1"]
+position = Vector2(-4, 0)
+scale = Vector2(1.22656, 1.14844)
+color = Color(0.294118, 0.505882, 1, 0.827451)
+energy = 2.45
+texture = ExtResource("40_2gs6l")
+height = 2.0
+
+[node name="SoulLantern5" type="Sprite2D" parent="."]
+position = Vector2(6725, 710)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("38_xitxg")
+
+[node name="Light" parent="SoulLantern5" instance=ExtResource("4_x0uxo")]
+
+[node name="CollisionShape2D" parent="SoulLantern5/Light/Area2D" index="0"]
+position = Vector2(-6, 0)
+shape = SubResource("CircleShape2D_apv1f")
+
+[node name="PointLight2D" parent="SoulLantern5/Light" index="1"]
+position = Vector2(-4, 0)
+scale = Vector2(1.22656, 1.14844)
+color = Color(0.294118, 0.505882, 1, 0.827451)
+energy = 2.45
+texture = ExtResource("40_2gs6l")
+height = 2.0
+
+[node name="SoulLantern6" type="Sprite2D" parent="."]
+position = Vector2(6710, 470)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("38_xitxg")
+
+[node name="Light" parent="SoulLantern6" instance=ExtResource("4_x0uxo")]
+
+[node name="CollisionShape2D" parent="SoulLantern6/Light/Area2D" index="0"]
+position = Vector2(-6, 0)
+shape = SubResource("CircleShape2D_apv1f")
+
+[node name="PointLight2D" parent="SoulLantern6/Light" index="1"]
+position = Vector2(-4, 0)
+scale = Vector2(1.22656, 1.14844)
+color = Color(0.294118, 0.505882, 1, 0.827451)
+energy = 2.45
+texture = ExtResource("40_2gs6l")
+height = 2.0
+
+[node name="SoulLantern7" type="Sprite2D" parent="."]
+position = Vector2(7260, 470)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("38_xitxg")
+
+[node name="Light" parent="SoulLantern7" instance=ExtResource("4_x0uxo")]
+
+[node name="CollisionShape2D" parent="SoulLantern7/Light/Area2D" index="0"]
+position = Vector2(-6, 0)
+shape = SubResource("CircleShape2D_apv1f")
+
+[node name="PointLight2D" parent="SoulLantern7/Light" index="1"]
+position = Vector2(-4, 0)
+scale = Vector2(1.22656, 1.14844)
+color = Color(0.294118, 0.505882, 1, 0.827451)
+energy = 2.45
+texture = ExtResource("40_2gs6l")
+height = 2.0
+
+[node name="SoulLantern8" type="Sprite2D" parent="."]
+position = Vector2(7617, 470)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("38_xitxg")
+
+[node name="Light" parent="SoulLantern8" instance=ExtResource("4_x0uxo")]
+
+[node name="CollisionShape2D" parent="SoulLantern8/Light/Area2D" index="0"]
+position = Vector2(-6, 0)
+shape = SubResource("CircleShape2D_apv1f")
+
+[node name="PointLight2D" parent="SoulLantern8/Light" index="1"]
+position = Vector2(-4, 0)
+scale = Vector2(1.22656, 1.14844)
+color = Color(0.294118, 0.505882, 1, 0.827451)
+energy = 2.45
+texture = ExtResource("40_2gs6l")
+height = 2.0
+
+[node name="SoulLantern9" type="Sprite2D" parent="."]
+position = Vector2(5716, 453)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("38_xitxg")
+
+[node name="Light" parent="SoulLantern9" instance=ExtResource("4_x0uxo")]
+
+[node name="CollisionShape2D" parent="SoulLantern9/Light/Area2D" index="0"]
+position = Vector2(-6, 0)
+shape = SubResource("CircleShape2D_apv1f")
+
+[node name="PointLight2D" parent="SoulLantern9/Light" index="1"]
+position = Vector2(-4, 0)
+scale = Vector2(1.22656, 1.14844)
+color = Color(0.294118, 0.505882, 1, 0.827451)
+energy = 2.45
+texture = ExtResource("40_2gs6l")
+height = 2.0
+
+[node name="SoulLantern10" type="Sprite2D" parent="."]
+position = Vector2(5507, 454)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("38_xitxg")
+
+[node name="Light" parent="SoulLantern10" instance=ExtResource("4_x0uxo")]
+
+[node name="CollisionShape2D" parent="SoulLantern10/Light/Area2D" index="0"]
+position = Vector2(-6, 0)
+shape = SubResource("CircleShape2D_apv1f")
+
+[node name="PointLight2D" parent="SoulLantern10/Light" index="1"]
+position = Vector2(-4, 0)
+scale = Vector2(1.22656, 1.14844)
+color = Color(0.294118, 0.505882, 1, 0.827451)
+energy = 2.45
+texture = ExtResource("40_2gs6l")
+height = 2.0
+
+[node name="SoulLantern2" type="Sprite2D" parent="."]
+position = Vector2(5869, 761)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("38_xitxg")
+
+[node name="Chain-Bronze" type="Sprite2D" parent="SoulLantern2"]
+position = Vector2(-5, -52.375)
+scale = Vector2(2.00003, 0.740566)
+texture = ExtResource("39_xd4su")
+
+[node name="Light" parent="SoulLantern2" instance=ExtResource("4_x0uxo")]
+
+[node name="CollisionShape2D" parent="SoulLantern2/Light/Area2D" index="0"]
+position = Vector2(-4, -2)
+shape = SubResource("CircleShape2D_nvowx")
+
+[node name="PointLight2D" parent="SoulLantern2/Light" index="1"]
+position = Vector2(-4, 20)
+scale = Vector2(1.22656, 1.14844)
+color = Color(0.294118, 0.505882, 1, 0.827451)
+energy = 2.45
+texture = ExtResource("40_2gs6l")
+height = 2.0
+
+[node name="SoulLantern3" type="Sprite2D" parent="."]
+position = Vector2(5314, 761)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("38_xitxg")
+
+[node name="Chain-Bronze" type="Sprite2D" parent="SoulLantern3"]
+position = Vector2(-5, -52.375)
+scale = Vector2(2.00003, 0.740566)
+texture = ExtResource("39_xd4su")
+
+[node name="Light" parent="SoulLantern3" instance=ExtResource("4_x0uxo")]
+
+[node name="CollisionShape2D" parent="SoulLantern3/Light/Area2D" index="0"]
+position = Vector2(-4, 0)
+shape = SubResource("CircleShape2D_aio8b")
+
+[node name="PointLight2D" parent="SoulLantern3/Light" index="1"]
+position = Vector2(-4, 20)
+scale = Vector2(1.22656, 1.14844)
+color = Color(0.294118, 0.505882, 1, 0.827451)
+energy = 2.45
+texture = ExtResource("40_2gs6l")
+height = 2.0
+
 [connection signal="area_entered" from="Area2D" to="Area2D" method="_on_area_entered"]
 [connection signal="body_entered" from="Area2D" to="Area2D" method="_on_body_entered"]
 [connection signal="area_entered" from="Area2D2" to="Area2D2" method="_on_area_entered"]
@@ -4519,3 +4728,12 @@ polygon = PackedVector2Array(-241, 446, -215, -608, 5826, -563, 5822, 612, 3051,
 [editable path="FireBoltCollectible"]
 [editable path="Player"]
 [editable path="Player/You died"]
+[editable path="SoulLantern4/Light"]
+[editable path="SoulLantern5/Light"]
+[editable path="SoulLantern6/Light"]
+[editable path="SoulLantern7/Light"]
+[editable path="SoulLantern8/Light"]
+[editable path="SoulLantern9/Light"]
+[editable path="SoulLantern10/Light"]
+[editable path="SoulLantern2/Light"]
+[editable path="SoulLantern3/Light"]

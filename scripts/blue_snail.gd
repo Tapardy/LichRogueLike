@@ -19,10 +19,10 @@ func _on_area_2d_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player") and active:
 		player_exited = false
 		# Start looping animation and particles
-		$AnimationPlayer.play("Spew")
+		$AnimationPlayer.play("default")
 		$GPUParticles2D.emitting = true
 		$Sprite2D/PoisonArea/CollisionShape2D.call_deferred("set_disabled", false)
-		$AnimationPlayer.get_animation("Spew").loop_mode = LoopMode.LOOP_LINEAR
+		$AnimationPlayer.get_animation("default").loop_mode = LoopMode.LOOP_LINEAR
 
 func _on_poison_area_body_entered(body: Node2D) -> void:
 	if body.is_in_group("player") and attacked == false:
@@ -36,7 +36,7 @@ func _on_poison_delay_timeout() -> void:
 	attacked = false
 
 func _on_animation_player_animation_finished(anim_name: StringName) -> void:
-	if anim_name == "Spew":
+	if anim_name == "default":
 		if player_exited:
 			$Sprite2D/PoisonArea/CollisionShape2D.disabled = true
 			$GPUParticles2D.emitting = false  # Only stop emitting if the player has exited
@@ -46,7 +46,7 @@ func _on_poison_area_body_exited(body: Node2D) -> void:
 	if body.is_in_group("player"):
 		player_exited = true
 		# Stop looping animation and particles only if animation is finished
-		if $AnimationPlayer.current_animation == "Spew":
-			$AnimationPlayer.get_animation("Spew").loop_mode = LoopMode.LOOP_NONE
+		if $AnimationPlayer.current_animation == "default":
+			$AnimationPlayer.get_animation("default").loop_mode = LoopMode.LOOP_NONE
 		else:
 			$GPUParticles2D.emitting = false
