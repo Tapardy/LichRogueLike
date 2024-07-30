@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="ItemData" load_steps=4 format=3 uid="uid://ccnolt1ngbmca"]
+
+[ext_resource type="Script" path="res://Inventory/Items(Resources)/item_data.gd" id="1_trfu5"]
+[ext_resource type="Texture2D" uid="uid://bga340hytfaw4" path="res://assets/Foozle_2DE0001_Pixel_Magic_Effects/Pixel_Magic_Effects_Icons.png" id="2_pr0s2"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xwm4q"]
+atlas = ExtResource("2_pr0s2")
+region = Rect2(64, 0, 32, 32)
+
+[resource]
+script = ExtResource("1_trfu5")
+type = 0
+name = "Water Bolt"
+description = "Transmute a ball of Water
+
+Self damage: 20%"
+texture = SubResource("AtlasTexture_xwm4q")
+sub_spell_type = 3

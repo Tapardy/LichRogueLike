@@ -1,0 +1,58 @@
+[gd_scene load_steps=12 format=3 uid="uid://bm3ngemo6475m"]
+
+[ext_resource type="PackedScene" uid="uid://gwyb6guautlf" path="res://scenes/abilities/fire bolt/fire bolt.tscn" id="1_1ri3b"]
+[ext_resource type="Script" path="res://scenes/abilities/water bolt/water bolt.gd" id="2_43ime"]
+[ext_resource type="Texture2D" uid="uid://bh8ak5wurqbsv" path="res://assets/Foozle_2DE0001_Pixel_Magic_Effects/Water/006.png" id="3_pvhwi"]
+[ext_resource type="Texture2D" uid="uid://b2ym7jeopqnkf" path="res://assets/Foozle_2DE0001_Pixel_Magic_Effects/Water/007.png" id="4_rprfe"]
+[ext_resource type="Texture2D" uid="uid://cap3pes1uq01d" path="res://assets/Foozle_2DE0001_Pixel_Magic_Effects/Water/008.png" id="5_xwcn1"]
+[ext_resource type="Texture2D" uid="uid://cc6lk6hr36x7a" path="res://assets/Foozle_2DE0001_Pixel_Magic_Effects/Water/009.png" id="6_fhi18"]
+[ext_resource type="Texture2D" uid="uid://dohma8h48fuil" path="res://assets/Foozle_2DE0001_Pixel_Magic_Effects/Water/010.png" id="7_vjyny"]
+[ext_resource type="Texture2D" uid="uid://pf3lknir2s6t" path="res://assets/Foozle_2DE0001_Pixel_Magic_Effects/Water/001.png" id="8_ksvq1"]
+[ext_resource type="Texture2D" uid="uid://bwg5mbmhi68i7" path="res://assets/Foozle_2DE0001_Pixel_Magic_Effects/Water/002.png" id="9_yii5e"]
+[ext_resource type="Texture2D" uid="uid://1mj6vpnysrnq" path="res://assets/Foozle_2DE0001_Pixel_Magic_Effects/Water/003.png" id="10_l10ni"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_i2std"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_pvhwi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_rprfe")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_xwcn1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_fhi18")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_vjyny")
+}],
+"loop": false,
+"name": &"Impact",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_ksvq1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_yii5e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_l10ni")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="WaterBolt" instance=ExtResource("1_1ri3b")]
+script = ExtResource("2_43ime")
+
+[node name="AnimatedSprite2D" parent="." index="1"]
+sprite_frames = SubResource("SpriteFrames_i2std")
+animation = &"default"
+frame = 0
+frame_progress = 0.0

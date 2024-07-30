@@ -1,0 +1,65 @@
+[gd_scene load_steps=14 format=3 uid="uid://tyh8ut2nhjuh"]
+
+[ext_resource type="PackedScene" uid="uid://gwyb6guautlf" path="res://scenes/abilities/fire bolt/fire bolt.tscn" id="1_o16x5"]
+[ext_resource type="Script" path="res://scenes/abilities/wind slash/wind slash.gd" id="2_ewx4o"]
+[ext_resource type="Texture2D" uid="uid://ccqunvyiq2ip3" path="res://assets/Foozle_2DE0001_Pixel_Magic_Effects/Wind/006.png" id="3_80itc"]
+[ext_resource type="Texture2D" uid="uid://dc8bb5sss3i2p" path="res://assets/Foozle_2DE0001_Pixel_Magic_Effects/Wind/007.png" id="4_sb07d"]
+[ext_resource type="Texture2D" uid="uid://b2l65rssbhvft" path="res://assets/Foozle_2DE0001_Pixel_Magic_Effects/Wind/008.png" id="5_g4rpn"]
+[ext_resource type="Texture2D" uid="uid://d0neietq3d6mi" path="res://assets/Foozle_2DE0001_Pixel_Magic_Effects/Wind/009.png" id="6_l3a78"]
+[ext_resource type="Texture2D" uid="uid://bswhtfy7s261f" path="res://assets/Foozle_2DE0001_Pixel_Magic_Effects/Wind/010.png" id="7_0tb1o"]
+[ext_resource type="Texture2D" uid="uid://bdnjlire22tfv" path="res://assets/Foozle_2DE0001_Pixel_Magic_Effects/Wind/001.png" id="8_176qu"]
+[ext_resource type="Texture2D" uid="uid://do2ini21tye6x" path="res://assets/Foozle_2DE0001_Pixel_Magic_Effects/Wind/002.png" id="9_snw5r"]
+[ext_resource type="Texture2D" uid="uid://dexji6c5r14yq" path="res://assets/Foozle_2DE0001_Pixel_Magic_Effects/Wind/003.png" id="10_t4f4m"]
+[ext_resource type="Texture2D" uid="uid://bk4dmm7rrbbsv" path="res://assets/Foozle_2DE0001_Pixel_Magic_Effects/Wind/004.png" id="11_7tsh7"]
+[ext_resource type="Texture2D" uid="uid://c7cj3ef1cqx06" path="res://assets/Foozle_2DE0001_Pixel_Magic_Effects/Wind/005.png" id="12_bx512"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_hkagq"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_80itc")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_sb07d")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_g4rpn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_l3a78")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_0tb1o")
+}],
+"loop": false,
+"name": &"Impact",
+"speed": 15.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_176qu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_snw5r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_t4f4m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_7tsh7")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_bx512")
+}],
+"loop": true,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="Wind Slash" instance=ExtResource("1_o16x5")]
+script = ExtResource("2_ewx4o")
+
+[node name="AnimatedSprite2D" parent="." index="1"]
+sprite_frames = SubResource("SpriteFrames_hkagq")
+frame = 4
+frame_progress = 1.0

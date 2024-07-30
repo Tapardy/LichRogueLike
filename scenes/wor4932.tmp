@@ -4043,7 +4043,6 @@ priority = 5
 script = ExtResource("35_x41dd")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Parallax change"]
-visible = false
 polygon = PackedVector2Array(-462, 407, -215, -608, 5826, -563, 5822, 612, 3415, 621, 3419, 1149, -348, 1223)
 
 [node name="Label" type="Label" parent="."]
@@ -4582,11 +4581,9 @@ active = false
 
 [node name="BlueSnail" parent="Enemies/Snails" instance=ExtResource("41_qnldb")]
 position = Vector2(388, 56)
-active = false
 
 [node name="PurpleSnail" parent="Enemies/Snails" instance=ExtResource("42_oncjg")]
 position = Vector2(94, 56)
-active = false
 
 [node name="Gorthulon" parent="." instance=ExtResource("34_1g0km")]
 position = Vector2(8003, 695)
@@ -4596,7 +4593,6 @@ scale = Vector2(1.2, 1.2)
 script = ExtResource("36_1wxlp")
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="SunlightArea"]
-visible = false
 polygon = PackedVector2Array(-96, -288, -96, 128, 672, 128, 672, -416, 1216, -416, 1216, 192, 1472, 192, 1472, 160, 1600, 160, 1600, 128, 1696, 128, 1696, 192, 1888, 192, 1888, 160, 1952, 160, 1952, -448, 2688, -448, 2720, -448, 2720, 128, 2848, 128, 2848, 320, 3008, 320, 3040, 320, 3040, -448, 3264, -448, 3296, -448, 3296, 320, 3360, 320, 3360, 128, 3680, 128, 3680, 480, 3904, 480, 3904, 64, 4096, 64, 4096, -512, 4640, -512, 4640, 64, 4768, 64, 4768, -416, 5056, -416, 5056, 320, 5184, 352, 5184, 32, 5472, 32, 5472, -704, -96, -704)
 
 [node name="light" type="Node" parent="."]
@@ -4825,19 +4821,10 @@ z_index = 3
 position = Vector2(20, 2)
 
 [node name="Skeleton" parent="." instance=ExtResource("52_exd73")]
-position = Vector2(5336, -30)
-
-[node name="Skeleton2" parent="." instance=ExtResource("52_exd73")]
-position = Vector2(5950, 437)
-
-[node name="Skeleton3" parent="." instance=ExtResource("52_exd73")]
-position = Vector2(6905, 416)
-
-[node name="Skeleton4" parent="." instance=ExtResource("52_exd73")]
-position = Vector2(6964, 590)
-
-[node name="Skeleton5" parent="." instance=ExtResource("52_exd73")]
-position = Vector2(5555, 771)
+position = Vector2(739, 33)
+speed = 10.0
+attack_range = 10.0
+ground_check_distance = 50.0
 
 [connection signal="body_entered" from="Parallax change" to="Parallax change" method="_on_body_entered"]
 [connection signal="body_exited" from="Parallax change" to="Parallax change" method="_on_body_exited"]

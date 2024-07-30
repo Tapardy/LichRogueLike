@@ -72,8 +72,6 @@ light_mask = 2
 sprite_frames = SubResource("SpriteFrames_j8rdf")
 animation = &"Impact"
 autoplay = "default"
-frame = 5
-frame_progress = 1.0
 
 [node name="ImpactTimer" type="Timer" parent="AnimatedSprite2D"]
 wait_time = 0.3
