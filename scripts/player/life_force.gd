@@ -28,11 +28,12 @@ func _physics_process(_delta: float) -> void:
 		heal_timer.stop()
 
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("heal") and not is_healing and not $"../HealthComponent".is_max_hp() and not get_parent().is_moving and not get_parent().is_jumping:
+	if event.is_action_pressed("heal") and not is_healing and not $"../HealthComponent".is_max_hp() and not get_parent().is_moving and not get_parent().is_jumping and current_life_force >= 33:
 		is_healing = true
 		heal_timer.start()
 		$CPUParticles2D.emitting = true
 		can_move = false  # Prevent movement during heal charge
+		
 	elif event.is_action_released("heal") and is_healing:
 		is_healing = false
 		heal_timer.stop()

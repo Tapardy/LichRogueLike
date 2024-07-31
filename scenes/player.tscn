@@ -764,6 +764,7 @@ shader_parameter/sky_colour = Color(0.34902, 0.027451, 0.027451, 1)
 shader_parameter/specular_colour = Color(0.34902, 0.027451, 0.027451, 1)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
+z_index = 1
 script = ExtResource("1_wtr5s")
 ghost_node = ExtResource("2_oc3px")
 

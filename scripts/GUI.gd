@@ -4,22 +4,8 @@ class_name InventoryManager
 
 var InvSize: int = 20
 @export var itemsLoad: Array = [
-	"res://Inventory/Items(Resources)/firebolt.tres",
-	"res://Inventory/Items(Resources)/rock.tres",
-	"res://Inventory/Items(Resources)/ground_stone.tres",
-	"res://Inventory/Items(Resources)/waterbolt.tres",
-	"res://Inventory/Items(Resources)/windslash.tres"
 ]
 @export var itemsLoadSub: Array = [
-	"res://Inventory/Items(Resources)/damage_increase.tres",
-	"res://Inventory/Items(Resources)/damage_increase.tres",
-	"res://Inventory/Items(Resources)/damage_increase.tres",
-	"res://Inventory/Items(Resources)/spell_duplication.tres",
-	"res://Inventory/Items(Resources)/spell_duplication.tres",
-	"res://Inventory/Items(Resources)/spell_duplication.tres",
-	"res://Inventory/Items(Resources)/size_increase.tres",
-	"res://Inventory/Items(Resources)/size_increase.tres",
-	"res://Inventory/Items(Resources)/size_increase.tres"
 ]
 
 var main_slot_texture: Texture = preload("res://assets/invslot.png")

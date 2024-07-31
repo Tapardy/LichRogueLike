@@ -13,8 +13,8 @@ func _on_body_entered(body: Node2D) -> void:
 		var attack := Attack.new()
 		attack.attack_damage = 40
 		body.get_node("HealthComponent").damage(attack)
-	body.position.y = playerPositionY
-	body.position.x = playerPositionX
+		body.position.y = playerPositionY
+		body.position.x = playerPositionX
 	
 	if body.is_in_group("enemies"):
 		queue_free()
