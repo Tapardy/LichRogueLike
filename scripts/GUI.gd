@@ -79,13 +79,11 @@ func remove_item(item: InventoryItem) -> void:
 		remove_item_from_sub(item)
 # Update inventory display
 func update_inventory() -> void:
-	# Clear existing items in primary inventory slots
 	for slot in $Inv.get_children():
 		for child in slot.get_children():
 			if child is InventoryItem:
 				child.queue_free()
 				
-	# Add new items to primary inventory
 	for i in range(itemsLoad.size()):
 		if i < $Inv.get_child_count():
 			var slot := $Inv.get_child(i) as InventorySlot
@@ -93,13 +91,11 @@ func update_inventory() -> void:
 			item.init(load(itemsLoad[i]))
 			slot.add_child(item)
 			
-	# Clear existing items in secondary inventory slots
 	for slot in $InvSub.get_children():
 		for child in slot.get_children():
 			if child is InventoryItem:
 				child.queue_free()
 				
-	# Add new items to secondary inventory
 	for i in range(itemsLoadSub.size()):
 		if i < $InvSub.get_child_count():
 			var slot := $InvSub.get_child(i) as InventorySlot
