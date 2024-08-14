@@ -2017,7 +2017,7 @@ texture = ExtResource("4_vitdl")
 3:15/0/custom_data_0 = true
 
 [sub_resource type="TileSet" id="TileSet_qcldw"]
-physics_layer_0/collision_layer = 5
+physics_layer_0/collision_layer = 4
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "Terrain 0"
 terrain_set_0/terrain_0/color = Color(0.442945, 0.00239037, 0.930064, 1)
@@ -4613,8 +4613,15 @@ occluder = SubResource("OccluderPolygon2D_a80b8")
 [node name="Snails" type="Node" parent="Enemies"]
 
 [node name="OrangeSnail" parent="Enemies/Snails" instance=ExtResource("13_5for1")]
+visibility_layer = 0
 position = Vector2(-11, 75)
+poison_damage = 0.0
+
+[node name="OrangeSnail9" parent="Enemies/Snails" instance=ExtResource("13_5for1")]
+position = Vector2(-11, 75)
+poison_damage = 0.0
 active = false
+enabled = false
 
 [node name="OrangeSnail2" parent="Enemies/Snails" instance=ExtResource("13_5for1")]
 position = Vector2(227, 75)
@@ -4633,10 +4640,10 @@ position = Vector2(1202, 154)
 active = false
 
 [node name="OrangeSnail6" parent="Enemies/Snails" instance=ExtResource("13_5for1")]
-position = Vector2(3189, 276)
+position = Vector2(3189, 283)
 
 [node name="OrangeSnail7" parent="Enemies/Snails" instance=ExtResource("13_5for1")]
-position = Vector2(3239, 276)
+position = Vector2(3239, 283)
 
 [node name="OrangeSnail8" parent="Enemies/Snails" instance=ExtResource("13_5for1")]
 position = Vector2(3516, 89)
@@ -4651,13 +4658,29 @@ position = Vector2(1283, 158)
 active = false
 
 [node name="BlueSnail4" parent="Enemies/Snails" instance=ExtResource("41_qnldb")]
-position = Vector2(2347, 153)
+position = Vector2(2347, 157)
+
+[node name="BlueSnail8" parent="Enemies/Snails" instance=ExtResource("41_qnldb")]
+visibility_layer = 0
+position = Vector2(-11, 71)
+poison_damage = 0.0
+
+[node name="CollisionShape2D" parent="Enemies/Snails/BlueSnail8/Sprite2D/TriggerArea" index="0"]
+visible = true
+
+[node name="GPUParticles2D" parent="Enemies/Snails/BlueSnail8" index="2"]
+amount = 8
+lifetime = 0.2
+fixed_fps = 15
+color = Color(1, 1, 0, 0.0705882)
+hue_variation_min = 0.0
+hue_variation_max = 0.0
 
 [node name="BlueSnail5" parent="Enemies/Snails" instance=ExtResource("41_qnldb")]
-position = Vector2(4725, 23)
+position = Vector2(4725, 30)
 
 [node name="BlueSnail6" parent="Enemies/Snails" instance=ExtResource("41_qnldb")]
-position = Vector2(4956, 310)
+position = Vector2(4956, 317)
 
 [node name="BlueSnail7" parent="Enemies/Snails" instance=ExtResource("41_qnldb")]
 position = Vector2(5064, 317)
@@ -4671,6 +4694,11 @@ active = false
 position = Vector2(147, 71)
 active = false
 
+[node name="PurpleSnail8" parent="Enemies/Snails" instance=ExtResource("42_oncjg")]
+visibility_layer = 0
+position = Vector2(-11, 73)
+poison_damage = 0.0
+
 [node name="PurpleSnail3" parent="Enemies/Snails" instance=ExtResource("42_oncjg")]
 position = Vector2(729, 66)
 active = false
@@ -4680,17 +4708,17 @@ position = Vector2(1055, 146)
 active = false
 
 [node name="PurpleSnail5" parent="Enemies/Snails" instance=ExtResource("42_oncjg")]
-position = Vector2(3436, 78)
+position = Vector2(3436, 85)
 
 [node name="PurpleSnail6" parent="Enemies/Snails" instance=ExtResource("42_oncjg")]
-position = Vector2(3643, 78)
+position = Vector2(3643, 85)
 
 [node name="PurpleSnail7" parent="Enemies/Snails" instance=ExtResource("42_oncjg")]
 position = Vector2(4857, 305)
 active = false
 
 [node name="Gorthulon" parent="." instance=ExtResource("34_1g0km")]
-position = Vector2(8003, 695)
+position = Vector2(8003, 708)
 scale = Vector2(1.2, 1.2)
 
 [node name="SunlightArea" type="Area2D" parent="."]
@@ -4967,6 +4995,9 @@ position = Vector2(5555, 771)
 [editable path="WindCollectible4"]
 [editable path="WindCollectible5"]
 [editable path="EnemyPlaceholder"]
+[editable path="Enemies/Snails/BlueSnail8"]
+[editable path="Gorthulon"]
+[editable path="Gorthulon/You won"]
 [editable path="light/SoulLantern4/Light"]
 [editable path="light/SoulLantern5/Light"]
 [editable path="light/SoulLantern11/Light"]

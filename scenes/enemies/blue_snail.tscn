@@ -1,23 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://bn6a36chhf58n"]
+[gd_scene load_steps=7 format=3 uid="uid://bn6a36chhf58n"]
 
 [ext_resource type="PackedScene" uid="uid://vbr4coln4tw4" path="res://scenes/enemies/purple_snail.tscn" id="1_cmyq2"]
 [ext_resource type="Script" path="res://scripts/blue_snail.gd" id="2_jsiid"]
 [ext_resource type="Texture2D" uid="uid://dtlvjnais1d13" path="res://scenes/enemies/Blue snail ANIMATION1.png" id="2_wq1a6"]
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_lphue"]
-particle_flag_disable_z = true
-angle_max = 720.0
-direction = Vector3(0, -1, 0)
-spread = 0.0
-initial_velocity_min = 50.0
-initial_velocity_max = 100.0
-gravity = Vector3(0, 0, 0)
-scale_min = 0.2
-scale_max = 0.2
-scale_over_velocity_max = 234.95
-color = Color(0, 0, 1, 0.133333)
-hue_variation_min = 1.0
-hue_variation_max = 1.0
 
 [sub_resource type="Animation" id="Animation_giwk0"]
 length = 0.001
@@ -114,7 +99,10 @@ metadata/_aseprite_wizard_source_file_hash_ = "60782de2f903bb59fd896d8332b56183"
 
 [node name="GPUParticles2D" parent="." index="2"]
 emitting = false
-process_material = SubResource("ParticleProcessMaterial_lphue")
+color = Color(0, 0, 0.552941, 0.368627)
+
+[node name="GPUParticles2D3" parent="." index="3"]
+amount = 2
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="." index="4"]
 libraries = {

@@ -73,8 +73,8 @@ func update_tilemaps() -> void:
 		parallax_light.visible = false
 		parallax_dark.visible = true
 		tile_map_dark.visible = true
-		#tile_map_light.tile_set.set_physics_layer_collision_layer(0, 2)
-		#tile_map_dark.tile_set.set_physics_layer_collision_layer(0, 1)
+		tile_map_light.tile_set.set_physics_layer_collision_layer(0, 2)
+		tile_map_dark.tile_set.set_physics_layer_collision_layer(0, 1)
 	else:
 		tile_map_light.visible = true
 		parallax_light.visible = true
@@ -84,8 +84,8 @@ func update_tilemaps() -> void:
 		tile_map_light.set_process(false)
 		tile_map_dark.set_physics_process(false)
 		
-		#tile_map_light.tile_set.set_physics_layer_collision_layer(0, 1)
-		#tile_map_dark.tile_set.set_physics_layer_collision_layer(0, 2)
+		tile_map_light.tile_set.set_physics_layer_collision_layer(0, 1)
+		tile_map_dark.tile_set.set_physics_layer_collision_layer(0, 2)
 
 func can_shift_realm() -> bool:
 	if is_in_shadowrealm:

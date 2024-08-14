@@ -1,22 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://vbr4coln4tw4"]
+[gd_scene load_steps=3 format=3 uid="uid://vbr4coln4tw4"]
 
 [ext_resource type="PackedScene" uid="uid://b3re5wmun74pi" path="res://scenes/enemies/orange_snail.tscn" id="1_dd86q"]
 [ext_resource type="Texture2D" uid="uid://dpe0478uv55vk" path="res://Purple snail ANIMATION.png" id="2_qo8fn"]
-
-[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_n2hp5"]
-particle_flag_disable_z = true
-angle_max = 720.0
-direction = Vector3(0, -1, 0)
-spread = 0.0
-initial_velocity_min = 50.0
-initial_velocity_max = 100.0
-gravity = Vector3(0, 0, 0)
-scale_min = 0.2
-scale_max = 0.2
-scale_over_velocity_max = 234.95
-color = Color(0.627451, 0.12549, 0.941176, 0.0941176)
-hue_variation_min = 1.0
-hue_variation_max = 1.0
 
 [node name="PurpleSnail" instance=ExtResource("1_dd86q")]
 
@@ -38,10 +23,15 @@ metadata/_aseprite_wizard_config_ = {
 metadata/_aseprite_wizard_source_file_hash_ = "054a8ff998b287e4000572ec565fa7c3"
 
 [node name="CollisionShape2D" parent="Sprite2D/TriggerArea" index="0"]
+visible = false
 position = Vector2(-2.5, 11)
 
 [node name="CollisionShape2D" parent="Sprite2D/PoisonArea" index="0"]
 visible = false
 
 [node name="GPUParticles2D" parent="." index="2"]
-process_material = SubResource("ParticleProcessMaterial_n2hp5")
+light_mask = 0
+color = Color(0.290196, 0.156863, 0.34902, 0.65098)
+
+[node name="GPUParticles2D3" parent="." index="3"]
+visible = false

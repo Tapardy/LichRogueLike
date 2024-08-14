@@ -16,6 +16,7 @@ func damage(attack: Attack) -> void:
 	if not suppress_damage:
 		if get_parent().is_in_group("player"):
 			$"../AnimationPlayer2".play("hit")  # Ensure "hit" animation is always played
+			$"../Camera2D".shake_camera(0.1)
 			emit_signal("player_damaged")
 			
 		health -= attack.attack_damage
